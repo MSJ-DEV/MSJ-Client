@@ -1,14 +1,14 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import {createAppContainer} from 'react-navigation';
 import Header from '../components/header'; 
-import Product from '../scenes/product'
+import SignUp from '../scenes/signUp'
 import React from 'react'
 
 
 const screens = {
    
-    Product: {
-        screen: Product,
+    SignIn: {
+        screen: SignUp,
         navigationOptions: ({navigation})=> {
             return {
                 headerTitle : () => <Header navigation={navigation}/>
@@ -21,5 +21,5 @@ const screens = {
   
 
 }
-const ProductStack = createStackNavigator(screens);
-export default createAppContainer(ProductStack);
+const SingUpStack = createStackNavigator(screens);
+export default createAppContainer(SingUpStack);

@@ -17,9 +17,9 @@ const screens = {
             }
         }
     },
-    Product : {
-        screen : Product
-    },
+    // Product : {
+    //     screen : Product
+    // },
   
   
 

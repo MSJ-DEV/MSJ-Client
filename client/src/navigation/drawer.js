@@ -2,8 +2,9 @@ import {createDrawerNavigator} from 'react-navigation-drawer';
 import {createAppContainer} from 'react-navigation';
 import HomeStack from './homeStack';
 import ProductStack from './productStack'
-import homeStack from './homeStack';
-import SingInStack from './signInStack'
+import SingInStack from './signInStack';
+import SingUpStack from './singUpStack';
+import MyListStack from './myListStack';
 
 
 
@@ -12,16 +13,16 @@ const screens = {
         screen: HomeStack,
     },
     Product:{
-        screen: ProductStack
+        screen: ProductStack,
     },
     SignIn:{
         screen:SingInStack
     },
-    SignUp:{
-        screen:homeStack
+    SingUp:{
+        screen:SingUpStack
     },
     myList:{
-        screen:homeStack
+        screen:MyListStack
     }
 }
 const RootDrawerNavigator = createDrawerNavigator(screens)
