@@ -1,14 +1,18 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 
 
-const product = () => {
+const product = ({navigation}) => {
+    const pressHandler =()=> {
+        navigation.goBack();
+    }
     return (
         <View>
             <Text>hello product</Text>
             <Text>hello product</Text>
             <Text>hello product</Text>
             <Text>hello product</Text>
+            <Button title='go back to home page' onPress={pressHandler}/>
 
         </View>
     )

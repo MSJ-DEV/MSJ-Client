@@ -1,15 +1,14 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import {createAppContainer} from 'react-navigation';
-import Home from '../scenes/home';
-import Product from '../scenes/product';
 import Header from '../components/header'; 
+import SignIn from '../scenes/signIn'
 import React from 'react'
 
 
 const screens = {
    
-    Home: {
-        screen: Home,
+    SignIn: {
+        screen: SignIn,
         navigationOptions: ({navigation})=> {
             return {
                 headerTitle : () => <Header navigation={navigation}/>
@@ -17,12 +16,10 @@ const screens = {
             }
         }
     },
-    Product : {
-        screen : Product
-    },
+    
   
   
 
 }
-const HomeStack = createStackNavigator(screens);
-export default createAppContainer(HomeStack);
+const SingInStack = createStackNavigator(screens);
+export default createAppContainer(SingInStack);

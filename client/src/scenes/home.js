@@ -7,8 +7,12 @@ const home = ({navigation}) => {
     return (
     <View>
         <Text>helloooo home page</Text>
+        <Text>helloooo home page</Text>
+        <Text>helloooo home page</Text>
+        <Text>helloooo home page</Text>
+        
 
-         <Button title='click me ' onPress={pressHandler}/>
+         <Button title='click me' onPress={pressHandler}/>
     </View>
     )
 }
