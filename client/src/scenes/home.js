@@ -7,9 +7,7 @@ const home = () => {
     return (
     <View>
         <Text>helloooo home page</Text>
-        <Text>helloooo home page</Text>
-        <Text>helloooo home page</Text>
-        <Text>helloooo home page</Text>
+
         
 
          <Button title='click me'/>
