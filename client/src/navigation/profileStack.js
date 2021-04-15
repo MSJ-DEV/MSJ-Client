@@ -1,15 +1,14 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import {createAppContainer} from 'react-navigation';
-import Home from '../scenes/home';
-import Product from '../scenes/product';
+import Profile from '../scenes/profile';
 import Header from '../components/header'; 
 import React from 'react'
 
 
 const screens = {
    
-    Home: {
-        screen: Home,
+    Profile: {
+        screen: Profile,
         navigationOptions: ({navigation})=> {
             return {
                 headerTitle : () => <Header navigation={navigation} title=''/>
@@ -24,5 +23,5 @@ const screens = {
   
 
 }
-const HomeStack = createStackNavigator(screens);
-export default createAppContainer(HomeStack);
+const ProfileStack = createStackNavigator(screens);
+export default createAppContainer(ProfileStack);
