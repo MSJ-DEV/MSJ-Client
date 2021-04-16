@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View,ScrollView } from 'react-native';
 import axios from "react-native-axios"
-import Constants from 'expo-constants';
+
 
 
 export default class product extends React.Component {
@@ -23,7 +23,9 @@ constructor(props){
   }
   render() {
     return (
-      <View style={{flex:1}}>
+     
+      <View style={{flex:1,flexDirection:'row'}}>
+          <ScrollView>
         {this.state.data.map((e)=>{
           return (
             <View key={e.id}>
@@ -41,8 +43,9 @@ constructor(props){
             </View>
           
         )})}
-   
+      </ScrollView>
     </View>
+   
   );
 
   }
