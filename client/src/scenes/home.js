@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from "react";
 import {
   StyleSheet,
@@ -9,6 +10,7 @@ import {
   StatusBar,
   Animated,
 } from "react-native";
+
 const home = () => {
   const SPACING = 20;
   const AVATAR_SIZE = 70;
