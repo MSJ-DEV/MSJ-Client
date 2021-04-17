@@ -1,27 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+ import Cards from './src/components/cards'
+import Navigation from './src/navigation/drawer'
+import Constants from 'expo-constants';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>hello MSJ-DEV</Text>
-      <Text>hello MSJ-DEV</Text>
-      <Text>hello MSJ-DEV</Text>
-      <Text>hello MSJ-DEV</Text>
-      <Text>hello elyes </Text>
-
-
-      <StatusBar style="auto" />
-    </View>
-  );
+    <Navigation />
+  //  <Cards />
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ddd',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
