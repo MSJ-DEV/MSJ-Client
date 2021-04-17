@@ -43,8 +43,8 @@ class product extends PureComponent {
         <TouchableOpacity style={styles.card} key={item.id}>
           <Image style={styles.cardImage} source={{uri:item.image}}/>
         <Text style={styles.cardText}>{item.name}</Text>
-        <Text style={styles.cardText}>{item.oldprice}</Text>
-        <Text>{item.information}</Text>
+        <Text style={styles.Text}>{item.oldprice}DT</Text>
+        <Text>{item.type}</Text>
         <Button title="press me" color="black" onPress={()=>this.delete(item.id)}/>
         </TouchableOpacity>
 
@@ -62,9 +62,14 @@ const styles = StyleSheet.create({
       justifyContent:"center",
     },
     cardText:{
-      fontSize:30
+      fontSize:24
+    },
+   Text:{
+      fontSize:15,
+      marginLeft:110
     },
     card:{
+      marginTop:"1%",
       backgroundColor:'#fff',
       marginBottom:10,
       width:'80%',
@@ -77,7 +82,7 @@ const styles = StyleSheet.create({
     },
     cardImage:{
           width:'100%',
-          height:100,
+          height:170,
           resizeMode:'cover'
      }
   });
