@@ -8,6 +8,8 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 package-lock.json
+package-lock.json
+
 web-build/
 
 # macOS

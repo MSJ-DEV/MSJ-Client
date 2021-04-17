@@ -5,6 +5,9 @@ import ProductStack from './productStack'
 import SingInStack from './signInStack';
 import SingUpStack from './singUpStack';
 import MyListStack from './myListStack';
+import ProfileStack from './profileStack';
+import FoundUs from './FoundUsStack';
+import ContactStack from './ContactStack'
 
 
 
@@ -23,6 +26,15 @@ const screens = {
     },
     myList:{
         screen:MyListStack
+    },
+    Profile:{
+        screen: ProfileStack
+    },
+    FoundUs :{
+        screen:FoundUs
+    },
+    Contact : {
+        screen: ContactStack
     }
 }
 const RootDrawerNavigator = createDrawerNavigator(screens)
