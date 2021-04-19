@@ -1,12 +1,15 @@
 import React, { PureComponent } from 'react';
 import axios from "react-native-axios"
+import { AsyncStorage } from 'react-native';
 import { StyleSheet, Text, View,TouchableOpacity,Image,FlatList,Button } from 'react-native'
-
+import Cart from './myList'
 class product extends PureComponent {
   constructor(props){
     super(props)
     this.state={
-      data:[]
+      data:[],
+      array:[],
+      togle:true
     }
     this.getData=this.getData.bind(this)
     this.delete=this.delete.bind(this)
@@ -30,6 +33,33 @@ class product extends PureComponent {
       this.getData()
     })
   }
+ handleClick(item){
+   var x=Object.values(item)
+         console.log(x[0],'ttttttttttttttttt ')
+         this.state.array.map((e)=>{
+           if(e.id!==Object.values(item)){
+           console.log(true,'hhhsssssssssssssss') 
+           }else{
+             console.log(false,'hhhhhhhhhhh')
+           }
+           
+         })
+    this.setState((previose)=>({array:previose.array.concat([item])}),(()=>{
+         if(!localStorage.getItem("list")){
+          localStorage.setItem("list",JSON.stringify(this.state.array))
+         }
+           this.state.array.forEach((stateElement)=>{
+              JSON.parse(localStorage.getItem("list")).forEach((storageElement, index)=>{
+                if(stateElement.id == storageElement.id){
+                  let temp=JSON.parse(localStorage.getItem("list"));
+                  temp[index]["quantity"]=Number(temp[index]["quantity"])+Number(stateElement.quantity) //counter is not correct because you keep adding the same item to your stateaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                  localStorage.setItem("list",JSON.stringify(temp))
+                }
+              })
+           }) 
+    }))
+   
+  }
   render() {
 
     return (
@@ -45,10 +75,12 @@ class product extends PureComponent {
         <Text style={styles.cardText}>{item.name}</Text>
         <Text style={styles.Text}>{item.oldprice}DT</Text>
         <Text>{item.type}</Text>
-        <Button title="press me" color="black" onPress={()=>this.delete(item.id)}/>
+        <Button title="press me" color="black" onPress={()=>this.handleClick(item)}/>
+        
         </TouchableOpacity>
 
         </View>
+         
         ) }}
         />
         </View>
