@@ -1,6 +1,5 @@
-
 import React from 'react';
-
+import Swal from 'sweetalert2'
 import { StyleSheet, Button, Text, View, TouchableOpacity, ScrollView, Image, ActivityIndicator, TextInput, Alert } from 'react-native';
 import { MaterialIcons, AntDesign, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 export default class Cart extends React.Component {
@@ -32,22 +31,31 @@ componentDidMount(){
     }
 
     deleteHandler = (index) => {
-      console.log(index,'rrrrrrr')
-      Alert.alert(
-        'Are you sure you want to delete this item from your cart?',
-        '',
-        [
-            { text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel' },
-            {
-                text: 'Delete', onPress: () => {
-                    let updatedCart = this.state.cartItems; /* Clone it first */
-                    updatedCart.splice(index, 1); /* Remove item from the cloned cart state */
-                    this.setState(updatedCart); /* Update the state */
-                }
-            },
-        ],
-        { cancelable: false }
-    );
+      var myid=JSON.parse(localStorage.getItem("list"))
+      myid.map((e,i)=>{
+        if(index===e.id){
+           delete myid[i]
+        }
+        localStorage.setItem("myid",JSON.stringify(myid))
+      })
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      })
+          .then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }
+      })
     }
 
     quantityHandler = (action, index) => {
@@ -113,7 +121,7 @@ componentDidMount(){
                                     <View style={{ flexGrow: 1, flexShrink: 1, alignSelf: 'center' }}>
                                         <Text numberOfLines={1} style={{ fontSize: 15 }}>{item.name}</Text>
                                         <Text numberOfLines={1} style={{ color: '#8f8f8f' }}>{item.color ? 'Variation: ' + item.color : ''}</Text>
-                                        <Text numberOfLines={1} style={{ color: '#333333', marginBottom: 10 }}>TND{item.quantity * item.oldprice}</Text>
+                                        <Text numberOfLines={1} style={{ color: '#333333', marginBottom: 10 }}>{item.quantity * item.oldprice} TND</Text>
                                         <View style={{ flexDirection: 'row' }}>
                                             <TouchableOpacity onPress={() => this.quantityHandler('less', i)} style={{ borderWidth: 1, borderColor: '#cccccc' }}>
                                                 <MaterialIcons name="remove" size={22} color="#cccccc" />
@@ -168,7 +176,7 @@ componentDidMount(){
                                 <Text>Select All</Text>
                                 <View style={{ flexDirection: 'row', paddingRight: 20, alignItems: 'center' }}>
                                     <Text style={{ color: '#8f8f8f' }}>SubTotal: </Text>
-                                    <Text>${this.subtotalPrice().toFixed(2)}</Text>
+                                    <Text>{this.subtotalPrice().toFixed(2)} TND</Text>
                                 </View>
                             </View>
                         </View>
