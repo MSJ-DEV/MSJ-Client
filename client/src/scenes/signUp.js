@@ -60,7 +60,8 @@ const signUp = ({navigation}) => {
             backgroundColor="#e6eaf4"
           />
 
-          <SocialButton
+          <SocialButton 
+          
             buttonTitle="Sign In with Google"
             btnType="google"
             color="#de4d41"
