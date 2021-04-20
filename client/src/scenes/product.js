@@ -19,8 +19,13 @@ class product extends PureComponent {
    componentDidMount(){
     this.getData()
   }
+
   getData(){
- axios.get("http://192.168.22.213:3333/api/poducts")
+ axios.get("http://192.168.1.15:3333/api/poducts", {
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods" : "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+  }})
     .then((res)=>{
       this.setState({data:res.data})
     }).catch((err)=>{
@@ -29,7 +34,7 @@ class product extends PureComponent {
 
   }
   delete(id){
-    axios.delete("http://192.168.22.213:3333/api/poducts/"+id)
+    axios.delete("http://localhost:3333/api/poducts/"+id)
     .then((res)=>{
       this.getData()
     })
