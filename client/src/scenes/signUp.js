@@ -1,6 +1,6 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {View, Text, TouchableOpacity, Platform, StyleSheet} from 'react-native';
-import FormInput from '../components/FormInput';
+import FormInput from '../components/FormInput'
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 
@@ -8,7 +8,6 @@ const signUp = () => {
     const [firstName, setFirstName] = useState();
     const [lastName, setLastName] = useState();  
     const [email, setEmail] = useState();
-    const [confirmPassword, setConfirmPassword] = useState();
     const [password, setPassword] = useState();
     const [numberPhone, setNumberPhone] = useState();
 
@@ -26,15 +25,49 @@ const signUp = () => {
           autoCapitalize="none"
           autoCorrect={false}
         />
+           <FormInput
+          labelValue={lastName}
+          onChangeText={(lastName) => setLastName(lastName)}
+          placeholderText="lastName"
+          iconType="user"
+          keyboardType="lastName"
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
         <FormInput
           labelValue={email}
           onChangeText={(userEmail) => setEmail(userEmail)}
           placeholderText="Email"
-          iconType="user"
+          iconType="mail"
           keyboardType="email-address"
           autoCapitalize="none"
           autoCorrect={false}
         />
+        <FormInput
+        labelValue={password}
+        onChangeText={(userPassword) => setPassword(userPassword)}
+        placeholderText ="password"
+        iconType="lock"
+        secureTextEntry={true}
+        />
+        <FormInput 
+          labelValue={numberPhone}
+          onChangeText={(userNumberPhone) => setNumberPhone(userNumberPhone)}
+          placeholderText="phone number"
+          iconType="phone"
+          keyboardType="tel"
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+
+{/*        
+        <FromInput  labelValue={password}
+        onChangeText={(userPassword) => setPassword(userPassword)}
+        placeholderText="Password"
+        iconType="lock"
+        secureTextEntry={true}/>   */}
+
+
         </View>
     )
 }

@@ -18,14 +18,16 @@ const signIn = () => {
         style={styles.logo}
       />
 
-            <FromInput  labelValue={email}
-        onChangeText={(userEmail) => setEmail(userEmail)}
-        placeholderText="Email"
-        iconType="user"
-        keyboardType="email-address"
-        autoCapitalize="none"
-        autoCorrect={false}/>
-            <FromInput  labelValue={password}
+            <FromInput 
+              labelValue={email}
+               onChangeText={(userEmail) => setEmail(userEmail)}
+               placeholderText="Email"
+               iconType="user"
+               keyboardType="email-address"
+               autoCapitalize="none"
+               autoCorrect={false}/>
+            <FromInput  
+            labelValue={password}
         onChangeText={(userPassword) => setPassword(userPassword)}
         placeholderText="Password"
         iconType="lock"
