@@ -31,15 +31,7 @@ const signUp = ({navigation}) => {
           placeholderText="lastName"
           iconType="user"
           keyboardType="lastName"
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
-        <FormInput
-          labelValue={email}
-          onChangeText={(userEmail) => setEmail(userEmail)}
-          placeholderText="Email"
-          iconType="mail"
-          keyboardType="email-address"
+          autoCapitalize="none"navigation
           autoCapitalize="none"
           autoCorrect={false}
         />
@@ -59,7 +51,7 @@ const signUp = ({navigation}) => {
           autoCapitalize="none"
           autoCorrect={false}
         />
-    
+      {Platform.OS === 'android' ? (
         <View>
           <SocialButton
             buttonTitle="Sign In with Facebook"
@@ -75,6 +67,7 @@ const signUp = ({navigation}) => {
             backgroundColor="#f5e7ea"
           />
         </View>
+      ) : null}
       
         <TouchableOpacity
         style={styles.navButton}

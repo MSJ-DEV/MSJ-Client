@@ -4,6 +4,8 @@ import Header from '../components/header';
 import SignUp from '../scenes/signUp';
 import signIN from '../scenes/signIn';
 import React from 'react'
+import { Text} from 'react-native'
+
 
 
 const screens = {
@@ -12,7 +14,8 @@ const screens = {
         screen: SignUp,
         navigationOptions: ({navigation})=> {
             return {
-                headerTitle : () => <Header navigation={navigation} title='Sign up'/>
+                headerLeft : () => <Header navigation={navigation} />,
+                headerTitle : ()=> (<Text>Sign Up</Text>)
                 
             }
         }
@@ -21,7 +24,10 @@ const screens = {
         screen:signIN,
         navigationOptions: ({navigation})=> {
             return {
-                headerTitle : () => <Header navigation={navigation} title='Sign In'/>
+                headerLeft: () => (
+                    <Header navigation={navigation}  />
+                  ),
+                headerTitle : () => (<Text>Sign In</Text>)
                 
             }
         }
