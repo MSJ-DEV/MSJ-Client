@@ -7,7 +7,7 @@ import FromInput from '../components/FormInput';
 import { StyleSheet, Text, View, Platform, Image } from 'react-native'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
-const signIn = () => {
+const signIn = ({navigation}) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
 
@@ -57,7 +57,7 @@ const signIn = () => {
 
       <TouchableOpacity
         style={styles.forgotButton}
-        onPress={() => navigation.navigate('Signup')}>
+        onPress={() => navigation.navigate('SignUp')}>
         <Text style={styles.navButtonText}>
           Don't have an acount? Create here
         </Text>
