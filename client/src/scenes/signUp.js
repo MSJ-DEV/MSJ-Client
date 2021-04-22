@@ -3,6 +3,8 @@ import {View, Text, TouchableOpacity, Platform, StyleSheet} from 'react-native';
 import FormInput from '../components/FormInput'
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
+import axios from "react-native-axios";
+import sanitizeHtml from 'sanitize-html';
 
 const signUp = ({navigation}) => {
     const [firstName, setFirstName] = useState();
@@ -10,6 +12,125 @@ const signUp = ({navigation}) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [numberPhone, setNumberPhone] = useState();
+
+    const [mailError,setMailError] = useState();
+    const [nameError, setNameError] = useState();
+    const [lastError, setLastError] = useState();
+    const [passwordError, setPasswordError] = useState();
+    const [phoneError, setPhoneError] = useState();
+
+
+    const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const passformat = /^(?=.*\d)(?=.*[a-z])[a-zA-Z0-9]{8,}$/;
+    const nameformat = /^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
+    const phoneFormat = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
+    
+    
+    const nameValidator =() => {
+      if (!firstName) {
+        setNameError('fill you name please*')
+        return false;
+      }else if (!firstName.match(nameformat)) {
+        setNameError('name not valid check your name again*');
+        return false;
+    
+      }
+      else if (firstName.match(nameformat)){
+        setNameError();
+        return true;
+      }else {
+        return true;
+      }
+    }
+        
+    const lastValidator =() => {
+      if (!lastName) {
+        setLastError('fill you last name please*')
+        return false;
+      }else if (!lastName.match(nameformat)) {
+        setLastError('name not valid check your last name again*');
+        return false;
+    
+      }else if (lastName.match(nameformat)) {
+        setLastError();
+        return true;
+      }
+      else {
+        return true;
+      }
+    }
+const emailvalidator = () => {
+  if (!email) {
+    setMailError('enter your email please*')
+    return false;
+  }else if (!email.match(mailformat)) {
+    setMailError('email not valid check your email again*');
+    return false;
+
+  }else if (email.match(mailformat)) {
+    setMailError()
+    return true;
+  }
+  else {
+    return true;
+  }
+}
+
+const passwordValid = () => {
+  if (!password) {
+    setPasswordError('you should enter your password*');
+    return false;
+  }else if (password.length < 6  || password.length > 20) {
+    setPasswordError('the password should be 8 caractere  minimum*');
+    return false
+  }else if (password.match(passformat)) {
+    setPasswordError();
+    return true;
+  }
+  else  {
+    return true;
+  }
+
+}
+const phoneValidator= () => {
+  if (!numberPhone) {
+    setPhoneError('you should enter your phone number*');
+    return false;
+  }else if (!numberPhone.match(phoneFormat)){
+    setPhoneError('please a correct phone number*');
+    return false;
+  }else if (numberPhone.match(phoneFormat)) {
+    setPhoneError();
+    return true;
+  }
+  else {
+    return true;
+  }
+}
+
+
+    const register =() =>{
+       let forms = {firstName : sanitizeHtml(firstName),
+      lastName :sanitizeHtml(lastName),
+      email:sanitizeHtml(email),
+      password,
+      numberPhone
+
+      
+      }
+      
+      if (JSON.stringify(forms)=== JSON.stringify({firstName, lastName, email, password, numberPhone}) && emailvalidator() && nameValidator() && passwordValid() && phoneValidator() && lastValidator()) {
+          axios.post("http://localhost:3333/api/users/create", {firstName, lastName, email, password, numberPhone}).then((res)=> {
+        console.log(res)
+        navigation.navigate('Profile')
+
+      }).catch((err)=> console.log(err.message))
+      }else {
+        alert('you are passing a wrong information check again please')
+      }
+    }
+
 
 
   
@@ -19,12 +140,17 @@ const signUp = ({navigation}) => {
         <FormInput
           labelValue={firstName}
           onChangeText={(firstName) => setFirstName(firstName)}
+          
           placeholderText="firstName"
           iconType="user"
           keyboardType="firstName"
           autoCapitalize="none"
           autoCorrect={false}
-        />
+          onBlur ={()=> nameValidator()}
+        />    
+         <Text style={{color:'red'}}>{nameError}</Text>
+
+
            <FormInput
           labelValue={lastName}
           onChangeText={(lastName) => setLastName(lastName)}
@@ -34,24 +160,50 @@ const signUp = ({navigation}) => {
           autoCapitalize="none"navigation
           autoCapitalize="none"
           autoCorrect={false}
+          onBlur={()=>lastValidator()}
+          
         />
+                 <Text style={{color:'red'}}>{lastError}</Text>
+
+        <FormInput
+        labelValue={email}
+        onChangeText={(userEmail) => setEmail(userEmail)}
+        onBlur={()=> emailvalidator()}
+        placeholderText="Email"
+        iconType="user"
+        keyboardType="email-address"
+        autoCapitalize="none"
+        autoCorrect={false}
+        
+      />
+     <Text style={{color:'red'}}>{mailError}</Text>
         <FormInput
         labelValue={password}
         onChangeText={(userPassword) => setPassword(userPassword)}
         placeholderText ="password"
         iconType="lock"
         secureTextEntry={true}
+        onBlur={()=> passwordValid()}
         />
+                 <Text style={{color:'red'}}>{passwordError}</Text>
+
         <FormInput 
           labelValue={numberPhone}
           onChangeText={(userNumberPhone) => setNumberPhone(userNumberPhone)}
           placeholderText="phone number"
           iconType="phone"
-          keyboardType="tel"
+          keyboardType="numeric"
           autoCapitalize="none"
           autoCorrect={false}
+          onBlur={()=> {phoneValidator()}}
         />
-      {Platform.OS === 'android' ? (
+        <Text style={{color:'red'}}>{phoneError}</Text>
+
+      {/* {Platform.OS === 'android' ? ( */}
+        <FormButton
+        buttonTitle="Sign Up"
+        onPress={() => register()}
+      />
         <View>
           <SocialButton
             buttonTitle="Sign In with Facebook"
@@ -60,14 +212,15 @@ const signUp = ({navigation}) => {
             backgroundColor="#e6eaf4"
           />
 
-          <SocialButton
+          <SocialButton 
+          
             buttonTitle="Sign In with Google"
             btnType="google"
             color="#de4d41"
             backgroundColor="#f5e7ea"
           />
         </View>
-      ) : null}
+      {/* ) : null} */}
       
         <TouchableOpacity
         style={styles.navButton}
