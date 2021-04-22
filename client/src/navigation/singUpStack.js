@@ -5,7 +5,6 @@ import SignUp from '../scenes/signUp';
 import signIN from '../scenes/signIn';
 import React from 'react'
 import { Text} from 'react-native';
-import Home from '../scenes/home';
 import Profile from '../scenes/profile'
 
 
@@ -22,6 +21,19 @@ const screens = {
             }
         }
     },
+    Profile: {
+        screen:Profile,
+        navigationOptions: ({navigation})=> {
+            return {
+                headerLeft: () => (
+                    <Header navigation={navigation}  />
+                  ),
+                headerTitle : () => (<Text>Profile</Text>)
+                
+            }
+        }
+    },   
+    
     signIN: {
         screen:signIN,
         navigationOptions: ({navigation})=> {
@@ -34,23 +46,7 @@ const screens = {
             }
         }
     },
-    Profile: {
-        screen:Profile,
-        navigationOptions: ({navigation})=> {
-            return {
-                headerLeft: () => (
-                    <Header navigation={navigation}  />
-                  ),
-                headerTitle : () => (<Text>Profile</Text>)
-                
-            }
-        }
-    },
     
-    
-  
-  
-
 }
 const SingUpStack = createStackNavigator(screens);
 export default createAppContainer(SingUpStack);

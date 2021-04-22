@@ -7,7 +7,9 @@ import SingUpStack from './singUpStack';
 import MyListStack from './myListStack';
 import ProfileStack from './profileStack';
 import FoundUs from './FoundUsStack';
-import ContactStack from './ContactStack'
+import ContactStack from './ContactStack';
+import {NavigationContainer} from '@react-navigation/native';
+import React from 'react';
 
 
 
@@ -39,3 +41,6 @@ const screens = {
 }
 const RootDrawerNavigator = createDrawerNavigator(screens)
 export default createAppContainer(RootDrawerNavigator)
+// export default ()=> {return <NavigationContainer> 
+//     <RootDrawerNavigator />
+// </NavigationContainer>}
