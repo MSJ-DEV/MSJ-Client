@@ -3,6 +3,7 @@ import {createAppContainer} from 'react-navigation';
 import Profile from '../scenes/profile';
 import Header from '../components/header'; 
 import React from 'react'
+import { Text } from 'react-native';
 
 
 const screens = {
@@ -11,16 +12,14 @@ const screens = {
         screen: Profile,
         navigationOptions: ({navigation})=> {
             return {
-                headerTitle : () => <Header navigation={navigation} title=''/>
+                headerLeft : () => <Header navigation={navigation} />,
+                headerTitle : ()=> (<Text>Product</Text>)
                 
             }
-        }
+        
+    }
     },
-    // Product : {
-    //     screen : Product
-    // },
-  
-  
+   
 
 }
 const ProfileStack = createStackNavigator(screens);

@@ -1,15 +1,29 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect} from 'react';
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 import FromInput from '../components/FormInput';
+import axios from "react-native-axios";
 
 
 import { StyleSheet, Text, View, Platform, Image } from 'react-native'
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
+
 const signIn = ({navigation}) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
+    const [data, setData] = useState();
+
+   const singIn = () => {
+       axios.post("http://localhost:3333/api/auth/login",{email, password}).then((res)=> {
+     
+        
+          console.log('***********************',res)
+          navigation.navigate('Profile')       
+      })
+   }
+    
+   
 
     return (
         <ScrollView contentContainerStyle={styles.container}>
@@ -33,7 +47,9 @@ const signIn = ({navigation}) => {
         iconType="lock"
         secureTextEntry={true}/>
 
-            <FormButton buttonTitle="Sign In"/>
+            <FormButton buttonTitle="Sign In"
+            onPress={()=> singIn()}
+            />
             <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
         <Text style={styles.navButtonText}>Forgot Password?</Text>
       </TouchableOpacity>

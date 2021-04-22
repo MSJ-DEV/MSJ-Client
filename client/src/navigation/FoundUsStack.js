@@ -3,6 +3,7 @@ import {createAppContainer} from 'react-navigation';
 import Header from '../components/header'; 
 import FoundUs from '../scenes/foundUs'
 import React from 'react'
+import { Text } from 'react-native';
 
 
 const screens = {
@@ -11,10 +12,12 @@ const screens = {
         screen:FoundUs ,
         navigationOptions: ({navigation})=> {
             return {
-                headerTitle : () => <Header navigation={navigation} title=''/>
+                headerLeft : () => <Header navigation={navigation} />,
+                headerTitle : ()=> (<Text>Product</Text>)
                 
             }
-        }
+        
+    }
     },  
 
 }

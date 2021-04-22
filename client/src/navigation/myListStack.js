@@ -3,6 +3,7 @@ import {createAppContainer} from 'react-navigation';
 import Header from '../components/header'; 
 import MyList from '../scenes/myList'
 import React from 'react'
+import { Text } from 'react-native';
 
 
 const screens = {
@@ -11,10 +12,13 @@ const screens = {
         screen: MyList,
         navigationOptions: ({navigation})=> {
             return {
-                headerTitle : () => <Header navigation={navigation} title='Product List'/>
+                headerLeft : () => <Header navigation={navigation} />,
+                headerTitle : ()=> (<Text>Product</Text>)
+                
                 
             }
-        }
+        
+    }
     },
     
   
