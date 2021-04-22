@@ -3,6 +3,8 @@ import {View, Text, TouchableOpacity, Platform, StyleSheet} from 'react-native';
 import FormInput from '../components/FormInput'
 import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
+import axios from "react-native-axios";
+import sanitizeHtml from 'sanitize-html'
 
 const signUp = ({navigation}) => {
     const [firstName, setFirstName] = useState();
@@ -10,6 +12,43 @@ const signUp = ({navigation}) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const [numberPhone, setNumberPhone] = useState();
+
+    const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const passformat = /^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/;
+    const nameformat = /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
+     
+    
+    const register =() =>{
+       let forms = {firstName : sanitizeHtml(firstName),
+      lastName :sanitizeHtml(lastName),
+      email:sanitizeHtml(email),
+      password,
+      numberPhone
+
+      
+      }
+      console.log(forms)
+      // const validateForm = () => {
+      //   // if (firstName.match(nameformat) && lastName.match(nameformat) && email.match(mailformat)&& password.match(passformat)&& numberPhone.length === 8) {
+      //   //   return true;
+      //   // }else {
+      //   //   console.log('cheack your form first ') ;
+      //   // }
+        
+      // }
+    
+      
+      if (JSON.stringify(forms)=== JSON.stringify({firstName, lastName, email, password, numberPhone}) ) {
+          axios.post("http://localhost:3333/api/users/create", {firstName, lastName, email, password, numberPhone}).then((res)=> {
+        console.log(res)
+        navigation.navigate('Profile')
+
+      }).catch((err)=> console.log(err))
+      }else {
+        alert('dont try tp put some script in the input');
+      }
+    }
+
 
 
   
@@ -19,6 +58,7 @@ const signUp = ({navigation}) => {
         <FormInput
           labelValue={firstName}
           onChangeText={(firstName) => setFirstName(firstName)}
+          
           placeholderText="firstName"
           iconType="user"
           keyboardType="firstName"
@@ -34,7 +74,18 @@ const signUp = ({navigation}) => {
           autoCapitalize="none"navigation
           autoCapitalize="none"
           autoCorrect={false}
+          
         />
+        <FormInput
+        labelValue={email}
+        onChangeText={(userEmail) => setEmail(userEmail)}
+        placeholderText="Email"
+        iconType="user"
+        keyboardType="email-address"
+        autoCapitalize="none"
+        autoCorrect={false}
+        
+      />
         <FormInput
         labelValue={password}
         onChangeText={(userPassword) => setPassword(userPassword)}
@@ -47,11 +98,15 @@ const signUp = ({navigation}) => {
           onChangeText={(userNumberPhone) => setNumberPhone(userNumberPhone)}
           placeholderText="phone number"
           iconType="phone"
-          keyboardType="tel"
+          keyboardType="numeric"
           autoCapitalize="none"
           autoCorrect={false}
         />
-      {Platform.OS === 'android' ? (
+      {/* {Platform.OS === 'android' ? ( */}
+        <FormButton
+        buttonTitle="Sign Up"
+        onPress={() => register()}
+      />
         <View>
           <SocialButton
             buttonTitle="Sign In with Facebook"
@@ -68,7 +123,7 @@ const signUp = ({navigation}) => {
             backgroundColor="#f5e7ea"
           />
         </View>
-      ) : null}
+      {/* ) : null} */}
       
         <TouchableOpacity
         style={styles.navButton}
