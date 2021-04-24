@@ -15,10 +15,12 @@ export default class Cart extends React.Component {
     }
 
 async componentDidMount(){
-  var x= await AsyncStorage.getItem("list")
-  console.log("***********",x)
+  var x= await AsyncStorage.getItem("item")
+
+
   this.setState({cartItems:JSON.parse(x)}) 
-  console.log(this.state.cartItems)
+  
+  
 }
     selectHandler = (index, value) => {
         const newItems = [...this.state.cartItems]; // clone the array 
@@ -35,12 +37,27 @@ async componentDidMount(){
     }
 
      deleteHandler = async (index) => {
-      var myid= await JSON.parse(AsyncStorage.getItem("list"))
+         
+      var listId= await AsyncStorage.getItem("item");
+      var myid = JSON.parse(listId)
+      console.log('***************', myid)
+      
        myid.map(async (e,i)=>{
         if(index===e.id){
-           delete myid[i]
+            console.log("########################")
+
+           myid.splice(i,1)
+           
+
         }
-        await AsyncStorage.setItem("myid",JSON.stringify(myid))
+        console.log("new my id ***")
+        // if (myid[0]===null) {
+        //     delete myid[0]
+        // }
+        console.log(myid)
+        await AsyncStorage.setItem("item",JSON.stringify(myid))
+
+        this.setState({cartItems:myid})
       })
       Swal.fire({
         title: 'Are you sure?',
@@ -78,7 +95,7 @@ async componentDidMount(){
     subtotalPrice = () => {
         const { cartItems } = this.state;
         if (cartItems) {
-            return cartItems.reduce((sum, item) => sum + (item.promotion == 1 ? item.quantity * item.oldprice : 0), 0);
+            return cartItems.reduce((sum, item) => sum + (item && item.promotion == 1 ? item.quantity * item.oldprice : 0), 0);
         }
         return 0;
     }

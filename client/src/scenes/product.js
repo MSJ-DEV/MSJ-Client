@@ -122,7 +122,9 @@ const product = ({navigation}) => {
       console.log(err)
     })
   },[])
-
+  const goToList = ()=> {
+    navigation.navigate('MyList')
+  }
 
 const  handleClick= async(item)=> { 
  
@@ -151,7 +153,13 @@ const  handleClick= async(item)=> {
   
 
   return (
-    <View >      
+    <View >   
+       <Button 
+            style={{flex: 1, zIndex:"-999"}}
+            onPress={()=>goToList()}
+            title="Check my List "
+            color="#841584"
+            accessibilityLabel="Learn more about this purple button"/>   
         <FlatList 
           data={data}
           renderItem={({item}) => { 
@@ -170,7 +178,9 @@ const  handleClick= async(item)=> {
              
             ) }}
             />
+           
             </View>
+         
   )
 }
 
