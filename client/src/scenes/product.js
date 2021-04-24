@@ -170,8 +170,8 @@ const  handleClick= async(item)=> {
                      <Image style={styles.cardImage} source={{uri:item.image}} onPress={()=> handleClick(items)}/>
                      <Text style={styles.cardText} onPress={()=> handleClick(items)}>{item.name}</Text>
                      <Text style={styles.Text} onPress={()=> handleClick(items)}>{item.oldprice}DT</Text>
-                     <Text onPress={()=> handleClick(items)}>{item.type}</Text>
-                     <Button title="ADD Me " color="#0652DD" style={{}} onPress={()=> handleClick(item)}/>
+                     <Text onPress={()=> handleClick(items)} style={{marginLeft:110, fontSize:20}}>{item.type}</Text>
+                     <Button title="ADD Me " color="#0652DD"  onPress={()=> handleClick(item)}/>
             
                   </TouchableOpacity>
     
@@ -207,12 +207,15 @@ const styles = StyleSheet.create({
       cardText:{
         fontSize:24,
         alignItems:"center",
+        marginLeft:110
+
        
         
       },
      Text:{
-        fontSize:15,
-        marginLeft:110
+        fontSize:24,
+        marginLeft:110,
+        color:'#009432'
       },
       card:{
         marginTop:"1%",
@@ -221,10 +224,8 @@ const styles = StyleSheet.create({
         width:'80%',
         shadowColor:'#000',
         shadowOpacity:1,
-        shadowOffset:{
-          width:3,
-          height:3
-        }
+        marginLeft:10
+
       },
       cardImage:{
             width:'80%',

@@ -155,17 +155,18 @@ this.setItems()
                                     <TouchableOpacity onPress={() => {/*this.props.navigation.navigate('ProductDetails', {productDetails: item})*/ }} style={{ paddingRight: 10 }}>
                                         <Image source={{ uri: item.image }} style={[styles.centerElement, { height: 60, width: 60, backgroundColor: '#eeeeee' }]} />
                                     </TouchableOpacity>
+                                    {/* go here to fix the style of the card  */}
                                     <View style={{ flexGrow: 1, flexShrink: 1, alignSelf: 'center' }}>
-                                        <Text numberOfLines={1} style={{ fontSize: 15 }}>{item.name}</Text>
+                                        <Text numberOfLines={1} style={{ fontSize: 22 }}>{item.name}</Text>
                                         <Text numberOfLines={1} style={{ color: '#8f8f8f' }}>{item.color ? 'Variation: ' + item.color : ''}</Text>
-                                        <Text numberOfLines={1} style={{ color: '#333333', marginBottom: 10 }}>{item.quantity * item.oldprice} TND</Text>
+                                        <Text numberOfLines={1} style={{ color: '#000', marginBottom: 10 ,}}>{item.quantity * item.oldprice} TND</Text>
                                         <View style={{ flexDirection: 'row' }}>
-                                            <TouchableOpacity onPress={() => this.quantityHandler('less', i)} style={{ borderWidth: 1, borderColor: '#cccccc' }}>
-                                                <MaterialIcons name="remove" size={22} color="#cccccc" />
+                                            <TouchableOpacity onPress={() => this.quantityHandler('less', i)} style={{ borderWidth: 1, borderColor: '#000' }}>
+                                                <MaterialIcons name="remove" size={22} color="#000" />
                                             </TouchableOpacity>
-                                            <Text style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: '#cccccc', paddingHorizontal: 7, paddingTop: 3, color: '#bbbbbb', fontSize: 13 }}>{item.quantity}</Text>
-                                            <TouchableOpacity onPress={() => this.quantityHandler('more', i)} style={{ borderWidth: 1, borderColor: '#cccccc' }}>
-                                                <MaterialIcons name="add" size={22} color="#cccccc" />
+                                            <Text style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: '#cccccc', paddingHorizontal: 7, paddingTop: 3, color: '#000', fontSize: 15 }}>{item.quantity}</Text>
+                                            <TouchableOpacity onPress={() => this.quantityHandler('more', i)} style={{ borderWidth: 1, borderColor: '#000' }}>
+                                                <MaterialIcons name="add" size={22} color="#000" />
                                             </TouchableOpacity>
                                         </View>
                                     </View>
