@@ -1,5 +1,7 @@
 import React from 'react';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { StyleSheet, Button, Text, View, TouchableOpacity, ScrollView, Image, ActivityIndicator, TextInput, Alert } from 'react-native';
 import { MaterialIcons, AntDesign, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 export default class Cart extends React.Component {
@@ -11,8 +13,10 @@ export default class Cart extends React.Component {
             cartItems:[]    
         }
     }
-componentDidMount(){
-  var x=localStorage.getItem("list")
+
+async componentDidMount(){
+  var x= await AsyncStorage.getItem("list")
+  console.log("***********",x)
   this.setState({cartItems:JSON.parse(x)}) 
   console.log(this.state.cartItems)
 }
@@ -30,13 +34,13 @@ componentDidMount(){
         this.setState({ cartItems: newItems, selectAll: (value == true ? false : true) }); // set new state
     }
 
-    deleteHandler = (index) => {
-      var myid=JSON.parse(localStorage.getItem("list"))
-      myid.map((e,i)=>{
+     deleteHandler = async (index) => {
+      var myid= await JSON.parse(AsyncStorage.getItem("list"))
+       myid.map(async (e,i)=>{
         if(index===e.id){
            delete myid[i]
         }
-        localStorage.setItem("myid",JSON.stringify(myid))
+        await AsyncStorage.setItem("myid",JSON.stringify(myid))
       })
       Swal.fire({
         title: 'Are you sure?',
