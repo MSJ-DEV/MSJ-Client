@@ -12,16 +12,30 @@ import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 const signIn = ({navigation}) => {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [data, setData] = useState();
 
    const singIn = () => {
-       axios.post("http://localhost:3333/api/auth/login",{email, password}).then((res)=> {
+       axios.post("http://192.168.1.15:3333/api/auth/login",{email, password}).then((res)=> {
      
-        
-          console.log('***********************',res)
-          navigation.navigate('Profile')       
+          console.log('***********************',res.data.user);
+
+
+          if (res.data === "password matched") {
+            
+          }
+          
+          if (res.data === "Invalid email") {
+            alert('wrong passwrod or email ')
+          }else if (res.data === "wrong password") {
+            alert('wrong passwrod or email ')
+          }
+          else {
+            
+            navigation.navigate('Profile',{res})  
+          }
+               
       })
    }
+
     
    
 
@@ -48,7 +62,7 @@ const signIn = ({navigation}) => {
         secureTextEntry={true}/>
 
             <FormButton buttonTitle="Sign In"
-            onPress={()=> singIn()}
+            onPress={(e)=> singIn()}
             />
             <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
         <Text style={styles.navButtonText}>Forgot Password?</Text>

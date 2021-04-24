@@ -1,4 +1,7 @@
 import React, {useState, useEffect} from 'react';
+import { Chip } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
 import {
   Text,
   Image,
@@ -7,14 +10,16 @@ import {
   SafeAreaView,
   View,
 } from 'react-native';
+import SocialButton from '../components/SocialButton';
 
 
 const Profile = ({navigation} ) => {
+
+
 // console.log("This is route props", route.params)
-console.log("This is navigationa props", navigation)
-
-  const [userData,setUserData] = useState([]);
-
+console.log("This is navigationa props", navigation.state.params.res.data.user)
+const {profile} = navigation.state.params.res.data.user
+console.log("3333333333333333",navigation)
 
 
 
@@ -29,9 +34,31 @@ console.log("This is navigationa props", navigation)
           style={styles.userImg}
             source ={{uri:"https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg"}}
         />
-      <Text>
-       hello there :!!!!!!! 
-      </Text>
+        <Text style={{marginTop:50, marginBottom:20, fontSize:30}}> Welcome Back </Text>
+     <SocialButton
+            buttonTitle= "your name is "
+            btnType="user"
+            color="#1e272e"
+            backgroundColor="#e6eaf4"
+          />
+           <SocialButton
+            buttonTitle= {"your lastName ", navigation.state.params.res.data.user.firstName} 
+            btnType="user"
+            color="#1e272e"
+            backgroundColor="#e6eaf4"
+          />
+          <SocialButton
+            buttonTitle= { navigation.state.params.res.data.user.email}
+            btnType="user"
+            color="#1e272e"
+            backgroundColor="#e6eaf4"
+          />
+          <SocialButton
+            buttonTitle= "your name is "
+            btnType="phone"
+            color="#1e272e"
+            backgroundColor="#e6eaf4"
+          />
           
       </ScrollView>
     </SafeAreaView>

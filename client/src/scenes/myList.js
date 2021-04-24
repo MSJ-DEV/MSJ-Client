@@ -1,5 +1,7 @@
 import React from 'react';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { StyleSheet, Button, Text, View, TouchableOpacity, ScrollView, Image, ActivityIndicator, TextInput, Alert } from 'react-native';
 import { MaterialIcons, AntDesign, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 export default class Cart extends React.Component {
@@ -11,10 +13,14 @@ export default class Cart extends React.Component {
             cartItems:[]    
         }
     }
-componentDidMount(){
-  var x=localStorage.getItem("list")
+
+async componentDidMount(){
+  var x= await AsyncStorage.getItem("item")
+
+
   this.setState({cartItems:JSON.parse(x)}) 
-  console.log(this.state.cartItems)
+  
+  
 }
     selectHandler = (index, value) => {
         const newItems = [...this.state.cartItems]; // clone the array 
@@ -30,13 +36,27 @@ componentDidMount(){
         this.setState({ cartItems: newItems, selectAll: (value == true ? false : true) }); // set new state
     }
 
-    deleteHandler = (index) => {
-      var myid=JSON.parse(localStorage.getItem("list"))
-      myid.map((e,i)=>{
+     deleteHandler = async (index) => {
+         
+      var listId= await AsyncStorage.getItem("item");
+      var myid = JSON.parse(listId)
+      console.log('***************', myid)
+      
+       myid.map(async (e,i)=>{
         if(index===e.id){
-           delete myid[i]
+            console.log("########################")
+
+           myid.splice(i,1)   
+
         }
-        localStorage.setItem("myid",JSON.stringify(myid))
+        console.log("new my id ***")
+        // if (myid[0]===null) {
+        //     delete myid[0]
+        // }
+        console.log(myid)
+        await AsyncStorage.setItem("item",JSON.stringify(myid))
+
+        this.setState({cartItems:myid})
       })
       Swal.fire({
         title: 'Are you sure?',
@@ -74,7 +94,7 @@ componentDidMount(){
     subtotalPrice = () => {
         const { cartItems } = this.state;
         if (cartItems) {
-            return cartItems.reduce((sum, item) => sum + (item.promotion == 1 ? item.quantity * item.oldprice : 0), 0);
+            return cartItems.reduce((sum, item) => sum + (item && item.promotion == 1 ? item.quantity * item.oldprice : 0), 0);
         }
         return 0;
     }
