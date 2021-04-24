@@ -46,8 +46,7 @@ async componentDidMount(){
         if(index===e.id){
             console.log("########################")
 
-           myid.splice(i,1)
-           
+           myid.splice(i,1)   
 
         }
         console.log("new my id ***")
