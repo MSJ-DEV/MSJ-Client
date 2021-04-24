@@ -23,7 +23,6 @@ const signUp = ({navigation}) => {
 
     const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
     const passformat = /^(?=.*\d)(?=.*[a-z])[a-zA-Z0-9]{8,}$/;
-    // const nameformat = /^(?=.{3,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
     const phoneFormat = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
     
@@ -32,14 +31,6 @@ const signUp = ({navigation}) => {
       if (!firstName) {
         setNameError('fill you name please*')
         return false;
-      // }else if (!firstName.match(nameformat)) {
-      //   setNameError('name not valid check your name again*');
-      //   return false;
-    
-      // }
-      // else if (firstName.match(nameformat)){
-      //   setNameError();
-      //   return true;
       }else {
         return true;
       }
@@ -49,16 +40,7 @@ const signUp = ({navigation}) => {
       if (!lastName) {
         setLastError('fill you last name please*')
         return false;
-      }
-      // else if (!lastName.match(nameformat)) {
-      //   setLastError('name not valid check your last name again*');
-      //   return false;
-    
-      // }else if (lastName.match(nameformat)) {
-      //   setLastError();
-      //   return true;
-      // }
-      else {
+      }else {
         return true;
       }
     }
@@ -112,7 +94,7 @@ const phoneValidator= () => {
 }
 
 
-    const register =() =>{
+    const register = () =>{
        let forms = {firstName : sanitizeHtml(firstName),
       lastName :sanitizeHtml(lastName),
       email:sanitizeHtml(email),
@@ -124,8 +106,8 @@ const phoneValidator= () => {
       
       if (JSON.stringify(forms)=== JSON.stringify({firstName, lastName, email, password, numberPhone}) && emailvalidator() && nameValidator() && passwordValid() && phoneValidator() && lastValidator()) {
           axios.post("http://192.168.1.15:3333/api/users/create", {firstName, lastName, email, password, numberPhone}).then((res)=> {
-        console.log(res)
-        navigation.navigate('Profile', {email, email})
+        console.log(res);
+        navigation.navigate('SingIn')  
 
       }).catch((err)=> console.log(err.message))
       }else {
@@ -228,7 +210,7 @@ const phoneValidator= () => {
       
         <TouchableOpacity
         style={styles.navButton}
-        onPress={() => navigation.navigate('signIN', {email})}>
+        onPress={() => navigation.navigate('SignIN', {email})}>
         <Text style={styles.navButtonText}>Have an account? Sign In</Text>
       </TouchableOpacity>
 
