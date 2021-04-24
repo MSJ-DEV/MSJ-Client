@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import { Chip } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import SafeAreaView from 'react-native-safe-area-view';
+
 
 import {
   Text,
   Image,
   StyleSheet,
   ScrollView,
-  SafeAreaView,
+ 
   View,
 } from 'react-native';
 import SocialButton from '../components/SocialButton';
@@ -19,7 +21,7 @@ const Profile = ({navigation} ) => {
 // console.log("This is route props", route.params)
 console.log("This is navigationa props", navigation.state.params.res.data.user)
 const {profile} = navigation.state.params.res.data.user
-console.log("3333333333333333",navigation)
+console.log("3333333333333333",navigation.state.params.res.data)
 
 
 
@@ -36,13 +38,13 @@ console.log("3333333333333333",navigation)
         />
         <Text style={{marginTop:50, marginBottom:20, fontSize:30}}> Welcome Back </Text>
      <SocialButton
-            buttonTitle= "your name is "
+            buttonTitle= { navigation.state.params.res.data.user.firstName}
             btnType="user"
             color="#1e272e"
             backgroundColor="#e6eaf4"
           />
            <SocialButton
-            buttonTitle= {"your lastName ", navigation.state.params.res.data.user.firstName} 
+            buttonTitle= {"your lastName ", navigation.state.params.res.data.user.lastName} 
             btnType="user"
             color="#1e272e"
             backgroundColor="#e6eaf4"
@@ -54,7 +56,7 @@ console.log("3333333333333333",navigation)
             backgroundColor="#e6eaf4"
           />
           <SocialButton
-            buttonTitle= "your name is "
+            buttonTitle= { navigation.state.params.res.data.user.numberPhone}
             btnType="phone"
             color="#1e272e"
             backgroundColor="#e6eaf4"

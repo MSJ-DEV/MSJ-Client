@@ -12,15 +12,17 @@ export default class Cart extends React.Component {
             cartItemsIsLoading: false,
             cartItems:[]    
         }
+        this.setItems = this.setItems.bind(this)
     }
 
-async componentDidMount(){
-  var x= await AsyncStorage.getItem("item")
-
-
-  this.setState({cartItems:JSON.parse(x)}) 
+ componentDidMount(){
+this.setItems()
   
   
+}
+ setItems= async ()=> {
+    var x= await AsyncStorage.getItem("item")
+    this.setState({cartItems:JSON.parse(x)}) 
 }
     selectHandler = (index, value) => {
         const newItems = [...this.state.cartItems]; // clone the array 
@@ -40,24 +42,25 @@ async componentDidMount(){
          
       var listId= await AsyncStorage.getItem("item");
       var myid = JSON.parse(listId)
-      console.log('***************', myid)
+    //   console.log('***************', myid)
       
        myid.map(async (e,i)=>{
-        if(index===e.id){
-            console.log("########################")
-
+        if(index === e.id){
+            // console.log("########################")
+           
            myid.splice(i,1)   
 
         }
-        console.log("new my id ***")
-        // if (myid[0]===null) {
-        //     delete myid[0]
-        // }
-        console.log(myid)
+        // console.log("new my id ***")
+        
+        // console.log(myid)
         await AsyncStorage.setItem("item",JSON.stringify(myid))
 
         this.setState({cartItems:myid})
+
+        
       })
+
       Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -99,7 +102,9 @@ async componentDidMount(){
         return 0;
     }
 
-
+   goToProduct=()=> {
+       this.props.navigation.navigate('Product')
+   }
 
     render() {
         const styles = StyleSheet.create({
@@ -110,14 +115,26 @@ async componentDidMount(){
 
         return (
             <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
+                   <View>     
+                      <Button 
+                        style={{ zIndex:"-999"}}
+                        onPress={()=>this.goToProduct()}
+                        title="See all product "
+                        color="#0652DD"
+                        accessibilityLabel="Learn more about this purple button"/> 
+                    </View>
          
                 <View style={{ flexDirection: 'row', backgroundColor: '#fff', marginBottom: 10 }}>
                     <View style={[styles.centerElement, { width: 50, height: 50 }]}>
                         <Ionicons name="ios-cart" size={25} color="#000" />
+                 
                     </View>
+                    
                     <View style={[styles.centerElement, { height: 50 }]}>
                         <Text style={{ fontSize: 18, color: '#000' }}>Shopping Cart</Text>
+                        
                     </View>
+                 
                 </View>
 
 
@@ -138,17 +155,18 @@ async componentDidMount(){
                                     <TouchableOpacity onPress={() => {/*this.props.navigation.navigate('ProductDetails', {productDetails: item})*/ }} style={{ paddingRight: 10 }}>
                                         <Image source={{ uri: item.image }} style={[styles.centerElement, { height: 60, width: 60, backgroundColor: '#eeeeee' }]} />
                                     </TouchableOpacity>
+                                    {/* go here to fix the style of the card  */}
                                     <View style={{ flexGrow: 1, flexShrink: 1, alignSelf: 'center' }}>
-                                        <Text numberOfLines={1} style={{ fontSize: 15 }}>{item.name}</Text>
+                                        <Text numberOfLines={1} style={{ fontSize: 22 }}>{item.name}</Text>
                                         <Text numberOfLines={1} style={{ color: '#8f8f8f' }}>{item.color ? 'Variation: ' + item.color : ''}</Text>
-                                        <Text numberOfLines={1} style={{ color: '#333333', marginBottom: 10 }}>{item.quantity * item.oldprice} TND</Text>
+                                        <Text numberOfLines={1} style={{ color: '#000', marginBottom: 10 ,}}>{item.quantity * item.oldprice} TND</Text>
                                         <View style={{ flexDirection: 'row' }}>
-                                            <TouchableOpacity onPress={() => this.quantityHandler('less', i)} style={{ borderWidth: 1, borderColor: '#cccccc' }}>
-                                                <MaterialIcons name="remove" size={22} color="#cccccc" />
+                                            <TouchableOpacity onPress={() => this.quantityHandler('less', i)} style={{ borderWidth: 1, borderColor: '#000' }}>
+                                                <MaterialIcons name="remove" size={22} color="#000" />
                                             </TouchableOpacity>
-                                            <Text style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: '#cccccc', paddingHorizontal: 7, paddingTop: 3, color: '#bbbbbb', fontSize: 13 }}>{item.quantity}</Text>
-                                            <TouchableOpacity onPress={() => this.quantityHandler('more', i)} style={{ borderWidth: 1, borderColor: '#cccccc' }}>
-                                                <MaterialIcons name="add" size={22} color="#cccccc" />
+                                            <Text style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: '#cccccc', paddingHorizontal: 7, paddingTop: 3, color: '#000', fontSize: 15 }}>{item.quantity}</Text>
+                                            <TouchableOpacity onPress={() => this.quantityHandler('more', i)} style={{ borderWidth: 1, borderColor: '#000' }}>
+                                                <MaterialIcons name="add" size={22} color="#000" />
                                             </TouchableOpacity>
                                         </View>
                                     </View>
