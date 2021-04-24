@@ -121,6 +121,7 @@ const product = ({navigation}) => {
     .catch((err)=> {
       console.log(err)
     })
+    
   },[])
   const goToList = ()=> {
     navigation.navigate('MyList')
@@ -158,7 +159,7 @@ const  handleClick= async(item)=> {
             style={{flex: 1, zIndex:"-999"}}
             onPress={()=>goToList()}
             title="Check my List "
-            color="#841584"
+            color="#0652DD"
             accessibilityLabel="Learn more about this purple button"/>   
         <FlatList 
           data={data}
@@ -170,7 +171,7 @@ const  handleClick= async(item)=> {
                      <Text style={styles.cardText} onPress={()=> handleClick(items)}>{item.name}</Text>
                      <Text style={styles.Text} onPress={()=> handleClick(items)}>{item.oldprice}DT</Text>
                      <Text onPress={()=> handleClick(items)}>{item.type}</Text>
-                     <Button title="press me" color="black" onPress={()=> handleClick(item)}/>
+                     <Button title="ADD Me " color="#0652DD" style={{}} onPress={()=> handleClick(item)}/>
             
                   </TouchableOpacity>
     
@@ -190,10 +191,24 @@ const styles = StyleSheet.create({
       container: {
         flex:1 ,
         alignItems:"center",
+        marginTop:20,
         justifyContent:"center",
+        flexDirection:'row',
+                padding: 10,
+                marginBottom: 15,
+                backgroundColor: "rgba(255,255,255,0.9)",
+                borderRadius: 12,
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 10 },
+                shadowOpacity: 0.3,
+                shadowRadius: 20,
+
       },
       cardText:{
-        fontSize:24
+        fontSize:24,
+        alignItems:"center",
+       
+        
       },
      Text:{
         fontSize:15,
@@ -212,7 +227,7 @@ const styles = StyleSheet.create({
         }
       },
       cardImage:{
-            width:'100%',
+            width:'80%',
             height:170,
             resizeMode:'cover'
        }

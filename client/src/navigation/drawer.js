@@ -29,9 +29,6 @@ const screens = {
     myList:{
         screen:MyListStack
     },
-    Profile:{
-        screen: ProfileStack
-    },
     FoundUs :{
         screen:FoundUs
     },

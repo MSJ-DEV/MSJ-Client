@@ -4,6 +4,7 @@ import Header from '../components/header';
 import MyList from '../scenes/myList'
 import React from 'react'
 import { Text } from 'react-native';
+import Product from '../scenes/product';
 
 
 const screens = {
@@ -15,6 +16,18 @@ const screens = {
                 headerLeft : () => <Header navigation={navigation} />,
                 headerTitle : ()=> (<Text>Product</Text>)
                 
+                
+            }
+        
+    }
+    },
+    Product: {
+        screen: Product,
+       
+        navigationOptions: ({navigation})=> {
+            return {
+                headerLeft : () => <Header navigation={navigation} />,
+                headerTitle : ()=> (<Text>Product</Text>)
                 
             }
         

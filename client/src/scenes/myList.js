@@ -12,15 +12,17 @@ export default class Cart extends React.Component {
             cartItemsIsLoading: false,
             cartItems:[]    
         }
+        this.setItems = this.setItems.bind(this)
     }
 
-async componentDidMount(){
-  var x= await AsyncStorage.getItem("item")
-
-
-  this.setState({cartItems:JSON.parse(x)}) 
+ componentDidMount(){
+this.setItems()
   
   
+}
+ setItems= async ()=> {
+    var x= await AsyncStorage.getItem("item")
+    this.setState({cartItems:JSON.parse(x)}) 
 }
     selectHandler = (index, value) => {
         const newItems = [...this.state.cartItems]; // clone the array 
@@ -40,24 +42,25 @@ async componentDidMount(){
          
       var listId= await AsyncStorage.getItem("item");
       var myid = JSON.parse(listId)
-      console.log('***************', myid)
+    //   console.log('***************', myid)
       
        myid.map(async (e,i)=>{
-        if(index===e.id){
-            console.log("########################")
-
+        if(index === e.id){
+            // console.log("########################")
+           
            myid.splice(i,1)   
 
         }
-        console.log("new my id ***")
-        // if (myid[0]===null) {
-        //     delete myid[0]
-        // }
-        console.log(myid)
+        // console.log("new my id ***")
+        
+        // console.log(myid)
         await AsyncStorage.setItem("item",JSON.stringify(myid))
 
         this.setState({cartItems:myid})
+
+        
       })
+
       Swal.fire({
         title: 'Are you sure?',
         text: "You won't be able to revert this!",
@@ -99,7 +102,9 @@ async componentDidMount(){
         return 0;
     }
 
-
+   goToProduct=()=> {
+       this.props.navigation.navigate('Product')
+   }
 
     render() {
         const styles = StyleSheet.create({
@@ -110,14 +115,26 @@ async componentDidMount(){
 
         return (
             <View style={{ flex: 1, backgroundColor: '#f6f6f6' }}>
+                   <View>     
+                      <Button 
+                        style={{ zIndex:"-999"}}
+                        onPress={()=>this.goToProduct()}
+                        title="See all product "
+                        color="#0652DD"
+                        accessibilityLabel="Learn more about this purple button"/> 
+                    </View>
          
                 <View style={{ flexDirection: 'row', backgroundColor: '#fff', marginBottom: 10 }}>
                     <View style={[styles.centerElement, { width: 50, height: 50 }]}>
                         <Ionicons name="ios-cart" size={25} color="#000" />
+                 
                     </View>
+                    
                     <View style={[styles.centerElement, { height: 50 }]}>
                         <Text style={{ fontSize: 18, color: '#000' }}>Shopping Cart</Text>
+                        
                     </View>
+                 
                 </View>
 
 

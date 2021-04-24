@@ -1,13 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import { Chip } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import SafeAreaView from 'react-native-safe-area-view';
+
 
 import {
   Text,
   Image,
   StyleSheet,
   ScrollView,
-  SafeAreaView,
+ 
   View,
 } from 'react-native';
 import SocialButton from '../components/SocialButton';
