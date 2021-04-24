@@ -5,6 +5,7 @@ import FormButton from '../components/FormButton';
 import SocialButton from '../components/SocialButton';
 import axios from "react-native-axios";
 import sanitizeHtml from 'sanitize-html';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const signUp = ({navigation}) => {
     const [firstName, setFirstName] = useState();
@@ -122,7 +123,7 @@ const phoneValidator= () => {
       }
       
       if (JSON.stringify(forms)=== JSON.stringify({firstName, lastName, email, password, numberPhone}) && emailvalidator() && nameValidator() && passwordValid() && phoneValidator() && lastValidator()) {
-          axios.post("http://localhost:3333/api/users/create", {firstName, lastName, email, password, numberPhone}).then((res)=> {
+          axios.post("http://192.168.1.15:3333/api/users/create", {firstName, lastName, email, password, numberPhone}).then((res)=> {
         console.log(res)
         navigation.navigate('Profile', {email, email})
 
@@ -136,7 +137,9 @@ const phoneValidator= () => {
 
   
     return (
-        < View style={styles.container}>
+      <ScrollView>
+   
+      < View style={styles.container}>
         <Text style={styles.text}>Create an account</Text>
         <FormInput
           labelValue={firstName}
@@ -232,6 +235,8 @@ const phoneValidator= () => {
 
 
         </View>
+             
+      </ScrollView>
     )
 }
 
