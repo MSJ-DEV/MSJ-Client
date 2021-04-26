@@ -16,7 +16,7 @@ export default class Cart extends React.Component {
     }
 
  componentDidMount(){
-this.setItems()
+this.setItems();
   
   
 }
