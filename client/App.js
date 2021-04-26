@@ -1,27 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from "react";
+import { useFonts } from "expo-font";
+import { StyleSheet, Text, View } from "react-native";
+import AppLoading from "expo-app-loading";
+import Navigation from "./src/navigation/drawer";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>hello MSJ-DEV</Text>
-      <Text>hello MSJ-DEV</Text>
-      <Text>hello MSJ-DEV</Text>
-      <Text>hello MSJ-DEV</Text>
-      <Text>hello elyes </Text>
-
-
-      <StatusBar style="auto" />
-    </View>
-  );
+  const getFonts = () => {};
+  let [fontsLoaded, setFontsLoaded] = useFonts({
+    "Kufam-SemiBoldItalic": require("./assets/fonts/Kufam-SemiBoldItalic.ttf"),
+    "Lato-Bold": require("./assets/fonts/Lato-Bold.ttf"),
+    "Lato-BoldItalic": require("./assets/fonts/Lato-BoldItalic.ttf"),
+    "Lato-Italic": require("./assets/fonts/Lato-Italic.ttf"),
+    "Lato-Regular": require("./assets/fonts/Lato-Regular.ttf"),
+  });
+  if (fontsLoaded) {
+    console.log("fonts loaded");
+    return <Navigation />;
+  } else {
+    console.log("loadingfonts");
+    return <AppLoading />;
+  }
 }
+// export default function App() {
+//   return (
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#ddd',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+//     <Navigation />
+//   //  <Cart />
+//   )
+// }
