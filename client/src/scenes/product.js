@@ -100,12 +100,12 @@
 
 // export default product;
 //****************************************************************
-import React, { PureComponent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from "react-native-axios"
 import { StyleSheet, Text, View,TouchableOpacity,Image,FlatList,Button } from 'react-native'
 import Cart from './myList'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { State } from 'react-native-gesture-handler';
+// import { State } from 'react-native-gesture-handler';
 
 
 
