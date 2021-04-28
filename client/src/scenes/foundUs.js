@@ -2,10 +2,15 @@ import React from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import googleThemes from "../components/googleMapsTheme";
+import carrefourCoords from "../components/carrefourLocation";
 
+// google maps theme
 const darkStyle = googleThemes.googleMapDarkTheme;
 const retroStyle = googleThemes.googleRetroTheme;
 const aubergineStyle = googleThemes.googleMapAubergineTheme;
+
+// carrefour coords
+const carrefourMarket = carrefourCoords.carrefourMarket;
 
 // to get the phone height
 const height = Dimensions.get("window").height;
@@ -112,26 +117,35 @@ const foundUs = () => {
       </Marker>
 
       {/* ************************** Carrefour green markers Careefour express ************************** */}
-      <Marker
-        coordinate={{
-          latitude: 33.98825,
-          longitude: 10.4324,
-        }}
-        title="carrefour souk el ahad"
-        description=" test description"
-        pinColor="green"
-      >
-        <Callout tooltip>
-          <View>
-            <View style={styles.bubble}>
-              <Text style={styles.name}>Carrefour</Text>
-              {/* <Image style={styles.image} source={require("")} /> */}
-            </View>
-            <View style={styles.arrowBorder}></View>
-            <View style={styles.arrow}></View>
-          </View>
-        </Callout>
-      </Marker>
+      {/* Carrefour Market  */}
+      <View>
+        {carrefourMarket.map((coord, key) => {
+          console.log(coord);
+          return (
+            <Marker
+              key={key}
+              coordinate={{
+                latitude: 33.98825,
+                longitude: 10.4324,
+              }}
+              title="carrefour souk el ahad"
+              description=" test description"
+              pinColor="green"
+            >
+              <Callout tooltip>
+                <View>
+                  <View style={styles.bubble}>
+                    <Text style={styles.name}>Carrefour</Text>
+                    {/* <Image style={styles.image} source={require("")} /> */}
+                  </View>
+                  <View style={styles.arrowBorder}></View>
+                  <View style={styles.arrow}></View>
+                </View>
+              </Callout>
+            </Marker>
+          );
+        })}
+      </View>
     </MapView>
   );
 };
