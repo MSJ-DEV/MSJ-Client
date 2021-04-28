@@ -4,6 +4,7 @@ import Home from '../scenes/home';
 import Product from '../scenes/product';
 import Header from '../components/header'; 
 import React from 'react'
+import { Text } from 'react-native';
 
 
 const screens = {
@@ -12,10 +13,12 @@ const screens = {
         screen: Home,
         navigationOptions: ({navigation})=> {
             return {
-                headerTitle : () => <Header navigation={navigation} title=''/>
-                
+                headerLeft : () => <Header navigation={navigation} />,
+                headerTitle : ()=> (<Text>Home</Text>)
+               
             }
-        }
+        
+    }
     },
     // Product : {
     //     screen : Product

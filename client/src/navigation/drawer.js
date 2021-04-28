@@ -7,7 +7,15 @@ import SingUpStack from './singUpStack';
 import MyListStack from './myListStack';
 import ProfileStack from './profileStack';
 import FoundUs from './FoundUsStack';
-import ContactStack from './ContactStack'
+import ContactStack from './ContactStack';
+import {NavigationContainer} from '@react-navigation/native';
+import React from 'react';
+import { enableScreens } from 'react-native-screens';
+
+
+
+enableScreens();
+
 
 
 
@@ -27,15 +35,18 @@ const screens = {
     myList:{
         screen:MyListStack
     },
-    Profile:{
-        screen: ProfileStack
-    },
     FoundUs :{
         screen:FoundUs
     },
     Contact : {
         screen: ContactStack
+    },
+    ProfileStack : {
+        screen : ProfileStack
     }
 }
 const RootDrawerNavigator = createDrawerNavigator(screens)
 export default createAppContainer(RootDrawerNavigator)
+// export default ()=> {return <NavigationContainer> 
+//     <RootDrawerNavigator />
+// </NavigationContainer>}
