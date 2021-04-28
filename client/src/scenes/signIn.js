@@ -13,7 +13,7 @@ const signIn = ({ navigation }) => {
 
   const singIn = () => {
     axios
-      .post("http://192.168.1.12:3333/api/auth/login", { email, password })
+      .post("http://192.168.1.15:3333/api/auth/login", { email, password })
       .then((res) => {
         console.log("***********************", res.data.user);
 
