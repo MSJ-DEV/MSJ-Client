@@ -67,6 +67,7 @@ export default function Profile({navigation}) {
             color="#1e272e"
             backgroundColor="#e6eaf4"
           />
+          
           <SocialButton
             buttonTitle= { navigation.state.params.res.data.user.email}
             btnType="user"
