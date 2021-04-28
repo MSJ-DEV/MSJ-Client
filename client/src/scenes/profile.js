@@ -43,7 +43,10 @@ export default function Profile({navigation}) {
            <Image 
              style={styles.userImg} 
               source={{uri:(selectImg.localUri !== null) ? selectImg.localUri : 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg'}} />
-         ) : <Text>Failed to load the image </Text>
+         ) : <Image 
+         style={styles.userImg} 
+         source={{uri:'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg'}}
+    />
        }
             <TouchableOpacity 
                 onPress={openImage}
@@ -96,7 +99,7 @@ const styles = StyleSheet.create({
   },
   button:{
     borderRadius:10,
-    backgroundColor:'#333',
+    backgroundColor:'#e6eaf4',
     justifyContent:'center',
     alignItems:'center',
     padding:10
