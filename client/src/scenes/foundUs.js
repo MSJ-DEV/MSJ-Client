@@ -1,16 +1,11 @@
 import React from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
-import MapView, { Callout, Marker } from "react-native-maps";
-import {
-  darkStyle,
-  retroStyle,
-  aubergineStyle,
-} from "../components/googleMapsTheme";
+import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
+import googleThemes from "../components/googleMapsTheme";
 
-// map themes
-// const darkStyle = googleMapTheme.googleMapDarkTheme;
-// const retroStyle = googleMapTheme.googleRetroTheme;
-// const aubergineStyle = googleMapTheme.googleMapAubergineTheme;
+const darkStyle = googleThemes.googleMapDarkTheme;
+const retroStyle = googleThemes.googleRetroTheme;
+const aubergineStyle = googleThemes.googleMapAubergineTheme;
 
 // to get the phone height
 const height = Dimensions.get("window").height;
@@ -18,7 +13,9 @@ const foundUs = () => {
   console;
   return (
     <MapView
+      provider={PROVIDER_GOOGLE}
       style={styles.screen}
+      customMapStyle={aubergineStyle}
       initialRegion={{
         latitude: 33.98825,
         longitude: 9.4324,
