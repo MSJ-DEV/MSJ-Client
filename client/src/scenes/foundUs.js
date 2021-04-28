@@ -1,9 +1,21 @@
 import React from "react";
 import { StyleSheet, Text, View, Dimensions } from "react-native";
 import MapView, { Callout, Marker } from "react-native-maps";
+import {
+  darkStyle,
+  retroStyle,
+  aubergineStyle,
+} from "../components/googleMapsTheme";
 
+// map themes
+// const darkStyle = googleMapTheme.googleMapDarkTheme;
+// const retroStyle = googleMapTheme.googleRetroTheme;
+// const aubergineStyle = googleMapTheme.googleMapAubergineTheme;
+
+// to get the phone height
 const height = Dimensions.get("window").height;
 const foundUs = () => {
+  console;
   return (
     <MapView
       style={styles.screen}
