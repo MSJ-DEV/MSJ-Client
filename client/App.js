@@ -21,10 +21,5 @@ export default function App() {
     return <AppLoading />;
   }
 }
-// export default function App() {
-//   return (
 
-//     <Navigation />
-//   //  <Cart />
-//   )
-// }
+// tryingggg

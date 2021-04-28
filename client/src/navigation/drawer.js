@@ -10,6 +10,12 @@ import FoundUs from './FoundUsStack';
 import ContactStack from './ContactStack';
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
+import { enableScreens } from 'react-native-screens';
+
+
+
+enableScreens();
+
 
 
 
@@ -34,6 +40,9 @@ const screens = {
     },
     Contact : {
         screen: ContactStack
+    },
+    ProfileStack : {
+        screen : ProfileStack
     }
 }
 const RootDrawerNavigator = createDrawerNavigator(screens)

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "76211365416",
+    "project_id": "msj-dev",
+    "storage_bucket": "msj-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76211365416:android:59d31338180bbf7d4a771d",
+        "android_client_info": {
+          "package_name": "com.msj"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "76211365416-2807b2dg9bfj166ejq61bhrjfi9ap8d5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBY0Qtgv8LcQ97-mgh2dMuw5lYh-I2Odmc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "76211365416-2807b2dg9bfj166ejq61bhrjfi9ap8d5.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "76211365416-7lcn6gscll1t7cner1m8i07o42f98bjo.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.msj"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
