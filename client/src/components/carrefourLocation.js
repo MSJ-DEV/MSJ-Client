@@ -1,3 +1,27 @@
+const carrefour = [
+  {
+    c: {
+      name: "The Marsa carrefour",
+      latitude: 36.86654201560798,
+      longitude: 10.297672509298287,
+    },
+  },
+  {
+    c: {
+      name: "Carrefour Sousse",
+      latitude: 35.90383021315254,
+      longitude: 10.541738520496269,
+    },
+  },
+  {
+    c: {
+      name: "Carrefour Gabes",
+      latitude: 33.870152746556606,
+      longitude: 10.108541336831475,
+    },
+  },
+];
+
 const carrefourMarket = [
   {
     cm: {
@@ -339,6 +363,233 @@ const carrefourMarket = [
   },
 ];
 
+const carrefourExpress = [
+  {
+    cex: {
+      latitude: 35.873277507420184,
+      longitude: 10.566210053140868,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.609671838019175,
+      longitude: 8.972224781424966,
+    },
+  },
+  {
+    cex: {
+      latitude: 35.853280694124585,
+      longitude: 10.604399688415263,
+    },
+  },
+  {
+    cex: {
+      latitude: 35.835430234885116,
+      longitude: 10.594661580230287,
+    },
+  },
+  {
+    cex: {
+      latitude: 35.822393915612366,
+      longitude: 10.63366796845197,
+    },
+  },
+  {
+    cex: {
+      latitude: 34.739653271442386,
+      longitude: 10.741222266675656,
+    },
+  },
+  {
+    cex: {
+      latitude: 33.508888756762914,
+      longitude: 11.107816890885557,
+    },
+  },
+  {
+    cex: {
+      latitude: 33.809500759266584,
+      longitude: 10.991660341253214,
+    },
+  },
+  {
+    cex: {
+      latitude: 33.874664230450755,
+      longitude: 10.857459495404886,
+    },
+  },
+  {
+    cex: {
+      latitude: 33.87098049746897,
+      longitude: 7.879490324992016,
+    },
+  },
+  {
+    cex: {
+      latitude: 33.456157743847164,
+      longitude: 9.021579562667133,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.63384667756611,
+      longitude: 10.128543442264455,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.80652058700208,
+      longitude: 10.181541914848596,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.40585522992326,
+      longitude: 10.141049546136692,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.722732675315186,
+      longitude: 9.185970889189553,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.79406480558526,
+      longitude: 10.178301516614692,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.82345472786003,
+      longitude: 10.071728872117433,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.81918442831775,
+      longitude: 10.086808685193152,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.8407045013786,
+      longitude: 10.116495332680866,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.83659729952251,
+      longitude: 10.144917705080315,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.85598215859171,
+      longitude: 10.15538753367264,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.86393829044095,
+      longitude: 10.166494708348035,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.874482401174006,
+      longitude: 10.203314348450046,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.88802876412087,
+      longitude: 10.215772769439726,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.90438203051319,
+      longitude: 10.179926883859682,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.87476788612176,
+      longitude: 10.274320487974352,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.8591485164453,
+      longitude: 10.25694479356909,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.85725874709853,
+      longitude: 10.266966207126329,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.860906177385786,
+      longitude: 10.27737985752584,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.84194111989049,
+      longitude: 10.313697489058269,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.84051701302313,
+      longitude: 10.317581621670143,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.88553429138873,
+      longitude: 10.314196617815155,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.88421009441739,
+      longitude: 10.331615355079856,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.75879631727611,
+      longitude: 10.020099954705511,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.72635780517335,
+      longitude: 10.338889257760961,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.73998888799871,
+      longitude: 10.239226695375763,
+    },
+  },
+  {
+    cex: {
+      latitude: 36.70347978411397,
+      longitude: 10.171752779662993,
+    },
+  },
+];
+
 export default {
+  carrefour,
   carrefourMarket,
+  carrefourExpress,
 };
