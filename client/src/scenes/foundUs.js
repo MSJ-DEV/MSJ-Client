@@ -15,7 +15,7 @@ const foundUs = () => {
     <MapView
       provider={PROVIDER_GOOGLE}
       style={styles.screen}
-      customMapStyle={aubergineStyle}
+      customMapStyle={retroStyle}
       initialRegion={{
         latitude: 33.98825,
         longitude: 9.4324,
@@ -23,7 +23,9 @@ const foundUs = () => {
         longitudeDelta: 0,
       }}
     >
-      {/* ************************** Carrefour Red markers for big Carrefour ************************** */}
+      {/* creating a square for the map theme */}
+
+      {/* ************************** Carrefour Blue markers for big Carrefour ************************** */}
       <Marker
         coordinate={{
           latitude: 33.98825,
@@ -31,7 +33,7 @@ const foundUs = () => {
         }}
         title="carrefour souk el ahad"
         description=" test description"
-        pinColor="red"
+        pinColor="blue"
       >
         <Callout tooltip>
           <View>
@@ -45,20 +47,62 @@ const foundUs = () => {
         </Callout>
       </Marker>
 
-      {/* ************************** Carrefour blue markers Careefour market ************************** */}
+      {/* ************************** Carrefour red markers Careefour market ************************** */}
+      {/* The Marsa Carrefour */}
       <Marker
         coordinate={{
-          latitude: 33.98825,
-          longitude: 9.4324,
+          latitude: 36.86654201560798,
+          longitude: 10.297672509298287,
         }}
-        title="carrefour souk el ahad"
-        description=" test description"
-        pinColor="blue"
+        title="The Marsa Carrefour"
+        pinColor="red"
       >
         <Callout tooltip>
           <View>
             <View style={styles.bubble}>
-              <Text style={styles.name}>Carrefour</Text>
+              <Text style={styles.name}>The Marsa Carrefour</Text>
+              {/* <Image style={styles.image} source={require("")} /> */}
+            </View>
+            <View style={styles.arrowBorder}></View>
+            <View style={styles.arrow}></View>
+          </View>
+        </Callout>
+      </Marker>
+
+      {/* Carrefour Sousse */}
+      <Marker
+        coordinate={{
+          latitude: 35.90383021315254,
+          longitude: 10.541738520496269,
+        }}
+        title="Carrefour Sousse"
+        pinColor="red"
+      >
+        <Callout tooltip>
+          <View>
+            <View style={styles.bubble}>
+              <Text style={styles.name}>The Marsa Carrefour</Text>
+              {/* <Image style={styles.image} source={require("")} /> */}
+            </View>
+            <View style={styles.arrowBorder}></View>
+            <View style={styles.arrow}></View>
+          </View>
+        </Callout>
+      </Marker>
+
+      {/* Carrefour Gabes */}
+      <Marker
+        coordinate={{
+          latitude: 33.870152746556606,
+          longitude: 10.108541336831475,
+        }}
+        title="Carrefour Sousse"
+        pinColor="red"
+      >
+        <Callout tooltip>
+          <View>
+            <View style={styles.bubble}>
+              <Text style={styles.name}>The Marsa Carrefour</Text>
               {/* <Image style={styles.image} source={require("")} /> */}
             </View>
             <View style={styles.arrowBorder}></View>
@@ -127,5 +171,10 @@ const styles = StyleSheet.create({
     borderWidth: 16,
     alignSelf: "center",
     marginTop: -0.5,
+  },
+  themeMapSquare: {
+    width: 120,
+    height: 120,
+    backgroundColor: "#00BCD4",
   },
 });
