@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { StyleSheet } from "react-native";
 import { useFonts } from "expo-font";
-import { StyleSheet, Text, View } from "react-native";
 import AppLoading from "expo-app-loading";
 import Navigation from "./src/navigation/drawer";
+import * as eva from "@eva-design/eva";
+import { ApplicationProvider } from "@ui-kitten/components";
 
 export default function App() {
   const getFonts = () => {};
@@ -15,11 +17,13 @@ export default function App() {
   });
   if (fontsLoaded) {
     console.log("fonts loaded");
-    return <Navigation />;
+    return (
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <Navigation />
+      </ApplicationProvider>
+    );
   } else {
     console.log("loadingfonts");
     return <AppLoading />;
   }
 }
-
-// tryingggg
