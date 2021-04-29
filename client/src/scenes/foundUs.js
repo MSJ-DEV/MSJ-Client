@@ -127,26 +127,22 @@ const foundUs = () => {
         </View>
       </MapView>
       <View style={styles.containerThemeBox}>
-        <Button
+        <View
           style={styles.themeButton}
           onPress={() => setTheme(normalStyle)}
           title="Normal"
-        />
+        ></View>
         <Button
           style={styles.themeButton}
           onPress={() => setTheme(darkStyle)}
           title="Dark"
         />
         <Button
-          style={styles.themeButton}
+          color="retro"
           onPress={() => setTheme(retroStyle)}
           title="Retro"
         />
-        <Button
-          style={styles.themeButton}
-          onPress={() => setTheme(aubergineStyle)}
-          title="Aubergine"
-        />
+        <Button onPress={() => setTheme(aubergineStyle)} title="Aubergine" />
       </View>
     </View>
   );
@@ -197,7 +193,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     marginTop: 20,
     flexDirection: "row",
-    backgroundColor: "rgba(52, 52, 52, 0.1)",
+    backgroundColor: "rgba(52, 52, 52, 0)",
     width: "90%",
     alignSelf: "center",
     borderRadius: 20,
@@ -205,6 +201,8 @@ const styles = StyleSheet.create({
   },
   themeButton: {
     marginLeft: 20,
-    color: "red",
+    width: 10,
+    height: 5,
+    color: "#fff",
   },
 });
