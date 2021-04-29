@@ -11,6 +11,8 @@ import MapView, { Callout, Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import googleThemes from "../components/googleMapsTheme";
 import carrefourCoords from "../components/carrefourLocation";
 
+// here we call ui kitten design
+
 // google maps theme
 const darkStyle = googleThemes.googleMapDarkTheme;
 const retroStyle = googleThemes.googleRetroTheme;
@@ -127,22 +129,26 @@ const foundUs = () => {
         </View>
       </MapView>
       <View style={styles.containerThemeBox}>
-        <View
-          style={styles.themeButton}
+        <Button
           onPress={() => setTheme(normalStyle)}
-          title="Normal"
-        ></View>
+          title=" Normal  "
+          color="#rgba(130, 100, 0, 0.7)"
+        />
         <Button
-          style={styles.themeButton}
           onPress={() => setTheme(darkStyle)}
-          title="Dark"
+          title="   Dark  "
+          color="##rgba(130, 100, 0, 0.7)"
         />
         <Button
-          color="retro"
           onPress={() => setTheme(retroStyle)}
-          title="Retro"
+          title="  Retro   "
+          color="##rgba(130, 100, 0, 0.7)"
         />
-        <Button onPress={() => setTheme(aubergineStyle)} title="Aubergine" />
+        <Button
+          onPress={() => setTheme(aubergineStyle)}
+          title="aubergine"
+          color="##rgba(130, 100, 0, 0.7)"
+        />
       </View>
     </View>
   );
@@ -193,16 +199,10 @@ const styles = StyleSheet.create({
     position: "absolute",
     marginTop: 20,
     flexDirection: "row",
-    backgroundColor: "rgba(52, 52, 52, 0)",
+    backgroundColor: "rgba(0, 0, 0, 0)",
     width: "90%",
     alignSelf: "center",
     borderRadius: 20,
     padding: 10,
-  },
-  themeButton: {
-    marginLeft: 20,
-    width: 10,
-    height: 5,
-    color: "#fff",
   },
 });
