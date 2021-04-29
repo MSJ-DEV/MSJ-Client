@@ -5,7 +5,7 @@ import MyList from '../scenes/myList'
 import React from 'react'
 import { Text } from 'react-native';
 import Product from '../scenes/product';
-
+import Payment from '../scenes/payment'
 
 const screens = {
    
@@ -28,6 +28,18 @@ const screens = {
             return {
                 headerLeft : () => <Header navigation={navigation} />,
                 headerTitle : ()=> (<Text>Product</Text>)
+                
+            }
+        
+    }
+    },
+    Payment: {
+        screen: Payment,
+        navigationOptions: ({navigation})=> {
+            return {
+                headerLeft : () => <Header navigation={navigation} />,
+                headerTitle : ()=> (<Text>Payment</Text>)
+                
                 
             }
         

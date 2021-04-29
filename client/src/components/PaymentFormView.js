@@ -3,10 +3,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { CreditCardInput } from 'react-native-credit-card-input';
 import { FontAwesome } from '@expo/vector-icons';
 
-/**
- * Renders the payment form and handles the credit card data
- * using the CreditCardInput component.
- */
+
 export default class PaymentFormView extends React.Component {
   constructor(props) {
     super(props);
@@ -14,7 +11,9 @@ export default class PaymentFormView extends React.Component {
   }
 
   render() {
-    const { onSubmit, submitted, error } = this.props;
+    const { onSubmit, submitted, error  } = this.props;
+    console.log('this all my dataaaaaaa ******')
+
 
     return (
       <View>
@@ -23,7 +22,7 @@ export default class PaymentFormView extends React.Component {
         </View>
         <View style={styles.buttonWrapper}>
           <Button
-            title='Subscribe'
+            title='Submit'
             disabled={!this.state.cardData.valid || submitted}
             onPress={() => onSubmit(this.state.cardData)}
           />

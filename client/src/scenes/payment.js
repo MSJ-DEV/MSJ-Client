@@ -4,7 +4,7 @@ import STRIPEKEY from '../utils/configKey'
 
 const STRIPE_ERROR = 'Payment service error. Try again later.';
 const SERVER_ERROR = 'Server error. Try again later.';
-const STRIPE_PUBLISHABLE_KEY = 'pk_test_ww70oUQ44vVJ3HO4AnvglxCp';
+// const STRIPE_PUBLISHABLE_KEY = 'pk_test_ww70oUQ44vVJ3HO4AnvglxCp';
 
 /**
  * The method sends HTTP requests to the Stripe API.
@@ -110,6 +110,7 @@ export default class AddSubscription extends React.Component {
 
   render() {
     const { submitted, error } = this.state;
+    console.log('this all my props ******', this.props.navigation.state.params)
     return (
         <AddSubscriptionView
           error={error}

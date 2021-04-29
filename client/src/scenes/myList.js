@@ -27,6 +27,7 @@ export default class Cart extends React.Component {
       selectAll: false,
       cartItemsIsLoading: false,
       cartItems: [],
+      totalSum : 0
     };
     this.setItems = this.setItems.bind(this);
   }
@@ -111,6 +112,7 @@ export default class Cart extends React.Component {
           (item && item.promotion == 1 ? item.quantity * item.oldprice : 0),
         0,
       );
+    
     }
     return 0;
   };
@@ -118,6 +120,14 @@ export default class Cart extends React.Component {
   goToProduct = () => {
     this.props.navigation.navigate("Product");
   };
+  goTopayment=()=> {
+    if (this.subtotalPrice() === 0 ) {
+      alert('you need to select at least one Item to pay')
+    }else {
+      let total = this.subtotalPrice().toFixed(2)
+      this.props.navigation.navigate('Payment', {total})  
+    }
+  }
 
   render() {
     const styles = StyleSheet.create({
@@ -301,7 +311,7 @@ export default class Cart extends React.Component {
               >
                 <Text>Voucher</Text>
                 <View style={{ paddingRight: 20 }}>
-                  <TextInput
+                   <TextInput
                     style={{
                       paddingHorizontal: 10,
                       backgroundColor: "#f0f0f0",
@@ -373,7 +383,7 @@ export default class Cart extends React.Component {
                     borderRadius: 5,
                   },
                 ]}
-                onPress={() => console.log("test")}
+                onPress={() => this.goTopayment()}
               >
                 <Text style={{ color: "#ffffff" }}>Checkout</Text>
               </TouchableOpacity>
