@@ -2,6 +2,8 @@ import React from "react";
 import Swal from "sweetalert2";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
+
 import {
   StyleSheet,
   Button,
@@ -27,7 +29,7 @@ export default class Cart extends React.Component {
       selectAll: false,
       cartItemsIsLoading: false,
       cartItems: [],
-      totalSum : 0
+     
     };
     this.setItems = this.setItems.bind(this);
   }
@@ -75,19 +77,7 @@ export default class Cart extends React.Component {
       this.setState({ cartItems: myid });
     });
 
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
-    });
+    
   };
 
   quantityHandler = (action, index) => {
@@ -122,7 +112,17 @@ export default class Cart extends React.Component {
   };
   goTopayment=()=> {
     if (this.subtotalPrice() === 0 ) {
-      alert('you need to select at least one Item to pay')
+  Alert.alert('OOPS!', 'You should select Some Items', [{
+    text: "unterstood",
+    style: "cancel",
+  }])
+
+
+    }else if (this.subtotalPrice()<10) {
+      Alert.alert('OOPS!', 'You should by at least over then 10 DT', [{
+        text: "unterstood",
+        style: "cancel",
+      }])
     }else {
       let total = this.subtotalPrice().toFixed(2)
       this.props.navigation.navigate('Payment', {total})  

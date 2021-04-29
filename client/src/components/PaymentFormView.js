@@ -12,7 +12,6 @@ export default class PaymentFormView extends React.Component {
 
   render() {
     const { onSubmit, submitted, error  } = this.props;
-    console.log('this all my dataaaaaaa ******')
 
 
     return (
