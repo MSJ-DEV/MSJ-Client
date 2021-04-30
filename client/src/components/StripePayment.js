@@ -1,9 +1,8 @@
-
 import React, { useState, useEffect} from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { WebView } from 'react-native-webview'
 
-const STRIPE_PK = 'pk_test_51IlZycKBsFdldFb4Ezu6WRvjY8AYddYOCnAzrXXavtzHcUN1VR7lsdGkHkIVOFI0dN23D7T6Q9ELo7WwaHCEAOHU003j3J7er6'
+const STRIPE_PK = "pk_test_51IlZycKBsFdldFb4Ezu6WRvjY8AYddYOCnAzrXXavtzHcUN1VR7lsdGkHkIVOFI0dN23D7T6Q9ELo7WwaHCEAOHU003j3J7er6"
 
 
 const StripePayment = (props) => { 
@@ -228,10 +227,10 @@ const StripePayment = (props) => {
             
                             var additionalData = {
                                 name: document.getElementById('card-name').value,
-                                address_line1: mahdia,
-                                address_city:  mahdia,
-                                address_state: mahdia,
-                                address_zip: 5100,
+                                address_line1: undefined,
+                                address_city:  undefined,
+                                address_state: undefined,
+                                address_zip: undefined,
                             };
             
                             stripe.createToken(card, additionalData).then(function(result) {

@@ -9,11 +9,12 @@ const paymentScreen = () => {
     
     const [ makePayment, setMakePayment ] = useState(false)
     const [paymentStatus, setPaymentStatus] = useState('')
+    const [amout, setAmout] = useState()
 
     const cartInfo = {
         id: '5eruyt35eggr76476236523t3',
-        description: 'Secure Payment ',
-        amount: 1
+        description: 'FROM RMADI ',
+        amount: 100
     }
 
     const onCheckStatus = async (paymentResponse) => {
@@ -24,14 +25,16 @@ const paymentScreen = () => {
         // perform operation to check payment status
 
         try {
-    
-            const stripeResponse = await axios.post('http://localhost:8000/payment', {
+            console.log('***************** in the suucces try block ')
+            const stripeResponse = await axios.post('http://192.168.1.15:8000/payment', {
                 email: 'rmadi.med1@gmail.com',
                 product: cartInfo,
                 authToken: jsonResponse
-            })
+            }, console.log("#################################################", stripeResponse))
+            console.log('***************** in the suucces try block after the post request ')
 
             if(stripeResponse){
+                console.log('***************** in the suucces try block after IF condition ')
 
                 const { paid } = stripeResponse.data;
                 if(paid === true){

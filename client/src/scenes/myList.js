@@ -118,7 +118,7 @@ export default class Cart extends React.Component {
   }])
 
 
-    }else if (this.subtotalPrice()<10) {
+    }else if (this.subtotalPrice()<100) {
       Alert.alert('OOPS!', 'You should by at least over then 10 DT', [{
         text: "unterstood",
         style: "cancel",
