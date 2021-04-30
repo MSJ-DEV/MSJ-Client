@@ -228,10 +228,10 @@ const StripePayment = (props) => {
             
                             var additionalData = {
                                 name: document.getElementById('card-name').value,
-                                address_line1: undefined,
-                                address_city:  undefined,
-                                address_state: undefined,
-                                address_zip: undefined,
+                                address_line1: mahdia,
+                                address_city:  mahdia,
+                                address_state: mahdia,
+                                address_zip: 5100,
                             };
             
                             stripe.createToken(card, additionalData).then(function(result) {
