@@ -125,7 +125,7 @@ export default class Cart extends React.Component {
       }])
     }else {
       let total = this.subtotalPrice().toFixed(2)
-      this.props.navigation.navigate('Payment', {total})  
+      this.props.navigation.navigate('PaymentScreen', {total})  
     }
   }
 

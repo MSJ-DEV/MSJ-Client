@@ -3,18 +3,29 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import PaymentView from '../components/StripePayment'
 import axios  from 'react-native-axios';
 
-const paymentScreen = () => {
+const paymentScreen = ({navigation}) => {
+
+
 
     const [response, setResponse ] = useState()
     
     const [ makePayment, setMakePayment ] = useState(false)
     const [paymentStatus, setPaymentStatus] = useState('')
-    const [amout, setAmout] = useState()
+    const [amount, setAmout] = useState()
+  if (navigation.state.params.total) {
+         setTimeout(()=> {
+    setAmout(+(navigation.state.params.total))
+
+   },2000)
+
+  }else {
+    navigation.goBack()
+  }
 
     const cartInfo = {
         id: '5eruyt35eggr76476236523t3',
         description: 'FROM RMADI ',
-        amount: 100
+        amount: amount
     }
 
     const onCheckStatus = async (paymentResponse) => {

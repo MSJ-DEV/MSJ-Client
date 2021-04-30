@@ -5,8 +5,8 @@ import MyList from '../scenes/myList'
 import React from 'react'
 import { Text, Button } from 'react-native';
 import Product from '../scenes/product';
-import Payment from '../scenes/payment'
-
+// import Payment from '../scenes/payment';
+import PaymentScreen from '../scenes/paymentScreen'
 const screens = {
    
     MyList: {
@@ -36,8 +36,9 @@ const screens = {
         
     }
     },
-    Payment: {
-        screen: Payment,
+    PaymentScreen: {
+        screen: PaymentScreen,
+        
         navigationOptions: ({navigation})=> {
             return {
                 headerLeft : () => <Header navigation={navigation} />,
@@ -46,7 +47,7 @@ const screens = {
                      <Button
                       title="Info"
                       color="#000"
-                      onPress={()=>goBack()}
+                    //   onPress={()=>navigation.goBack()}
                       
                     />
                   ),
