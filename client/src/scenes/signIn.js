@@ -1,73 +1,86 @@
-import React, { useState, useEffect} from 'react';
-import FormButton from '../components/FormButton';
-import SocialButton from '../components/SocialButton';
-import FromInput from '../components/FormInput';
+import React, { useState, useEffect } from "react";
+import FormButton from "../components/FormButton";
+import SocialButton from "../components/SocialButton";
+import FromInput from "../components/FormInput";
 import axios from "react-native-axios";
+import * as GoogleSignIn from 'expo-google-sign-in';
+import Expo from "expo"
 
 
-import { StyleSheet, Text, View, Platform, Image } from 'react-native'
-import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 
 
-const signIn = ({navigation}) => {
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+import { StyleSheet, Text, View, Platform, Image } from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 
-   const singIn = () => {
-       axios.post("http://192.168.1.15:3333/api/auth/login",{email, password}).then((res)=> {
-     
-          console.log('***********************',res.data.user);
+const signIn = ({ navigation }) => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+ 
+  // const signInAsync = async () => {
+  //   initAsync = async () => {
+  //     await GoogleSignIn.initAsync({
+  //       // You may ommit the clientId when the firebase `googleServicesFile` is configured
+  //       clientId: '213513789380-4g4i28f9lrf6soppvpqrri94tqoc9n8t.apps.googleusercontent.com',
+  //     });
+  //     this._syncUserWithStateAsync();
+  //   };
+  //   try {
+  //     await GoogleSignIn.askForPlayServicesAsync();
+  //     const { type, user } = await GoogleSignIn.signInAsync();
+  //     if (type === 'success') {
+  //       this._syncUserWithStateAsync();
+  //     }
+  //   } catch ({ message }) {
+  //     alert('login: Error:' + message);
+  //   }
+  // };
 
 
-          if (res.data === "password matched") {
-            
-          }
-          
-          if (res.data === "Invalid email") {
-            alert('wrong passwrod or email ')
-          }else if (res.data === "wrong password") {
-            alert('wrong passwrod or email ')
-          }
-          else {
-            
-            navigation.navigate('Profile',{res})  
-          }
-               
-      })
-   }
+  const singIn = () => {
+    axios
+      .post("http://192.168.1.15:3333/api/auth/login", { email, password })
+      .then((res) => {
+        console.log("***********************", res.data.user);
 
-    
-   
+        if (res.data === "password matched") {
+        }
 
-    return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <Image
-        source={require('../../assets/logo.jpeg')}
-        style={styles.logo}
+        if (res.data === "Invalid email") {
+          alert("wrong passwrod or email ");
+        } else if (res.data === "wrong password") {
+          alert("wrong passwrod or email ");
+        } else {
+          navigation.navigate("Profile", { res });
+        }
+      });
+  };
+
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <Image source={require("../../assets/logo.jpeg")} style={styles.logo} />
+
+      <FromInput
+        labelValue={email}
+        onChangeText={(userEmail) => setEmail(userEmail)}
+        placeholderText="Email"
+        iconType="user"
+        keyboardType="email-address"
+        autoCapitalize="none"
+        autoCorrect={false}
       />
-
-            <FromInput 
-              labelValue={email}
-               onChangeText={(userEmail) => setEmail(userEmail)}
-               placeholderText="Email"
-               iconType="user"
-               keyboardType="email-address"
-               autoCapitalize="none"
-               autoCorrect={false}/>
-            <FromInput  
-            labelValue={password}
+      <FromInput
+        labelValue={password}
         onChangeText={(userPassword) => setPassword(userPassword)}
         placeholderText="Password"
         iconType="lock"
-        secureTextEntry={true}/>
+        secureTextEntry={true}
+      />
 
-            <FormButton buttonTitle="Sign In"
-            onPress={(e)=> singIn()}
-            />
-            <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
+      <FormButton buttonTitle="Sign In" onPress={(e) => singIn()} />
+      <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
         <Text style={styles.navButtonText}>Forgot Password?</Text>
       </TouchableOpacity>
-      {Platform.OS === 'android' ? (
+      {Platform.OS === "android" ? (
         <View>
           <SocialButton
             buttonTitle="Sign In with Facebook"
@@ -81,56 +94,59 @@ const signIn = ({navigation}) => {
             btnType="google"
             color="#de4d41"
             backgroundColor="#f5e7ea"
+            onPress={()=> onLoginPress()}
           />
         </View>
       ) : null}
 
       <TouchableOpacity
         style={styles.forgotButton}
-        onPress={() => navigation.navigate('SignUp')}>
+        onPress={() => navigation.navigate("SignUp")}
+      >
         <Text style={styles.navButtonText}>
           Don't have an acount? Create here
         </Text>
       </TouchableOpacity>
+    </ScrollView>
+  );
+};
 
-            
-
-        </ScrollView>
-
-    )
-}
-
-export default signIn
+export default signIn;
 
 const styles = StyleSheet.create({
-    container: {
-      justifyContent: 'center',
-      alignItems: 'center',
-      padding: 20,
-      paddingTop: 50
-    },
-    logo: {
-      height: 150,
-      width: 150,
-      resizeMode: 'cover',
-    },
-    text: {
-      fontFamily: 'Kufam-SemiBoldItalic',
-      fontSize: 28,
-      marginBottom: 10,
-      color: '#051d5f',
-    },
-    navButton: {
-      marginTop: 15,
-    },
-    forgotButton: {
-      marginVertical: 35,
-    },
-    navButtonText: {
-      fontSize: 18,
-      fontWeight: '500',
-      color: '#2e64e5',
-      fontFamily: 'Lato-Regular',
-    },
-  });
-  
+  container: {
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+    paddingTop: 50,
+  },
+  logo: {
+    height: 150,
+    width: 150,
+    resizeMode: "cover",
+  },
+  text: {
+    fontFamily: "Kufam-SemiBoldItalic",
+    fontSize: 28,
+    marginBottom: 10,
+    color: "#051d5f",
+  },
+  navButton: {
+    marginTop: 15,
+  },
+  forgotButton: {
+    marginVertical: 35,
+  },
+  navButtonText: {
+    fontSize: 18,
+    fontWeight: "500",
+    color: "#2e64e5",
+    fontFamily: "Lato-Regular",
+  },
+});
+
+
+// 213513789380-4g4i28f9lrf6soppvpqrri94tqoc9n8t.apps.googleusercontent.com
+
+// ios
+// 213513789380-vq6hj0529hpbte0k5epr1c72gapq4np2.apps.googleusercontent.com

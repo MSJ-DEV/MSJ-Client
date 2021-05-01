@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from "react";
 import axios from "react-native-axios";
 import {
@@ -19,15 +18,16 @@ const home = () => {
 
   const [data, SetData] = useState([]);
 
-useEffect(()=> {
-  axios.get('http://192.168.1.15:3333/api/poducts').then((res)=> {
-    SetData(res.data)
-  
-  })
-  .catch((err)=> {
-    console.log(err)
-  })
-},[])
+  useEffect(() => {
+    axios
+      .get("http://192.168.1.15:3333/api/poducts")
+      .then((res) => {
+        SetData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const scrollY = React.useRef(new Animated.Value(0)).current;
 
@@ -52,7 +52,7 @@ useEffect(()=> {
           ],
           {
             useNativeDriver: true,
-          }
+          },
         )}
         keyExtractor={(item) => item.id}
         contentContainerStyle={{
@@ -77,7 +77,7 @@ useEffect(()=> {
             outputRange: [1, 1, 1, 0],
           });
           const opacity = scrollY.interpolate({
-            inputRange:opacityInputRange,
+            inputRange: opacityInputRange,
             outputRange: [1, 1, 1, 0],
           });
           return (
@@ -109,9 +109,9 @@ useEffect(()=> {
                 <Text style={{ fontSize: 24, fontWeight: "900" }}>
                   {" "}
                   {item.title}
-                  <Text style={{color:'#1e3799'}}>{item.newprice} DT</Text>
+                  <Text style={{ color: "#1e3799" }}>{item.newprice} DT</Text>
                 </Text>
-                <Text style={{fontSize:23}}>{item.type}</Text>
+                <Text style={{ fontSize: 23 }}>{item.type}</Text>
               </View>
             </Animated.View>
           );

@@ -12,7 +12,8 @@ import SocialButton from '../components/SocialButton';
 
 export default function Profile({navigation}) {
   const [selectImg, setSelectedImg] = useState(null);
-  const [data,setPhoto]=useState('')
+  const [data,setPhoto]=useState('');
+  const [firstName, setFirstName]= useState('user')
 
   let openImage = async () =>{
     let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -67,7 +68,7 @@ export default function Profile({navigation}) {
             color="#1e272e"
             backgroundColor="#e6eaf4"
           />
-          
+
           <SocialButton
             buttonTitle= { navigation.state.params.res.data.user.email}
             btnType="user"
