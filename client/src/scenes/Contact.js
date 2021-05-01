@@ -1,24 +1,27 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from 'react-native'
-import { TextInput } from 'react-native-gesture-handler';
+import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import FromInput from "../components/FormInput";
 import { Button } from '@ui-kitten/components';
 import axios from "react-native-axios";
+import TextArea from '../components/TextArea';
 
 
 
 const Contact = ({navigaton}) => {
     const [email, setEmail] = useState();
     const [text, setText] = useState();
-    console.log('text',text)
-    console.log('email', email)
+
     const onSendEMail = ()=> {
       axios.post('http://192.168.1.15:3333/sendmail',{email, text})
-      .then((res)=>{navigation.navigate('Home')})
+      .then((res)=>{console.log(res); navigaton.navigate('HOME')})
       .catch((e)=>{console.log(e)})
     }
 
     return (
+      <ScrollView>
+
+      
         <View style={styles.conntainer}>
 
         <FromInput
@@ -30,8 +33,18 @@ const Contact = ({navigaton}) => {
         autoCapitalize="none"
         autoCorrect={false}
       />
+            <TextArea
+            labelValue={text}
+            onChangeText={(text) => setText(text)}
+             underlineColorAndroid="transparent"
+             placeholder="Type something"
+             placeholderTextColor="grey"
+             numberOfLines={10}
+             multiline={true}
+       
+         />
       
-        <TextInput
+        {/* <TextInput
         style={styles.input}
          labelValue={text}
          onChangeText={(text) => setText(text)}
@@ -40,15 +53,16 @@ const Contact = ({navigaton}) => {
           placeholderTextColor="grey"
           numberOfLines={10}
           multiline={true}
-        />
+        /> */}
         <Button
          style={styles.btn}
          onPress={()=>onSendEMail()}
         
         >Submit</Button>
-       
+  
         
       </View>
+      </ScrollView>
     )
 }
 
