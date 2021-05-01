@@ -110,7 +110,7 @@ const signUp = ({ navigation }) => {
       lastValidator()
     ) {
       axios
-        .post("http://192.168.1.12:3333/api/users/create", {
+        .post("http://192.168.1.15:3333/api/users/create", {
           firstName,
           lastName,
           email,

@@ -11,6 +11,8 @@ import ContactStack from './ContactStack';
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import { enableScreens } from 'react-native-screens';
+import paymentScreen from '../scenes/paymentScreen';
+import ContactStack1 from './contactStack1';
 
 
 
@@ -39,11 +41,13 @@ const screens = {
         screen:FoundUs
     },
     Contact : {
-        screen: ContactStack
+        screen: ContactStack1
     },
     ProfileStack : {
         screen : ProfileStack
-    }
+    },
+  
+  
 }
 const RootDrawerNavigator = createDrawerNavigator(screens)
 export default createAppContainer(RootDrawerNavigator)
