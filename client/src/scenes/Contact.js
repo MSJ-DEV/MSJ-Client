@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, StyleSheet, Text, View } from 'react-native'
 import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import FromInput from "../components/FormInput";
 import { Button } from '@ui-kitten/components';
@@ -14,17 +14,25 @@ const Contact = ({navigaton}) => {
 
     const onSendEMail = ()=> {
       axios.post('http://192.168.1.15:3333/sendmail',{email, text})
-      .then((res)=>{console.log(res); navigaton.navigate('HOME')})
+      .then((res)=>{console.log(res)})
       .catch((e)=>{console.log(e)})
+      
     }
+  const goTohome =()=> {
+      navigaton.navigate('HOME')
+}
 
     return (
-      <ScrollView>
+     
 
       
         <View style={styles.conntainer}>
+          <Image
+              source={{uri:'https://gtmix.org/wp-content/uploads/2019/05/contact_us.jpg'}}         
+          />
 
         <FromInput
+        style={{ fontSize:25, color:'#000'}}
         labelValue={email}
         onChangeText={(userEmail) => setEmail(userEmail)}
         placeholderText="Email"
@@ -34,6 +42,7 @@ const Contact = ({navigaton}) => {
         autoCorrect={false}
       />
             <TextArea
+            style={styles.input}
             labelValue={text}
             onChangeText={(text) => setText(text)}
              underlineColorAndroid="transparent"
@@ -41,6 +50,7 @@ const Contact = ({navigaton}) => {
              placeholderTextColor="grey"
              numberOfLines={10}
              multiline={true}
+             
        
          />
       
@@ -60,9 +70,8 @@ const Contact = ({navigaton}) => {
         
         >Submit</Button>
   
-        
+
       </View>
-      </ScrollView>
     )
 }
 
@@ -75,19 +84,15 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         padding: 20,
-        paddingTop: 50,
+        // paddingTop: 50,
     },
     input: {
-      width:440,
-      height:150,
-      borderBottomColor:1,
-      borderColor:'black',
-      fontSize:20,
+ 
+      fontSize:25,
       justifyContent: "flex-start",
       textAlignVertical: 'top',
-      backgroundColor:'#fff',
-      borderRadius: 5,
-      marginTop:20
+      color:"#000"
+ 
 
   },
   btn:{

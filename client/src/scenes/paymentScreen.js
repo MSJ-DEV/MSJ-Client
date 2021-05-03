@@ -2,6 +2,9 @@ import React, { useState, useEffect} from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import PaymentView from '../components/StripePayment'
 import axios  from 'react-native-axios';
+import AppLoading from "expo-app-loading";
+import { Button } from 'react-native-paper';
+
 
 const paymentScreen = ({navigation}) => {
 
@@ -41,11 +44,9 @@ const paymentScreen = ({navigation}) => {
                 email: 'rmadi.med1@gmail.com',
                 product: cartInfo,
                 authToken: jsonResponse
-            }, console.log("#################################################", stripeResponse))
-            console.log('***************** in the suucces try block after the post request ')
+            },)
 
             if(stripeResponse){
-                console.log('***************** in the suucces try block after IF condition ')
 
                 const { paid } = stripeResponse.data;
                 if(paid === true){
@@ -100,8 +101,9 @@ const paymentScreen = ({navigation}) => {
 
             if(response !== undefined){
                 return <View style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: 300, marginTop: 50}}>
-                    <Text style={{ fontSize: 25, margin: 10}}> { paymentStatus} </Text>
-                    <Text style={{ fontSize: 16, margin: 10}}> { response} </Text>
+                    <Text style={{ fontSize: 25, margin: 10, alignContent:'center', alignItems:'center'}}> { paymentStatus} </Text>
+                    {/* <Button onPress={()=>navigation.navigate('home')}/> */}
+                    {/* <Text style={{ fontSize: 16, margin: 10}}> { response} </Text> */}
                 </View>
 
             }else{
