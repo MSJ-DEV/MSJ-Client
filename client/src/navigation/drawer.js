@@ -8,7 +8,7 @@ import MyListStack from "./myListStack";
 import ProfileStack from "./profileStack";
 import FoundUs from "./FoundUsStack";
 import ContactStack from "./ContactStack";
-import WeelOfFortuneStack from "./weelOfFortuneStack";
+import QuizStack from "./quizStack";
 import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { enableScreens } from "react-native-screens";
@@ -33,9 +33,9 @@ const screens = {
   },
   FoundUs: {
     screen: FoundUs,
-  },
-  WeelOfFortune: {
-    screen: WeelOfFortuneStack,
+    // },
+    // QuizStack: {
+    //   screen: QuizStack,
   },
   Contact: {
     screen: ContactStack,

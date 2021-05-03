@@ -1,17 +1,17 @@
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import Header from "../components/header";
-import WheelOfFortune from "../scenes/wheelOfFortune";
+import Quiz from "../scenes/quiz";
 import React from "react";
 import { Text } from "react-native";
 
 const screens = {
-  Home: {
-    screen: WheelOfFortune,
+  Quiz: {
+    screen: Quiz,
     navigationOptions: ({ navigation }) => {
       return {
         headerLeft: () => <Header navigation={navigation} />,
-        headerTitle: () => <Text>Wheel of Fortune</Text>,
+        headerTitle: () => <Text>Quiz</Text>,
       };
     },
   },
