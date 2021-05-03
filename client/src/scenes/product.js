@@ -89,7 +89,11 @@ const product = ({ navigation }) => {
                 >
                   {item.type}
                 </Text>
-                ala 
+                <Button
+                  title="ADD To List"
+                  color="#0652DD"
+                  onPress={() => handleClick(item)}
+                />
               </TouchableOpacity>
             </View>
           );

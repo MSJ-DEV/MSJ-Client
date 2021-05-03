@@ -39,7 +39,6 @@ const Contact = ({navigaton}) => {
         iconType="user"
         keyboardType="email-address"
         autoCapitalize="none"
-        autoCorrect={false}
       />
             <TextArea
             style={styles.input}
