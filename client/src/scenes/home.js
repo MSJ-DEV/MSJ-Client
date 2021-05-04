@@ -20,7 +20,7 @@ const home = () => {
 
   useEffect(() => {
     axios
-      .get("http://192.168.1.15:3333/api/poducts")
+      .get("http://192.168.1.12:3333/api/poducts")
       .then((res) => {
         SetData(res.data);
       })
