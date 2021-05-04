@@ -27,6 +27,7 @@ const signIn = ({ navigation }) => {
       await AsyncStorage.setItem('signIn', jsonValue)
       console.log('store in my function ', jsonValue)
     } catch (e) {
+      
       console.log(e)
     }
   }
