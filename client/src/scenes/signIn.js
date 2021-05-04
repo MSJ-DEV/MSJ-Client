@@ -4,6 +4,8 @@ import SocialButton from "../components/SocialButton";
 import FromInput from "../components/FormInput";
 import axios from "react-native-axios";
 import * as Google from "expo-google-app-auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 import Expo from "expo"
 
@@ -18,7 +20,16 @@ const signIn = ({ navigation }) => {
   const [password, setPassword] = useState();
   const clientAndroid = '213513789380-4g4i28f9lrf6soppvpqrri94tqoc9n8t.apps.googleusercontent.com';
   const ClientIos = '213513789380-vq6hj0529hpbte0k5epr1c72gapq4np2.apps.googleusercontent.com'
-  
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
+
+      await AsyncStorage.setItem('signIn', jsonValue)
+      console.log('store in my function ', jsonValue)
+    } catch (e) {
+      console.log(e)
+    }
+  }
   const signInAsync = async () => {
     console.log("LoginScreen.js 6 | loggin in");
     try {
@@ -26,10 +37,11 @@ const signIn = ({ navigation }) => {
         iosClientId:ClientIos ,
         androidClientId: clientAndroid,
       });
-
+      console.log('************ from gooooooogle', user)
       if (type === "success") {
         // Then you can use the Google REST API
         console.log("LoginScreen.js 17 | success, navigating to profile");
+        storeData({user})
         navigation.navigate("Profile", { user });
       }
     } catch (error) {
