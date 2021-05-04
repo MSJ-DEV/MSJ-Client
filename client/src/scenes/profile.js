@@ -37,7 +37,13 @@ const getInformation= async ()=> {
 
      axios.post('http://192.168.1.15:3333/api/users/oneUserEmail', {email:email})
      .then((res)=> {
+       let data = res.data
+       setFirstName(data[0][firstName])
+       setLastName(data[0][lastName])
+       setEmail(data[0][email])
+       
        console.log('*************** response data ',res.data)
+       console.log('firstName************',firstName)
 
       })
       .catch((e)=> {
