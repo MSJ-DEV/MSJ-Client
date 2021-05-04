@@ -119,7 +119,7 @@ export default class Cart extends React.Component {
 
 
     }else if (this.subtotalPrice()<100) {
-      Alert.alert('OOPS!', 'You should by at least over then 10 DT', [{
+      Alert.alert('OOPS!', 'You should by at least over then 100 DT ', [{
         text: "unterstood",
         style: "cancel",
       }])
