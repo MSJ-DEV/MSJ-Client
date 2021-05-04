@@ -1,10 +1,12 @@
 
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafeAreaView from 'react-native-safe-area-view';
 import SocialButton from '../components/SocialButton';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 
 
@@ -20,7 +22,27 @@ export default function Profile({navigation}) {
   const [photoUrl, setPhotoUrl] = useState('https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg')
   
 
+useEffect(async ()=> {
+  try {
+    const jsonValue = await AsyncStorage.getItem('signIn')
+    console.log('get data from local strorage ***************************************', jsonValue)
+    return jsonValue != null ? JSON.parse(jsonValue) : null;
 
+  } catch(e) {
+    console.log(e)
+  }
+}, [])
+  // const getData = async () => {
+  //   try {
+  //     const jsonValue = await AsyncStorage.getItem('signIn')
+  //     console.log('get data from local strorage ***************************************', jsonValue)
+  //     return jsonValue != null ? JSON.parse(jsonValue) : null;
+
+  //   } catch(e) {
+  //     // error reading value
+  //   }
+  // }
+  
   let openImage = async () =>{
     let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
