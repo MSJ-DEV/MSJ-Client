@@ -39,7 +39,14 @@ export default function Profile({ navigation }) {
       let email = JSON.parse(jsonValue);
       let mail = email.user.email;
 
-      //  axios.post('http://192.168.1.15:3333/api/users/oneUserEmail', {mail}).then((res)=> {console.log('*************** resupnse data ',res)}).catch((e)=> {console.log(e)})
+      axios
+        .post("http://192.168.1.15:3333/api/users/oneUserEmail", { mail })
+        .then((res) => {
+          console.log("*************** resupnse data ", res);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     } catch (e) {
       // error reading value
     }
