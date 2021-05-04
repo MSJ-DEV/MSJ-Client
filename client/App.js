@@ -17,14 +17,12 @@ export default function App() {
   });
   
   if (fontsLoaded) {
-    console.log("fonts loaded");
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
         <Navigation />
       </ApplicationProvider>
     );
   } else {
-    console.log("loadingfonts");
     return <AppLoading />;
   }
 }

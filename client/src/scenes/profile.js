@@ -1,10 +1,12 @@
 
 import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import SafeAreaView from 'react-native-safe-area-view';
 import SocialButton from '../components/SocialButton';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 
 
@@ -18,9 +20,30 @@ export default function Profile({navigation}) {
   const [email, setEmail]= useState('user')
   const [numberPhone, setNumbePhone]= useState('user')
   const [photoUrl, setPhotoUrl] = useState('https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg')
+  const [localStorrage, setLocalStrorage] = useState()
+
+useEffect( ()=> {
+
+ getInformation()
+}, [])
+const getInformation= async ()=> {
+  try {
+    const jsonValue = await AsyncStorage.getItem('signIn')
+    console.log('****************************** GET data from local strorage from PROFILE  *********', jsonValue)
+      jsonValue != null ? JSON.parse(jsonValue) : null;
+     let email = JSON.parse(jsonValue) 
+     let mail = email.user.email
+
+     axios.post('http://192.168.1.15:3333/api/users/oneUserEmail', {mail}).then((res)=> {console.log('*************** resupnse data ',res)}).catch((e)=> {console.log(e)})
+
+  } catch(e) {
+    // error reading value
+  }
+}
+  // const getData = async () => {
+
+  // }
   
-
-
   let openImage = async () =>{
     let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
 

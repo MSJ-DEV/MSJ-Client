@@ -12,6 +12,11 @@ import SocialButton from "../components/SocialButton";
 import axios from "react-native-axios";
 import sanitizeHtml from "sanitize-html";
 import { ScrollView } from "react-native-gesture-handler";
+import * as Google from "expo-google-app-auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+
+
 
 const signUp = ({ navigation }) => {
   const [firstName, setFirstName] = useState();
@@ -19,17 +24,32 @@ const signUp = ({ navigation }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [numberPhone, setNumberPhone] = useState();
+  const [googleId, setGoogleId] = useState();
+
+
 
   const [mailError, setMailError] = useState();
   const [nameError, setNameError] = useState();
   const [lastError, setLastError] = useState();
   const [passwordError, setPasswordError] = useState();
   const [phoneError, setPhoneError] = useState();
+  const clientAndroid = '213513789380-4g4i28f9lrf6soppvpqrri94tqoc9n8t.apps.googleusercontent.com';
+  const ClientIos = '213513789380-vq6hj0529hpbte0k5epr1c72gapq4np2.apps.googleusercontent.com'
 
   const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const passformat = /^(?=.*\d)(?=.*[a-z])[a-zA-Z0-9]{8,}$/;
   const phoneFormat = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
 
+      await AsyncStorage.setItem('signIn', jsonValue)
+      console.log('store in my function ', jsonValue)
+    } catch (e) {
+      
+      console.log(e)
+    }
+  }
   const nameValidator = () => {
     if (!firstName) {
       setNameError("fill you name please*");
@@ -38,7 +58,32 @@ const signUp = ({ navigation }) => {
       return true;
     }
   };
+  const signInAsync = async () => {
+    console.log("LoginScreen.js 6 | loggin in");
+    try {
+      const { type, user } = await Google.logInAsync({
+        iosClientId:ClientIos ,
+        androidClientId: clientAndroid,
+      });
+      console.log('************ from gooooooogle', user)
+      if (type === "success") {
+        // Then you can use the Google REST API
+        console.log("LoginScreen.js 17 | success, navigating to profile");
+      
 
+        axios.post('http://192.168.1.15:3333/api/auth/signup/google',{googleId:user.id, firstName:user.givenName, lastName: user.familyName , email: user.email })
+      .then((res)=> {console.log("dataaaaaaaaaaa\n*************",res.data),
+          storeData(user)
+    })
+      .catch((err)=>console.log('### err ###',err))
+
+      navigation.navigate("Profile", { user });
+      }
+    } catch (error) {
+      console.log("LoginScreen.js 19 | error with login", error);
+    }
+  };
+  
   const lastValidator = () => {
     if (!lastName) {
       setLastError("fill you last name please*");
@@ -150,7 +195,7 @@ const signUp = ({ navigation }) => {
           iconType="user"
           keyboardType="lastName"
           autoCapitalize="none"
-          navigation
+          
           autoCapitalize="none"
           autoCorrect={false}
           onBlur={() => lastValidator()}
@@ -196,24 +241,26 @@ const signUp = ({ navigation }) => {
         <FormButton buttonTitle="Sign Up" onPress={() => register()} />
         <View>
           <SocialButton
-            buttonTitle="Sign In with Facebook"
+            buttonTitle="Sign Un with Facebook"
             btnType="facebook"
             color="#4867aa"
             backgroundColor="#e6eaf4"
           />
 
           <SocialButton
-            buttonTitle="Sign In with Google"
+            buttonTitle="Sign Un with Google"
             btnType="google"
             color="#de4d41"
             backgroundColor="#f5e7ea"
+            onPress={()=> signInAsync()}
+
           />
         </View>
         {/* ) : null} */}
 
         <TouchableOpacity
           style={styles.navButton}
-          onPress={() => navigation.navigate("SignIN", { email })}
+          onPress={() => navigation.navigate("SingIn")}
         >
           <Text style={styles.navButtonText}>Have an account? Sign In</Text>
         </TouchableOpacity>
