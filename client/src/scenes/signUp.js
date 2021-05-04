@@ -39,7 +39,17 @@ const signUp = ({ navigation }) => {
   const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const passformat = /^(?=.*\d)(?=.*[a-z])[a-zA-Z0-9]{8,}$/;
   const phoneFormat = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value)
 
+      await AsyncStorage.setItem('signIn', jsonValue)
+      console.log('store in my function ', jsonValue)
+    } catch (e) {
+      
+      console.log(e)
+    }
+  }
   const nameValidator = () => {
     if (!firstName) {
       setNameError("fill you name please*");
@@ -62,10 +72,11 @@ const signUp = ({ navigation }) => {
       
 
         axios.post('http://192.168.1.15:3333/api/auth/signup/google',{googleId:user.id, firstName:user.givenName, lastName: user.familyName , email: user.email })
-      .then((res)=> {console.log('###### #########################  RRRRRRRRRRRRRRRRRRRRR ####\n',res.message),
-      console.log("dataaaaaaaaaaa\n*************",res.data),
-      console.log("ressssssssss\n*************",res)})
+      .then((res)=> {console.log("dataaaaaaaaaaa\n*************",res.data),
+          storeData(user)
+    })
       .catch((err)=>console.log('### err ###',err))
+
       navigation.navigate("Profile", { user });
       }
     } catch (error) {
@@ -184,7 +195,7 @@ const signUp = ({ navigation }) => {
           iconType="user"
           keyboardType="lastName"
           autoCapitalize="none"
-          navigation
+          
           autoCapitalize="none"
           autoCorrect={false}
           onBlur={() => lastValidator()}
@@ -249,7 +260,7 @@ const signUp = ({ navigation }) => {
 
         <TouchableOpacity
           style={styles.navButton}
-          onPress={() => navigation.navigate("SignIN", { email })}
+          onPress={() => navigation.navigate("SingIn")}
         >
           <Text style={styles.navButtonText}>Have an account? Sign In</Text>
         </TouchableOpacity>

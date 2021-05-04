@@ -22,24 +22,26 @@ export default function Profile({navigation}) {
   const [photoUrl, setPhotoUrl] = useState('https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg')
   const [localStorrage, setLocalStrorage] = useState()
 
-useEffect(async ()=> {
+useEffect( ()=> {
+
+ getInformation()
+}, [])
+const getInformation= async ()=> {
   try {
     const jsonValue = await AsyncStorage.getItem('signIn')
-    console.log('get data from local strorage ***************************************', jsonValue)
-    setLocalStrorage(jsonValue)
-  } catch(e) {
-    console.log(e)
-  }
-}, [])
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem('signIn')
-  //     console.log('get data from local strorage ***************************************', jsonValue)
-  //     return jsonValue != null ? JSON.parse(jsonValue) : null;
+    console.log('****************************** GET data from local strorage from PROFILE  *********', jsonValue)
+      jsonValue != null ? JSON.parse(jsonValue) : null;
+     let email = JSON.parse(jsonValue) 
+     let mail = email.user.email
 
-  //   } catch(e) {
-  //     // error reading value
-  //   }
+     axios.post('http://192.168.1.15:3333/api/users/oneUserEmail', {mail}).then((res)=> {console.log('*************** resupnse data ',res)}).catch((e)=> {console.log(e)})
+
+  } catch(e) {
+    // error reading value
+  }
+}
+  // const getData = async () => {
+
   // }
   
   let openImage = async () =>{
