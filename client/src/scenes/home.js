@@ -113,6 +113,11 @@ const home = () => {
                 </Text>
                 <Text style={{ fontSize: 23 }}>{item.type}</Text>
               </View>
+              {/* <Button
+                  title="ADD To List"
+                  color="#0652DD"
+                  onPress={() => handleClick(item)}
+                /> */}
             </Animated.View>
           );
         }}

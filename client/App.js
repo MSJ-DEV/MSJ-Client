@@ -15,6 +15,7 @@ export default function App() {
     "Lato-Italic": require("./assets/fonts/Lato-Italic.ttf"),
     "Lato-Regular": require("./assets/fonts/Lato-Regular.ttf"),
   });
+  
   if (fontsLoaded) {
     console.log("fonts loaded");
     return (
