@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import SafeAreaView from 'react-native-safe-area-view';
 import SocialButton from '../components/SocialButton';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from 'react-native-axios';
 
 
 
@@ -25,16 +26,23 @@ export default function Profile({navigation}) {
 useEffect( ()=> {
 
  getInformation()
-}, [])
+}, {})
 const getInformation= async ()=> {
   try {
     const jsonValue = await AsyncStorage.getItem('signIn')
     console.log('****************************** GET data from local strorage from PROFILE  *********', jsonValue)
       jsonValue != null ? JSON.parse(jsonValue) : null;
-     let email = JSON.parse(jsonValue) 
-     let mail = email.user.email
+     let mail = JSON.parse(jsonValue) 
+     let email = mail.user.email
 
-     axios.post('http://192.168.1.15:3333/api/users/oneUserEmail', {mail}).then((res)=> {console.log('*************** resupnse data ',res)}).catch((e)=> {console.log(e)})
+     axios.post('http://192.168.1.15:3333/api/users/oneUserEmail', {email:email})
+     .then((res)=> {
+       console.log('*************** response data ',res.data)
+
+      })
+      .catch((e)=> {
+        console.log(e)
+      })
 
   } catch(e) {
     // error reading value
