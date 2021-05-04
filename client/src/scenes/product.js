@@ -90,7 +90,7 @@ const product = ({ navigation }) => {
                   {item.type}
                 </Text>
                 <Button
-                  title="ADD Me "
+                  title="ADD To List"
                   color="#0652DD"
                   onPress={() => handleClick(item)}
                 />

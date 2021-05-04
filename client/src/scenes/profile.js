@@ -14,6 +14,12 @@ export default function Profile({navigation}) {
   const [selectImg, setSelectedImg] = useState(null);
   const [data,setPhoto]=useState('');
   const [firstName, setFirstName]= useState('user')
+  const [lastName, setLastName]= useState('user')
+  const [email, setEmail]= useState('user')
+  const [numberPhone, setNumbePhone]= useState('user')
+  const [photoUrl, setPhotoUrl] = useState('https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg')
+  
+
 
   let openImage = async () =>{
     let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -43,10 +49,10 @@ export default function Profile({navigation}) {
           selectImg !== null ?  (
            <Image 
              style={styles.userImg} 
-              source={{uri:(selectImg.localUri !== null) ? selectImg.localUri : 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg'}} />
+              source={{uri:(selectImg.localUri !== null) ? selectImg.localUri : photoUrl}} />
          ) : <Image 
          style={styles.userImg} 
-         source={{uri:'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg'}}
+         source={{uri:photoUrl}}
     />
        }
             <TouchableOpacity 
@@ -57,26 +63,26 @@ export default function Profile({navigation}) {
 
         <Text style={{marginTop:50, marginBottom:20, fontSize:30}}> Welcome Back </Text>
        <SocialButton
-            buttonTitle= { navigation.state.params.res.data.user.firstName}
+            buttonTitle= {firstName}
             btnType="user"
             color="#1e272e"
             backgroundColor="#e6eaf4"
           />
            <SocialButton
-            buttonTitle= {"your lastName ", navigation.state.params.res.data.user.lastName} 
+            buttonTitle= {"your lastName ", lastName} 
             btnType="user"
             color="#1e272e"
             backgroundColor="#e6eaf4"
           />
 
           <SocialButton
-            buttonTitle= { navigation.state.params.res.data.user.email}
+            buttonTitle= {email}
             btnType="user"
             color="#1e272e"
             backgroundColor="#e6eaf4"
           />
           <SocialButton
-            buttonTitle= { navigation.state.params.res.data.user.numberPhone}
+            buttonTitle= {numberPhone}
             btnType="phone"
             color="#1e272e"
             backgroundColor="#e6eaf4"
@@ -166,16 +172,6 @@ export default function Photo(props) {
       {console.log(data,'rrrrrr')}
       <Text> Look at our pretty picture! </Text>
       <Button theme={theme} icon="image-area" mode="contained" onPress={() => openImagePickerAsync()}/>
-      <Image style={styles.img} source={{uri:data}}/>
-
-</View>
-  );
-}
-const theme = {colors:{primary:"#CA9D0C"}};
-const styles = StyleSheet.create({
-  img:{
-    width:30,
-    height:20
   }
 })
 */
