@@ -22,28 +22,36 @@ export default function Profile({navigation}) {
   const [numberPhone, setNumbePhone]= useState('user')
   const [photoUrl, setPhotoUrl] = useState('https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg')
   const [localStorrage, setLocalStrorage] = useState()
+  const [storage, setStorage] = useState()
 
 useEffect( ()=> {
 
  getInformation()
-}, {})
+}, [])
 const getInformation= async ()=> {
   try {
     const jsonValue = await AsyncStorage.getItem('signIn')
     console.log('****************************** GET data from local strorage from PROFILE  *********', jsonValue)
       jsonValue != null ? JSON.parse(jsonValue) : null;
      let mail = JSON.parse(jsonValue) 
-     let email = mail.user.email
+     let emailserver = mail.user.email
 
-     axios.post('http://192.168.1.15:3333/api/users/oneUserEmail', {email:email})
+     axios.post('http://192.168.1.15:3333/api/users/oneUserEmail', {email:emailserver})
      .then((res)=> {
-       let data = res.data
-       setFirstName(data[0][firstName])
-       setLastName(data[0][lastName])
-       setEmail(data[0][email])
+          setStorage(res.data)
+          let  first = storage[0].firstName
+          setFirstName(first)
+          let last = storage[0].lastName
+         setLastName(last)
+         let m = storage[0].email
+         setEmail(m)
+
+      //  console.log('*************** response data ',res.data)
+       console.log('########################my hooooooks\n',storage)
+       console.log('firstName************',firstName , '',  lastName, email)
+      //  console.log('firstName************',email)
+
        
-       console.log('*************** response data ',res.data)
-       console.log('firstName************',firstName)
 
       })
       .catch((e)=> {
@@ -98,7 +106,7 @@ const getInformation= async ()=> {
               <Text>Click</Text>
              </TouchableOpacity>
 
-        <Text style={{marginTop:50, marginBottom:20, fontSize:30}}> Welcome Back </Text>
+        <Text style={{marginTop:50, marginBottom:20, fontSize:30}}> Welcome Back {firstName} </Text>
        <SocialButton
             buttonTitle= {firstName}
             btnType="user"
