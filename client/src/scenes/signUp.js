@@ -24,6 +24,9 @@ const signUp = ({ navigation }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [numberPhone, setNumberPhone] = useState();
+  const [googleId, setGoogleId] = useState();
+
+
 
   const [mailError, setMailError] = useState();
   const [nameError, setNameError] = useState();
@@ -56,10 +59,13 @@ const signUp = ({ navigation }) => {
       if (type === "success") {
         // Then you can use the Google REST API
         console.log("LoginScreen.js 17 | success, navigating to profile");
-        axios.post('http://192.168.1.15:3333/api/users/create',{firstName:user.familyName, lastName:user.givenName, email:user
-      .email})
-      .then((res)=> {console.log(res)})
-      .catch((e)=>console.log(e))
+      
+
+        axios.post('http://192.168.1.15:3333/api/auth/signup/google',{googleId:user.id, firstName:user.givenName, lastName: user.familyName , email: user.email })
+      .then((res)=> {console.log('###### #########################  RRRRRRRRRRRRRRRRRRRRR ####\n',res.message),
+      console.log("dataaaaaaaaaaa\n*************",res.data),
+      console.log("ressssssssss\n*************",res)})
+      .catch((err)=>console.log('### err ###',err))
       navigation.navigate("Profile", { user });
       }
     } catch (error) {

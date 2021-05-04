@@ -20,14 +20,13 @@ export default function Profile({navigation}) {
   const [email, setEmail]= useState('user')
   const [numberPhone, setNumbePhone]= useState('user')
   const [photoUrl, setPhotoUrl] = useState('https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg')
-  
+  const [localStorrage, setLocalStrorage] = useState()
 
 useEffect(async ()=> {
   try {
     const jsonValue = await AsyncStorage.getItem('signIn')
     console.log('get data from local strorage ***************************************', jsonValue)
-    return jsonValue != null ? JSON.parse(jsonValue) : null;
-
+    setLocalStrorage(jsonValue)
   } catch(e) {
     console.log(e)
   }
