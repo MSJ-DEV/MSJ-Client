@@ -13,7 +13,7 @@ const Contact = ({navigaton}) => {
     const [text, setText] = useState();
 
     const onSendEMail = ()=> {
-      axios.post('http://192.168.1.15:3333/sendmail',{email, text})
+      axios.post('http://192.168.1.15:3333/api/sendmail',{email, text})
       .then((res)=>{console.log(res)})
       .catch((e)=>{console.log(e)})
       
@@ -34,7 +34,7 @@ const Contact = ({navigaton}) => {
         <FromInput
         style={{ fontSize:25, color:'#000'}}
         labelValue={email}
-        onChangeText={(userEmail) => setEmail(userEmail)}
+        onChangeText={(email) => setEmail(email)}
         placeholderText="Email"
         iconType="user"
         keyboardType="email-address"
@@ -53,16 +53,7 @@ const Contact = ({navigaton}) => {
        
          />
       
-        {/* <TextInput
-        style={styles.input}
-         labelValue={text}
-         onChangeText={(text) => setText(text)}
-          underlineColorAndroid="transparent"
-          placeholder="Type something"
-          placeholderTextColor="grey"
-          numberOfLines={10}
-          multiline={true}
-        /> */}
+     
         <Button
          style={styles.btn}
          onPress={()=>onSendEMail()}
