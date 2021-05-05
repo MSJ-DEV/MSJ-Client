@@ -24,6 +24,7 @@ export default function Profile({ navigation }) {
     "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg",
   );
   const [localStorrage, setLocalStrorage] = useState();
+  const [storage, setStorage] = useState();
 
   useEffect(() => {
     getInformation();
@@ -37,20 +38,25 @@ export default function Profile({ navigation }) {
       );
       jsonValue != null ? JSON.parse(jsonValue) : null;
       let mail = JSON.parse(jsonValue);
-      let email = mail.user.email;
+      let emailserver = mail.user.email;
 
       axios
         .post("http://192.168.1.15:3333/api/users/oneUserEmail", {
-          email: email,
+          email: emailserver,
         })
         .then((res) => {
-          let data = res.data;
-          setFirstName(data[0][firstName]);
-          setLastName(data[0][lastName]);
-          setEmail(data[0][email]);
+          setStorage(res.data);
+          let first = storage[0].firstName;
+          setFirstName(first);
+          let last = storage[0].lastName;
+          setLastName(last);
+          let m = storage[0].email;
+          setEmail(m);
 
-          console.log("*************** response data ", res.data);
-          console.log("firstName************", firstName);
+          //  console.log('*************** response data ',res.data)
+          console.log("########################my hooooooks\n", storage);
+          console.log("firstName************", firstName, "", lastName, email);
+          //  console.log('firstName************',email)
         })
         .catch((e) => {
           console.log(e);
@@ -102,7 +108,27 @@ export default function Profile({ navigation }) {
         <TouchableOpacity onPress={openImage} style={styles.button}>
           <Text>Click</Text>
         </TouchableOpacity>
-
+        <Text style={{ marginTop: 50, marginBottom: 20, fontSize: 30 }}>
+          {" "}
+          Welcome Back {firstName}{" "}
+        </Text>
+        <SocialButton
+          buttonTitle={firstName}
+          btnType="user"
+          color="#1e272e"
+          backgroundColor="#e6eaf4"
+        />
+        <SocialButton
+          buttonTitle={("your lastName ", lastName)}
+          btnType="user"
+          color="#1e272e"
+          backgroundColor="#e6eaf4"
+        />
+        ) : (
+        <Image style={styles.userImg} source={{ uri: photoUrl }} />)
+        <TouchableOpacity onPress={openImage} style={styles.button}>
+          <Text>Click</Text>
+        </TouchableOpacity>
         <Text style={{ marginTop: 50, marginBottom: 20, fontSize: 30 }}>
           {" "}
           Welcome Back{" "}
@@ -119,7 +145,6 @@ export default function Profile({ navigation }) {
           color="#1e272e"
           backgroundColor="#e6eaf4"
         />
-
         <SocialButton
           buttonTitle={email}
           btnType="user"

@@ -13,7 +13,7 @@ const Contact = ({ navigaton }) => {
   console.log("email", email);
   const onSendEMail = () => {
     axios
-      .post("http://192.168.1.12:3333/sendmail", { email, text })
+      .post("http://192.168.1.12:3333/api/sendmail", { email, text })
       .then((res) => {
         navigation.navigate("Home");
       })
