@@ -27,7 +27,7 @@ const paymentScreen = ({navigation}) => {
 
     const cartInfo = {
         id: '5eruyt35eggr76476236523t3',
-        description: 'FROM RMADI ',
+        description: 'Carrefour',
         amount: amount
     }
 
@@ -40,7 +40,7 @@ const paymentScreen = ({navigation}) => {
 
         try {
             console.log('***************** in the suucces try block ')
-            const stripeResponse = await axios.post('http://192.168.1.15:8000/payment', {
+            const stripeResponse = await axios.post('http://192.168.1.15:3333/payment', {
                 email: 'rmadi.med1@gmail.com',
                 product: cartInfo,
                 authToken: jsonResponse
