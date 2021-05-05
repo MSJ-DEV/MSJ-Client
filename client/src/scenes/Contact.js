@@ -11,9 +11,10 @@ import TextArea from '../components/TextArea';
 const Contact = ({navigaton}) => {
     const [email, setEmail] = useState();
     const [text, setText] = useState();
+    const [subjectTosend, setSubject] = useState();
 
     const onSendEMail = ()=> {
-      axios.post('http://192.168.1.15:3333/api/sendmail',{email, text})
+      axios.post('http://192.168.1.15:3333/api/sendmail',{email, text, subjectTosend})
       .then((res)=>{console.log(res)})
       .catch((e)=>{console.log(e)})
       
@@ -38,6 +39,14 @@ const Contact = ({navigaton}) => {
         placeholderText="Email"
         iconType="user"
         keyboardType="email-address"
+        autoCapitalize="none"
+      />
+       <FromInput
+        style={{ fontSize:25, color:'#000'}}
+        labelValue={subjectTosend}
+        onChangeText={(subjectTosend) => setSubject(subjectTosend)}
+        placeholderText="Subject"
+        iconType="filetext1"
         autoCapitalize="none"
       />
             <TextArea
@@ -70,7 +79,7 @@ export default Contact
 const styles = StyleSheet.create({
     conntainer:{
         flex:1,
-        backgroundColor:'#808e9b',
+        backgroundColor:'#1d5aa9',
         justifyContent: "center",
         alignItems: "center",
         padding: 20,
