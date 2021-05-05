@@ -1,20 +1,20 @@
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import Header from "../components/header";
-import FoundUs from "../scenes/foundUs";
+import Quiz from "../scenes/quiz";
 import React from "react";
 import { Text } from "react-native";
 
 const screens = {
-  Home: {
-    screen: FoundUs,
+  Quiz: {
+    screen: Quiz,
     navigationOptions: ({ navigation }) => {
       return {
         headerLeft: () => <Header navigation={navigation} />,
-        headerTitle: () => <Text>Found Us</Text>,
+        headerTitle: () => <Text>Quiz</Text>,
       };
     },
   },
 };
-const FoundUsStack = createStackNavigator(screens);
-export default createAppContainer(FoundUsStack);
+const weelOfFortuneStack = createStackNavigator(screens);
+export default createAppContainer(weelOfFortuneStack);

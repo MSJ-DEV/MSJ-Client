@@ -2,6 +2,8 @@ import React from "react";
 import Swal from "sweetalert2";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
+
 import {
   StyleSheet,
   Button,
@@ -27,6 +29,7 @@ export default class Cart extends React.Component {
       selectAll: false,
       cartItemsIsLoading: false,
       cartItems: [],
+     
     };
     this.setItems = this.setItems.bind(this);
   }
@@ -74,19 +77,7 @@ export default class Cart extends React.Component {
       this.setState({ cartItems: myid });
     });
 
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire("Deleted!", "Your file has been deleted.", "success");
-      }
-    });
+    
   };
 
   quantityHandler = (action, index) => {
@@ -111,6 +102,7 @@ export default class Cart extends React.Component {
           (item && item.promotion == 1 ? item.quantity * item.oldprice : 0),
         0,
       );
+    
     }
     return 0;
   };
@@ -118,6 +110,24 @@ export default class Cart extends React.Component {
   goToProduct = () => {
     this.props.navigation.navigate("Product");
   };
+  goTopayment=()=> {
+    if (this.subtotalPrice() === 0 ) {
+  Alert.alert('OOPS!', 'You should select Some Items', [{
+    text: "unterstood",
+    style: "cancel",
+  }])
+
+
+    }else if (this.subtotalPrice()<100) {
+      Alert.alert('OOPS!', 'You should by at least over then 100 DT ', [{
+        text: "unterstood",
+        style: "cancel",
+      }])
+    }else {
+      let total = this.subtotalPrice().toFixed(2)
+      this.props.navigation.navigate('PaymentScreen', {total})  
+    }
+  }
 
   render() {
     const styles = StyleSheet.create({
@@ -301,7 +311,7 @@ export default class Cart extends React.Component {
               >
                 <Text>Voucher</Text>
                 <View style={{ paddingRight: 20 }}>
-                  <TextInput
+                   <TextInput
                     style={{
                       paddingHorizontal: 10,
                       backgroundColor: "#f0f0f0",
@@ -373,7 +383,7 @@ export default class Cart extends React.Component {
                     borderRadius: 5,
                   },
                 ]}
-                onPress={() => console.log("test")}
+                onPress={() => this.goTopayment()}
               >
                 <Text style={{ color: "#ffffff" }}>Checkout</Text>
               </TouchableOpacity>

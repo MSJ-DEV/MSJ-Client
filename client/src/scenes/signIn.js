@@ -3,6 +3,10 @@ import FormButton from "../components/FormButton";
 import SocialButton from "../components/SocialButton";
 import FromInput from "../components/FormInput";
 import axios from "react-native-axios";
+import * as Google from "expo-google-app-auth";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
+import Expo from "expo";
 
 import { StyleSheet, Text, View, Platform, Image } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
@@ -10,8 +14,40 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 const signIn = ({ navigation }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const clientAndroid =
+    "213513789380-4g4i28f9lrf6soppvpqrri94tqoc9n8t.apps.googleusercontent.com";
+  const ClientIos =
+    "213513789380-vq6hj0529hpbte0k5epr1c72gapq4np2.apps.googleusercontent.com";
+  const storeData = async (value) => {
+    try {
+      const jsonValue = JSON.stringify(value);
 
-  const singIn = () => {
+      await AsyncStorage.setItem("signIn", jsonValue);
+      console.log("store in my function ", jsonValue);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  const signInAsync = async () => {
+    console.log("LoginScreen.js 6 | loggin in");
+    try {
+      const { type, user } = await Google.logInAsync({
+        iosClientId: ClientIos,
+        androidClientId: clientAndroid,
+      });
+      console.log("************ from gooooooogle", user);
+      if (type === "success") {
+        // Then you can use the Google REST API
+        console.log("LoginScreen.js 17 | success, navigating to profile");
+        storeData({ user });
+        navigation.navigate("Profile", { user });
+      }
+    } catch (error) {
+      console.log("LoginScreen.js 19 | error with login", error);
+    }
+  };
+
+  const singInx = () => {
     axios
       .post("http://192.168.1.12:3333/api/auth/login", { email, password })
       .then((res) => {
@@ -51,7 +87,7 @@ const signIn = ({ navigation }) => {
         secureTextEntry={true}
       />
 
-      <FormButton buttonTitle="Sign In" onPress={(e) => singIn()} />
+      <FormButton buttonTitle="Sign In" onPress={(e) => singInx()} />
       <TouchableOpacity style={styles.forgotButton} onPress={() => {}}>
         <Text style={styles.navButtonText}>Forgot Password?</Text>
       </TouchableOpacity>
@@ -69,6 +105,7 @@ const signIn = ({ navigation }) => {
             btnType="google"
             color="#de4d41"
             backgroundColor="#f5e7ea"
+            onPress={() => signInAsync()}
           />
         </View>
       ) : null}
@@ -118,3 +155,8 @@ const styles = StyleSheet.create({
     fontFamily: "Lato-Regular",
   },
 });
+
+// 213513789380-4g4i28f9lrf6soppvpqrri94tqoc9n8t.apps.googleusercontent.com
+
+// ios
+// 213513789380-vq6hj0529hpbte0k5epr1c72gapq4np2.apps.googleusercontent.com
