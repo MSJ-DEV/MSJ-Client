@@ -23,6 +23,7 @@ export default function Profile({navigation}) {
   const [photoUrl, setPhotoUrl] = useState('https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg')
   const [localStorrage, setLocalStrorage] = useState()
   const [storage, setStorage] = useState()
+  const [logIn , setLogIn] = useState(false)
 
 useEffect( ()=> {
 
@@ -38,6 +39,7 @@ const getInformation= async ()=> {
 
      axios.post('http://192.168.1.15:3333/api/users/oneUserEmail', {email:emailserver})
      .then((res)=> {
+       setLogIn(true)
           setStorage(res.data)
           let  first = storage[0].firstName
           setFirstName(first)
@@ -62,9 +64,6 @@ const getInformation= async ()=> {
     // error reading value
   }
 }
-  // const getData = async () => {
-
-  // }
   
   let openImage = async () =>{
     let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
