@@ -19,10 +19,9 @@ const paymentScreen = ({ navigation }) => {
     navigation.goBack();
   }
 
-
   const cartInfo = {
     id: "5eruyt35eggr76476236523t3",
-    description: "FROM RMADI ",
+    description: "Carrefour",
     amount: amount,
   };
 
@@ -36,72 +35,20 @@ const paymentScreen = ({ navigation }) => {
     try {
       console.log("***************** in the suucces try block ");
       const stripeResponse = await axios.post(
-        "http://192.168.1.12:8000/payment",
+        "http://192.168.1.15:3333/api/payment",
         {
           email: "rmadi.med1@gmail.com",
           product: cartInfo,
           authToken: jsonResponse,
         },
-        console.log(
-          "#################################################",
-          stripeResponse,
-        ),
-      );
-      console.log(
-        "***************** in the suucces try block after the post request ",
       );
 
       if (stripeResponse) {
-        console.log(
-          "***************** in the suucces try block after IF condition ",
-        );
-
         const { paid } = stripeResponse.data;
         if (paid === true) {
           setPaymentStatus("Payment Success");
         } else {
           setPaymentStatus("Payment failed due to some issue");
-    const cartInfo = {
-        id: '5eruyt35eggr76476236523t3',
-        description: 'Carrefour',
-        amount: amount
-    }
-
-    const onCheckStatus = async (paymentResponse) => {
-        setPaymentStatus('Please wait while confirming your payment!')
-        setResponse(paymentResponse)
-
-        let jsonResponse = JSON.parse(paymentResponse);
-        // perform operation to check payment status
-
-        try {
-            console.log('***************** in the suucces try block ')
-            const stripeResponse = await axios.post('http://192.168.1.15:3333/payment', {
-                email: 'rmadi.med1@gmail.com',
-                product: cartInfo,
-                authToken: jsonResponse
-            },)
-
-            if(stripeResponse){
-
-                const { paid } = stripeResponse.data;
-                if(paid === true){
-                    setPaymentStatus('Payment Success')
-                }else{
-                    setPaymentStatus('Payment failed due to some issue')
-                }
-
-            }else{
-                setPaymentStatus(' Payment failed due to some issue')
-            }
-
-            
-        } catch (error) {
-            
-            console.log(error)
-            setPaymentStatus(' Payment failed due to some issue')
-
-
         }
       } else {
         setPaymentStatus(" Payment failed due to some issue");
@@ -167,8 +114,19 @@ const paymentScreen = ({ navigation }) => {
               marginTop: 50,
             }}
           >
-            <Text style={{ fontSize: 25, margin: 10 }}> {paymentStatus} </Text>
-            <Text style={{ fontSize: 16, margin: 10 }}> {response} </Text>
+            <Text
+              style={{
+                fontSize: 25,
+                margin: 10,
+                alignContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {" "}
+              {paymentStatus}{" "}
+            </Text>
+            {/* <Button onPress={()=>navigation.navigate('home')}/> */}
+            {/* <Text style={{ fontSize: 16, margin: 10}}> { response} </Text> */}
           </View>
         );
       } else {
