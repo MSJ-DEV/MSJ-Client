@@ -6,11 +6,7 @@ import axios from "react-native-axios";
 import * as Google from "expo-google-app-auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
-import Expo from "expo"
-
-
-
+import Expo from "expo";
 
 import { StyleSheet, Text, View, Platform, Image } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
@@ -18,19 +14,23 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 const signIn = ({ navigation }) => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const clientAndroid = '213513789380-4g4i28f9lrf6soppvpqrri94tqoc9n8t.apps.googleusercontent.com';
-  const ClientIos = '213513789380-vq6hj0529hpbte0k5epr1c72gapq4np2.apps.googleusercontent.com';
+  const clientAndroid =
+    "213513789380-4g4i28f9lrf6soppvpqrri94tqoc9n8t.apps.googleusercontent.com";
+  const ClientIos =
+    "213513789380-vq6hj0529hpbte0k5epr1c72gapq4np2.apps.googleusercontent.com";
+
+
 
   const storeData = async (value) => {
     try {
-      const jsonValue = JSON.stringify(value)
+      const jsonValue = JSON.stringify(value);
 
-      await AsyncStorage.setItem('signIn', jsonValue)
-      console.log('store in my function ', jsonValue)
+      await AsyncStorage.setItem("signIn", jsonValue);
+      console.log("store in my function ", jsonValue);
     } catch (e) {
-      
-      console.log(e)
+      console.log(e);
     }
+  };
   }
 
   
@@ -41,11 +41,17 @@ const signIn = ({ navigation }) => {
     //  set item in local storage 
     try {
       const { type, user } = await Google.logInAsync({
-        iosClientId:ClientIos ,
+        iosClientId: ClientIos,
         androidClientId: clientAndroid,
       });
-      console.log('************ from gooooooogle', user)
+      console.log("************ from gooooooogle", user);
       if (type === "success") {
+
+        // Then you can use the Google REST API
+        console.log("LoginScreen.js 17 | success, navigating to profile");
+        storeData({ user });
+        navigation.navigate("Profile", { user });
+
        
    
         axios.post('http://192.168.1.15:3333/api/auth/signup/google',{googleId:user.id, firstName:user.givenName, lastName: user.familyName , email: user.email })
@@ -55,16 +61,16 @@ const signIn = ({ navigation }) => {
       .catch((err)=>console.log('### err ###',err))
 
       navigation.navigate("Profile", { user });
+
       }
     } catch (error) {
       console.log(" error with login", error);
     }
   };
-  
 
   const singInx = () => {
     axios
-      .post("http://192.168.1.15:3333/api/auth/login", { email, password })
+      .post("http://192.168.1.12:3333/api/auth/login", { email, password })
       .then((res) => {
         console.log("***********************", res.data.user);
 
@@ -80,10 +86,8 @@ const signIn = ({ navigation }) => {
         }
       });
   };
-  
 
   return (
-
     <ScrollView contentContainerStyle={styles.container}>
       <Image source={require("../../assets/logo.jpeg")} style={styles.logo} />
 
@@ -122,7 +126,7 @@ const signIn = ({ navigation }) => {
             btnType="google"
             color="#de4d41"
             backgroundColor="#f5e7ea"
-            onPress={()=> signInAsync()}
+            onPress={() => signInAsync()}
           />
         </View>
       ) : null}
@@ -172,7 +176,6 @@ const styles = StyleSheet.create({
     fontFamily: "Lato-Regular",
   },
 });
-
 
 // 213513789380-4g4i28f9lrf6soppvpqrri94tqoc9n8t.apps.googleusercontent.com
 
