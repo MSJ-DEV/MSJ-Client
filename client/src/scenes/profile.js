@@ -36,14 +36,21 @@ export default function Profile({ navigation }) {
         jsonValue,
       );
       jsonValue != null ? JSON.parse(jsonValue) : null;
-<<<<<<< HEAD
-      let email = JSON.parse(jsonValue);
-      let mail = email.user.email;
+      let mail = JSON.parse(jsonValue);
+      let email = mail.user.email;
 
       axios
-        .post("http://192.168.1.15:3333/api/users/oneUserEmail", { mail })
+        .post("http://192.168.1.15:3333/api/users/oneUserEmail", {
+          email: email,
+        })
         .then((res) => {
-          console.log("*************** resupnse data ", res);
+          let data = res.data;
+          setFirstName(data[0][firstName]);
+          setLastName(data[0][lastName]);
+          setEmail(data[0][email]);
+
+          console.log("*************** response data ", res.data);
+          console.log("firstName************", firstName);
         })
         .catch((e) => {
           console.log(e);
@@ -52,30 +59,6 @@ export default function Profile({ navigation }) {
       // error reading value
     }
   };
-=======
-     let mail = JSON.parse(jsonValue) 
-     let email = mail.user.email
-
-     axios.post('http://192.168.1.15:3333/api/users/oneUserEmail', {email:email})
-     .then((res)=> {
-       let data = res.data
-       setFirstName(data[0][firstName])
-       setLastName(data[0][lastName])
-       setEmail(data[0][email])
-       
-       console.log('*************** response data ',res.data)
-       console.log('firstName************',firstName)
-
-      })
-      .catch((e)=> {
-        console.log(e)
-      })
-
-  } catch(e) {
-    // error reading value
-  }
-}
->>>>>>> c4a22af304135062c28bde7809cadfcc7ce150e0
   // const getData = async () => {
 
   // }
