@@ -1,75 +1,20 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  Image,
-  ScrollView,
-} from "react-native";
-import * as ImagePicker from "expo-image-picker";
-import React, { useEffect, useState } from "react";
-import Icon from "react-native-vector-icons/FontAwesome";
-import SafeAreaView from "react-native-safe-area-view";
-import SocialButton from "../components/SocialButton";
+
+import { StyleSheet, Text, View, TouchableOpacity, Image, ScrollView } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import React, {useEffect, useState} from 'react';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import SafeAreaView from 'react-native-safe-area-view';
+import SocialButton from '../components/SocialButton';
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from 'react-native-axios';
 
-export default function Profile({ navigation }) {
+
+
+
+
+
+export default function Profile({navigation}) {
   const [selectImg, setSelectedImg] = useState(null);
-
-  const [data, setPhoto] = useState("");
-  const [firstName, setFirstName] = useState("user");
-  const [lastName, setLastName] = useState("user");
-  const [email, setEmail] = useState("user");
-  const [numberPhone, setNumbePhone] = useState("user");
-  const [photoUrl, setPhotoUrl] = useState(
-    "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg",
-  );
-  const [localStorrage, setLocalStrorage] = useState();
-  const [storage, setStorage] = useState();
-
-  useEffect(() => {
-    getInformation();
-  }, []);
-  const getInformation = async () => {
-    try {
-      const jsonValue = await AsyncStorage.getItem("signIn");
-      console.log(
-        "****************************** GET data from local strorage from PROFILE  *********",
-        jsonValue,
-      );
-      jsonValue != null ? JSON.parse(jsonValue) : null;
-      let mail = JSON.parse(jsonValue);
-      let emailserver = mail.user.email;
-
-      axios
-        .post("http://192.168.1.15:3333/api/users/oneUserEmail", {
-          email: emailserver,
-        })
-        .then((res) => {
-          setStorage(res.data);
-          let first = storage[0].firstName;
-          setFirstName(first);
-          let last = storage[0].lastName;
-          setLastName(last);
-          let m = storage[0].email;
-          setEmail(m);
-
-          //  console.log('*************** response data ',res.data)
-          console.log("########################my hooooooks\n", storage);
-          console.log("firstName************", firstName, "", lastName, email);
-          //  console.log('firstName************',email)
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    } catch (e) {
-      // error reading value
-    }
-  };
-  // const getData = async () => {
-
-  // }
-
   const [data,setPhoto]=useState('');
   const [firstName, setFirstName]= useState('user')
   const [lastName, setLastName]= useState('user')
@@ -123,103 +68,80 @@ const getInformation= async ()=> {
   let openImage = async () =>{
     let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-  let openImage = async () => {
-    let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-    if (permission.granted === false) {
+    if(permission.granted === false){
       return;
     }
 
-    let picker = await ImagePicker.launchImageLibraryAsync();
+    let picker = await ImagePicker.launchImageLibraryAsync()
 
-    if (picker.cancelled === true) {
+    if(picker.cancelled ===true){
       return;
     }
-    setSelectedImg({ localUri: picker.uri });
-    console.log(picker);
-  };
+    setSelectedImg({localUri:picker.uri})
+    console.log(picker)
+  }
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+
+  <SafeAreaView style={{flex: 1, backgroundColor: '#fff'}}>
       <ScrollView
         style={styles.container}
-        contentContainerStyle={{
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        showsVerticalScrollIndicator={false}
-      >
-        {selectImg !== null ? (
-          <Image
-            style={styles.userImg}
-            source={{
-              uri: selectImg.localUri !== null ? selectImg.localUri : photoUrl,
-            }}
+        contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
+        showsVerticalScrollIndicator={false}>
+      {
+          selectImg !== null ?  (
+           <Image 
+             style={styles.userImg} 
+              source={{uri:(selectImg.localUri !== null) ? selectImg.localUri : photoUrl}} />
+         ) : <Image 
+         style={styles.userImg} 
+         source={{uri:photoUrl}}
+    />
+       }
+            <TouchableOpacity 
+                onPress={openImage}
+              style={styles.button}>
+              <Text>Click</Text>
+             </TouchableOpacity>
+
+        <Text style={{marginTop:50, marginBottom:20, fontSize:30}}> Welcome Back {firstName} </Text>
+       <SocialButton
+            buttonTitle= {firstName}
+            btnType="user"
+            color="#1e272e"
+            backgroundColor="#e6eaf4"
           />
-        ) : (
-          <Image style={styles.userImg} source={{ uri: photoUrl }} />
-        )}
-        <TouchableOpacity onPress={openImage} style={styles.button}>
-          <Text>Click</Text>
-        </TouchableOpacity>
-        <Text style={{ marginTop: 50, marginBottom: 20, fontSize: 30 }}>
-          {" "}
-          Welcome Back {firstName}{" "}
-        </Text>
-        <SocialButton
-          buttonTitle={firstName}
-          btnType="user"
-          color="#1e272e"
-          backgroundColor="#e6eaf4"
-        />
-        <SocialButton
-          buttonTitle={("your lastName ", lastName)}
-          btnType="user"
-          color="#1e272e"
-          backgroundColor="#e6eaf4"
-        />
-        ) : (
-        <Image style={styles.userImg} source={{ uri: photoUrl }} />)
-        <TouchableOpacity onPress={openImage} style={styles.button}>
-          <Text>Click</Text>
-        </TouchableOpacity>
-        <Text style={{ marginTop: 50, marginBottom: 20, fontSize: 30 }}>
-          {" "}
-          Welcome Back{" "}
-        </Text>
-        <SocialButton
-          buttonTitle={firstName}
-          btnType="user"
-          color="#1e272e"
-          backgroundColor="#e6eaf4"
-        />
-        <SocialButton
-          buttonTitle={("your lastName ", lastName)}
-          btnType="user"
-          color="#1e272e"
-          backgroundColor="#e6eaf4"
-        />
-        <SocialButton
-          buttonTitle={email}
-          btnType="user"
-          color="#1e272e"
-          backgroundColor="#e6eaf4"
-        />
-        <SocialButton
-          buttonTitle={numberPhone}
-          btnType="phone"
-          color="#1e272e"
-          backgroundColor="#e6eaf4"
-        />
+           <SocialButton
+            buttonTitle= {"your lastName ", lastName} 
+            btnType="user"
+            color="#1e272e"
+            backgroundColor="#e6eaf4"
+          />
+
+          <SocialButton
+            buttonTitle= {email}
+            btnType="user"
+            color="#1e272e"
+            backgroundColor="#e6eaf4"
+          />
+          <SocialButton
+            buttonTitle= {numberPhone}
+            btnType="phone"
+            color="#1e272e"
+            backgroundColor="#e6eaf4"
+          />
+          
       </ScrollView>
     </SafeAreaView>
+ 
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     padding: 20,
   },
   userImg: {
@@ -227,16 +149,18 @@ const styles = StyleSheet.create({
     width: 150,
     borderRadius: 75,
   },
-  button: {
-    borderRadius: 10,
-    backgroundColor: "#e6eaf4",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
+  button:{
+    borderRadius:10,
+    backgroundColor:'#e6eaf4',
+    justifyContent:'center',
+    alignItems:'center',
+    padding:10
   },
+ 
 });
 
 //  to add cloudinary
+
 
 /* 
 

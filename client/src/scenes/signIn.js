@@ -19,8 +19,6 @@ const signIn = ({ navigation }) => {
   const ClientIos =
     "213513789380-vq6hj0529hpbte0k5epr1c72gapq4np2.apps.googleusercontent.com";
 
-
-
   const storeData = async (value) => {
     try {
       const jsonValue = JSON.stringify(value);
@@ -31,14 +29,10 @@ const signIn = ({ navigation }) => {
       console.log(e);
     }
   };
-  }
-
-  
-
 
   const signInAsync = async () => {
     console.log("loggin in");
-    //  set item in local storage 
+    //  set item in local storage
     try {
       const { type, user } = await Google.logInAsync({
         iosClientId: ClientIos,
@@ -46,22 +40,20 @@ const signIn = ({ navigation }) => {
       });
       console.log("************ from gooooooogle", user);
       if (type === "success") {
+        axios
+          .post("http://192.168.1.12:3333/api/auth/signup/google", {
+            googleId: user.id,
+            firstName: user.givenName,
+            lastName: user.familyName,
+            email: user.email,
+          })
+          .then((res) => {
+            console.log("dataaaaaaaaaaa\n*************", res.data),
+              storeData(user);
+          })
+          .catch((err) => console.log("### err ###", err));
 
-        // Then you can use the Google REST API
-        console.log("LoginScreen.js 17 | success, navigating to profile");
-        storeData({ user });
         navigation.navigate("Profile", { user });
-
-       
-   
-        axios.post('http://192.168.1.15:3333/api/auth/signup/google',{googleId:user.id, firstName:user.givenName, lastName: user.familyName , email: user.email })
-      .then((res)=> {console.log("dataaaaaaaaaaa\n*************",res.data),
-          storeData(user)
-    })
-      .catch((err)=>console.log('### err ###',err))
-
-      navigation.navigate("Profile", { user });
-
       }
     } catch (error) {
       console.log(" error with login", error);
