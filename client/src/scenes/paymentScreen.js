@@ -19,6 +19,7 @@ const paymentScreen = ({ navigation }) => {
     navigation.goBack();
   }
 
+
   const cartInfo = {
     id: "5eruyt35eggr76476236523t3",
     description: "FROM RMADI ",
@@ -60,6 +61,47 @@ const paymentScreen = ({ navigation }) => {
           setPaymentStatus("Payment Success");
         } else {
           setPaymentStatus("Payment failed due to some issue");
+    const cartInfo = {
+        id: '5eruyt35eggr76476236523t3',
+        description: 'Carrefour',
+        amount: amount
+    }
+
+    const onCheckStatus = async (paymentResponse) => {
+        setPaymentStatus('Please wait while confirming your payment!')
+        setResponse(paymentResponse)
+
+        let jsonResponse = JSON.parse(paymentResponse);
+        // perform operation to check payment status
+
+        try {
+            console.log('***************** in the suucces try block ')
+            const stripeResponse = await axios.post('http://192.168.1.15:3333/payment', {
+                email: 'rmadi.med1@gmail.com',
+                product: cartInfo,
+                authToken: jsonResponse
+            },)
+
+            if(stripeResponse){
+
+                const { paid } = stripeResponse.data;
+                if(paid === true){
+                    setPaymentStatus('Payment Success')
+                }else{
+                    setPaymentStatus('Payment failed due to some issue')
+                }
+
+            }else{
+                setPaymentStatus(' Payment failed due to some issue')
+            }
+
+            
+        } catch (error) {
+            
+            console.log(error)
+            setPaymentStatus(' Payment failed due to some issue')
+
+
         }
       } else {
         setPaymentStatus(" Payment failed due to some issue");
