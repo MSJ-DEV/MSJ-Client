@@ -137,7 +137,7 @@ export default class Cart extends React.Component {
     const { cartItems, cartItemsIsLoading, selectAll } = this.state;
 
     return (
-      <View style={{ flex: 1, backgroundColor: "#f6f6f6" }}>
+      <View style={{ flex: 1, backgroundColor: "#0fb9b1" }}>
         <View>
           <Button
             style={{ zIndex: "-999" }}
@@ -206,16 +206,14 @@ export default class Cart extends React.Component {
                     }}
                   >
                     <TouchableOpacity
-                      onPress={() => {
-                        /*this.props.navigation.navigate('ProductDetails', {productDetails: item})*/
-                      }}
+                    
                       style={{ paddingRight: 10 }}
                     >
                       <Image
                         source={{ uri: item.image }}
                         style={[
                           styles.centerElement,
-                          { height: 60, width: 60, backgroundColor: "#eeeeee" },
+                          { height: 80, width: 80, backgroundColor: "#eeeeee", alignContent:'center' , justifyContent:'center' ,paddingTop:20},
                         ]}
                       />
                     </TouchableOpacity>
@@ -227,41 +225,44 @@ export default class Cart extends React.Component {
                         alignSelf: "center",
                       }}
                     >
+                      {/* ITEM  NAME */}
                       <Text numberOfLines={1} style={{ fontSize: 22 }}>
                         {item.name}
                       </Text>
+                 
                       <Text numberOfLines={1} style={{ color: "#8f8f8f" }}>
                         {item.color ? "Variation: " + item.color : ""}
                       </Text>
                       <Text
                         numberOfLines={1}
-                        style={{ color: "#000", marginBottom: 10 }}
+                        // color of Price
+                        style={{ color: "#000", marginBottom: 10, alignItems:'center', justifyContent:'center'}}
                       >
                         {item.quantity * item.oldprice} TND
                       </Text>
                       <View style={{ flexDirection: "row" }}>
                         <TouchableOpacity
                           onPress={() => this.quantityHandler("less", i)}
-                          style={{ borderWidth: 1, borderColor: "#000" }}
+                          style={{ borderWidth: 2, borderColor: "#1d5aa9" }}
                         >
-                          <MaterialIcons name="remove" size={22} color="#000" />
+                          <MaterialIcons name="remove" size={22} color="#1d5aa9" />
                         </TouchableOpacity>
                         <Text
                           style={{
                             borderTopWidth: 1,
                             borderBottomWidth: 1,
-                            borderColor: "#cccccc",
+                            borderColor: "#000",
                             paddingHorizontal: 7,
                             paddingTop: 3,
-                            color: "#000",
-                            fontSize: 15,
+                            color: "#1d5aa9",
+                            fontSize: 20,
                           }}
                         >
                           {item.quantity}
                         </Text>
                         <TouchableOpacity
                           onPress={() => this.quantityHandler("more", i)}
-                          style={{ borderWidth: 1, borderColor: "#000" }}
+                          style={{ borderWidth: 2, borderColor: "#1d5aa9" }}
                         >
                           <MaterialIcons name="add" size={22} color="#000" />
                         </TouchableOpacity>
@@ -282,9 +283,10 @@ export default class Cart extends React.Component {
         )}
 
         {!cartItemsIsLoading && (
+          // backGround color of footer
           <View
             style={{
-              backgroundColor: "#fff",
+              backgroundColor: "#0652DD",
               borderTopWidth: 2,
               borderColor: "#f6f6f6",
               paddingVertical: 5,
@@ -339,6 +341,7 @@ export default class Cart extends React.Component {
                     }
                     size={25}
                     color={selectAll == true ? "#0faf9a" : "#aaaaaa"}
+                    style={{alignItems:'center'}}
                   />
                 </TouchableOpacity>
               </View>
