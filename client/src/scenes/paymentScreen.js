@@ -87,7 +87,7 @@ const paymentScreen = ({ navigation }) => {
             marginTop: 50,
           }}
         >
-          <Image source={require("../../assets/pay1.png")} style={styles.logo}/>
+          <Image source={require("../../assets/payment.png")} style={styles.logo}/>
           <Text style={{ fontSize: 28, margin: 10 , fontWeight:'bold' , color:'#009432'}}> Make Payment </Text>
           <Text style={{ fontSize: 20, fontWeight:'bold',margin: 10 }}>
             {" "}
@@ -146,9 +146,9 @@ const paymentScreen = ({ navigation }) => {
             </Text>
             {paymentStatus === "Please wait while confirming your payment!" ?
                 <Button style={styles.load} appearance='outline' accessoryLeft={LoadingIndicator}>
-                ..LOADING
+                ...LOADING
               </Button>: 
-              <Button status='success' style={styles.button}>
+              <Button status='success' style={styles.button} onPress={()=> navigation.navigate('Home')}>
                   SUCCESS
               </Button>
             }
@@ -182,14 +182,14 @@ const styles = StyleSheet.create({
   footer: { flex: 1, backgroundColor: "cyan" },
   load: {
     margin:30,
-    backgroundColor:'#ffd32a'
+    backgroundColor:'#0652DD'
   },
   indicator: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   logo: {
-    height: windowHeight /3,
+    height: windowHeight /2,
     width:windowWidth -20,
     resizeMode: "cover",
   },

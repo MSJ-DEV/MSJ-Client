@@ -39,6 +39,7 @@ const StripePayment = (props) => {
                     padding-bottom: 20px;
                     margin-top: 50px;
                     margin-bottom: 50px;
+                    
                 }
                 .card-element{
                     height: 100px;
@@ -53,6 +54,8 @@ const StripePayment = (props) => {
                     font-size: '25px';
                     background-color: transparent;
                     border: none;
+                    text-transform: uppercase;
+
                 
                 }
                 input {
@@ -72,10 +75,12 @@ const StripePayment = (props) => {
                     }
                     .products-info{
                         
-                        height: 150px;
+                        height: 15px;
                         width: 100%;
                         padding: 20px;
                         text-align: center;
+                        font-size:18px;
+                        font-weight: bold;
                     }
                     .card-errors{
                         color: red;
@@ -97,7 +102,7 @@ const StripePayment = (props) => {
                     <div class="row">
                         <div class="products-info">
                             Product Info: ${product}
-                            Amount: ${amount}
+                            Amount: ${amount} DT
                         </div>
                     </div>
                     <div class="row">
