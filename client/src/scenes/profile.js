@@ -25,6 +25,7 @@ export default function Profile({ navigation }) {
   );
   const [localStorrage, setLocalStrorage] = useState();
   const [storage, setStorage] = useState();
+  const [logIn, setLogIn] = useState(false);
 
   useEffect(() => {
     getInformation();
@@ -45,6 +46,7 @@ export default function Profile({ navigation }) {
           email: emailserver,
         })
         .then((res) => {
+          setLogIn(true);
           setStorage(res.data);
           let first = storage[0].firstName;
           setFirstName(first);
@@ -65,123 +67,124 @@ export default function Profile({ navigation }) {
       // error reading value
     }
   };
-  // const getData = async () => {
-
-  // }
 
   let openImage = async () => {
     let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-    if (permission.granted === false) {
-      return;
-    }
+    let openImage = async () => {
+      let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
-    let picker = await ImagePicker.launchImageLibraryAsync();
+      if (permission.granted === false) {
+        return;
+      }
 
-    if (picker.cancelled === true) {
-      return;
-    }
-    setSelectedImg({ localUri: picker.uri });
-    console.log(picker);
+      let picker = await ImagePicker.launchImageLibraryAsync();
+
+      if (picker.cancelled === true) {
+        return;
+      }
+      setSelectedImg({ localUri: picker.uri });
+      console.log(picker);
+    };
+
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+        <ScrollView
+          style={styles.container}
+          contentContainerStyle={{
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+          showsVerticalScrollIndicator={false}
+        >
+          {selectImg !== null ? (
+            <Image
+              style={styles.userImg}
+              source={{
+                uri:
+                  selectImg.localUri !== null ? selectImg.localUri : photoUrl,
+              }}
+            />
+          ) : (
+            <Image style={styles.userImg} source={{ uri: photoUrl }} />
+          )}
+          <TouchableOpacity onPress={openImage} style={styles.button}>
+            <Text>Click</Text>
+          </TouchableOpacity>
+          <Text style={{ marginTop: 50, marginBottom: 20, fontSize: 30 }}>
+            {" "}
+            Welcome Back {firstName}{" "}
+          </Text>
+          <SocialButton
+            buttonTitle={firstName}
+            btnType="user"
+            color="#1e272e"
+            backgroundColor="#e6eaf4"
+          />
+          <SocialButton
+            buttonTitle={("your lastName ", lastName)}
+            btnType="user"
+            color="#1e272e"
+            backgroundColor="#e6eaf4"
+          />
+          ) : (
+          <Image style={styles.userImg} source={{ uri: photoUrl }} />)
+          <TouchableOpacity onPress={openImage} style={styles.button}>
+            <Text>Click</Text>
+          </TouchableOpacity>
+          <Text style={{ marginTop: 50, marginBottom: 20, fontSize: 30 }}>
+            {" "}
+            Welcome Back{" "}
+          </Text>
+          <SocialButton
+            buttonTitle={firstName}
+            btnType="user"
+            color="#1e272e"
+            backgroundColor="#e6eaf4"
+          />
+          <SocialButton
+            buttonTitle={("your lastName ", lastName)}
+            btnType="user"
+            color="#1e272e"
+            backgroundColor="#e6eaf4"
+          />
+          <SocialButton
+            buttonTitle={email}
+            btnType="user"
+            color="#1e272e"
+            backgroundColor="#e6eaf4"
+          />
+          <SocialButton
+            buttonTitle={numberPhone}
+            btnType="phone"
+            color="#1e272e"
+            backgroundColor="#e6eaf4"
+          />
+        </ScrollView>
+      </SafeAreaView>
+    );
   };
 
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={{
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-        showsVerticalScrollIndicator={false}
-      >
-        {selectImg !== null ? (
-          <Image
-            style={styles.userImg}
-            source={{
-              uri: selectImg.localUri !== null ? selectImg.localUri : photoUrl,
-            }}
-          />
-        ) : (
-          <Image style={styles.userImg} source={{ uri: photoUrl }} />
-        )}
-        <TouchableOpacity onPress={openImage} style={styles.button}>
-          <Text>Click</Text>
-        </TouchableOpacity>
-        <Text style={{ marginTop: 50, marginBottom: 20, fontSize: 30 }}>
-          {" "}
-          Welcome Back {firstName}{" "}
-        </Text>
-        <SocialButton
-          buttonTitle={firstName}
-          btnType="user"
-          color="#1e272e"
-          backgroundColor="#e6eaf4"
-        />
-        <SocialButton
-          buttonTitle={("your lastName ", lastName)}
-          btnType="user"
-          color="#1e272e"
-          backgroundColor="#e6eaf4"
-        />
-        ) : (
-        <Image style={styles.userImg} source={{ uri: photoUrl }} />)
-        <TouchableOpacity onPress={openImage} style={styles.button}>
-          <Text>Click</Text>
-        </TouchableOpacity>
-        <Text style={{ marginTop: 50, marginBottom: 20, fontSize: 30 }}>
-          {" "}
-          Welcome Back{" "}
-        </Text>
-        <SocialButton
-          buttonTitle={firstName}
-          btnType="user"
-          color="#1e272e"
-          backgroundColor="#e6eaf4"
-        />
-        <SocialButton
-          buttonTitle={("your lastName ", lastName)}
-          btnType="user"
-          color="#1e272e"
-          backgroundColor="#e6eaf4"
-        />
-        <SocialButton
-          buttonTitle={email}
-          btnType="user"
-          color="#1e272e"
-          backgroundColor="#e6eaf4"
-        />
-        <SocialButton
-          buttonTitle={numberPhone}
-          btnType="phone"
-          color="#1e272e"
-          backgroundColor="#e6eaf4"
-        />
-      </ScrollView>
-    </SafeAreaView>
-  );
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: "#fff",
+      padding: 20,
+    },
+    userImg: {
+      height: 150,
+      width: 150,
+      borderRadius: 75,
+    },
+    button: {
+      borderRadius: 10,
+      backgroundColor: "#e6eaf4",
+      justifyContent: "center",
+      alignItems: "center",
+      padding: 10,
+    },
+  });
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    padding: 20,
-  },
-  userImg: {
-    height: 150,
-    width: 150,
-    borderRadius: 75,
-  },
-  button: {
-    borderRadius: 10,
-    backgroundColor: "#e6eaf4",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 10,
-  },
-});
-
 //  to add cloudinary
 
 /* 

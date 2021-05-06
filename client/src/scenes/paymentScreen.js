@@ -21,7 +21,7 @@ const paymentScreen = ({ navigation }) => {
 
   const cartInfo = {
     id: "5eruyt35eggr76476236523t3",
-    description: "FROM RMADI ",
+    description: "Carrefour",
     amount: amount,
   };
 
@@ -35,26 +35,15 @@ const paymentScreen = ({ navigation }) => {
     try {
       console.log("***************** in the suucces try block ");
       const stripeResponse = await axios.post(
-        "http://192.168.1.12:8000/payment",
+        "http://192.168.1.12:3333/api/payment",
         {
           email: "rmadi.med1@gmail.com",
           product: cartInfo,
           authToken: jsonResponse,
         },
-        console.log(
-          "#################################################",
-          stripeResponse,
-        ),
-      );
-      console.log(
-        "***************** in the suucces try block after the post request ",
       );
 
       if (stripeResponse) {
-        console.log(
-          "***************** in the suucces try block after IF condition ",
-        );
-
         const { paid } = stripeResponse.data;
         if (paid === true) {
           setPaymentStatus("Payment Success");
@@ -125,8 +114,19 @@ const paymentScreen = ({ navigation }) => {
               marginTop: 50,
             }}
           >
-            <Text style={{ fontSize: 25, margin: 10 }}> {paymentStatus} </Text>
-            <Text style={{ fontSize: 16, margin: 10 }}> {response} </Text>
+            <Text
+              style={{
+                fontSize: 25,
+                margin: 10,
+                alignContent: "center",
+                alignItems: "center",
+              }}
+            >
+              {" "}
+              {paymentStatus}{" "}
+            </Text>
+            {/* <Button onPress={()=>navigation.navigate('home')}/> */}
+            {/* <Text style={{ fontSize: 16, margin: 10}}> { response} </Text> */}
           </View>
         );
       } else {
