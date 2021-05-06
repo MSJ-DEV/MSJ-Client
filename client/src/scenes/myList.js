@@ -137,7 +137,7 @@ export default class Cart extends React.Component {
     const { cartItems, cartItemsIsLoading, selectAll } = this.state;
 
     return (
-      <View style={{ flex: 1, backgroundColor: "#0fb9b1" }}>
+      <View style={{ flex: 1, backgroundColor: "#f6f6f6" }}>
         <View>
           <Button
             style={{ zIndex: "-999" }}
@@ -155,13 +155,7 @@ export default class Cart extends React.Component {
             marginBottom: 10,
           }}
         >
-          <View style={[styles.centerElement, { width: 50, height: 50 }]}>
-            <Ionicons name="ios-cart" size={25} color="#000" />
-          </View>
-
-          <View style={[styles.centerElement, { height: 50 }]}>
-            <Text style={{ fontSize: 18, color: "#000" }}>Shopping Cart</Text>
-          </View>
+       
         </View>
 
         {cartItemsIsLoading ? (
@@ -173,12 +167,14 @@ export default class Cart extends React.Component {
             {cartItems &&
               cartItems.map((item, i) => (
                 <View
+                // styling card color 
                   key={i}
                   style={{
                     flexDirection: "row",
-                    backgroundColor: "#fff",
+                    backgroundColor: "#dfe4ea",
                     marginBottom: 2,
                     height: 120,
+                    borderRadius:20
                   }}
                 >
                   <View style={[styles.centerElement, { width: 60 }]}>
@@ -209,11 +205,13 @@ export default class Cart extends React.Component {
                     
                       style={{ paddingRight: 10 }}
                     >
+                      {/* image position  */}
                       <Image
                         source={{ uri: item.image }}
                         style={[
                           styles.centerElement,
-                          { height: 80, width: 80, backgroundColor: "#eeeeee", alignContent:'center' , justifyContent:'center' ,paddingTop:20},
+                          { height: 90, width: 90, borderRadius: 70,
+                            alignContent:'center' , justifyContent:'center' , marginTop:14, position:'relative', bottom:-15},
                         ]}
                       />
                     </TouchableOpacity>
@@ -226,7 +224,7 @@ export default class Cart extends React.Component {
                       }}
                     >
                       {/* ITEM  NAME */}
-                      <Text numberOfLines={1} style={{ fontSize: 22 }}>
+                      <Text numberOfLines={1} style={{ fontSize: 22 , marginTop:10, fontWeight:'bold', color:'#1e2d7d' , position:'relative', top:20}}>
                         {item.name}
                       </Text>
                  
@@ -235,12 +233,14 @@ export default class Cart extends React.Component {
                       </Text>
                       <Text
                         numberOfLines={1}
-                        // color of Price
-                        style={{ color: "#000", marginBottom: 10, alignItems:'center', justifyContent:'center'}}
+                        // color of Price 
+                        style={{ color: "#d50100", marginBottom: 5 , alignItems:'center', justifyContent:'center', 
+                         width: 90, backgroundColor: '#ffed00', fontSize:20, fontWeight:'bold' , height:35
+                      }}
                       >
                         {item.quantity * item.oldprice} TND
                       </Text>
-                      <View style={{ flexDirection: "row" }}>
+                      <View style={{ flexDirection: "row" , marginLeft:100, marginBottom:10, position:'relative', bottom:37.5}}>
                         <TouchableOpacity
                           onPress={() => this.quantityHandler("less", i)}
                           style={{ borderWidth: 2, borderColor: "#1d5aa9" }}
