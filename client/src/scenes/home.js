@@ -168,7 +168,9 @@ const home = () => {
           />
         </View>
       </View>
-
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   header: {
@@ -177,7 +179,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff8eb",
   },
   imageFooter: {
-    height: 60,
+    height: 30,
     width,
   },
   backgroundLogo: {
@@ -293,4 +295,3 @@ const catalogueText = StyleSheet.create({
 });
 
 export default home;
-
