@@ -44,7 +44,7 @@ const product = ({ navigation }) => {
   };
 
   const handleClick = async (item) => {
-    let storage = await AsyncStorage.getItem("item");
+    let storage = await AsyncStorage.getItem("item")
     let parseStorage = JSON.parse(storage);
     var containe = -1;
     if (array) {

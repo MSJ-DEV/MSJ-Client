@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 16,
     fontFamily: 'Lato-Regular',
-    color: '#333',
+    color: '#000',
     justifyContent: 'center',
     alignItems: 'center',
   },
