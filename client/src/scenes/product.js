@@ -58,56 +58,11 @@ const product = ({ navigation }) => {
     }
 
     await AsyncStorage.setItem("item", JSON.stringify(array));
-    console.log("###########################", parseStorage);
   };
 
   return (
-    // <View>
-    //   <Button
-    //     style={{ flex: 1, zIndex: "-999" }}
-    //     onPress={() => goToList()}
-    //     title="Check my List "
-    //     color="#0652DD"
-    //     accessibilityLabel="L15636msearn more about this purple button"
-    //   />
-    //   <FlatList
-    //     data={data}
-    //     renderItem={({ item }) => {
-    //       return (
-    //         <View style={styles.container}>
-    //           <TouchableOpacity style={styles.card} key={item.id}>
-    //             <Image
-    //               style={styles.cardImage}
-    //               source={{ uri: item.image }}
-    //               onPress={() => handleClick(items)}
-    //             />
-    //             <Text
-    //               style={styles.cardText}
-    //               onPress={() => handleClick(items)}
-    //             >
-    //               {item.name}
-    //             </Text>
-    //             <Text style={styles.Text} onPress={() => handleClick(items)}>
-    //               {item.oldprice}DT
-    //             </Text>
-    //             <Text
-    //               onPress={() => handleClick(items)}
-    //               style={{ marginLeft: 110, fontSize: 20 }}
-    //             >
-    //               {item.type}
-    //             </Text>
-    //             <Button
-    //               title="ADD To List"
-    //               color="#0652DD"
-    //               onPress={() => handleClick(item)}
-    //             />
-    //           </TouchableOpacity>
-    //         </View>
-    //       );
-    //     }}
-    //   />
-    // </View>
-    <View style={{ flex: 1, backgroundColor: "#1d5aa9", marginRight: 20 }}>
+
+    <View style={{ flex: 1, backgroundColor: "#fa8231", marginRight: 20 }}>
   
 
     <Animated.FlatList

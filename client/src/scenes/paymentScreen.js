@@ -1,11 +1,27 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity , Image} from "react-native";
 import PaymentView from "../components/StripePayment";
 import axios from "react-native-axios";
 import AppLoading from "expo-app-loading";
-import { Button } from "react-native-paper";
+// import { Button } from "react-native-paper";
+import { Button, Icon, Layout, Spinner } from '@ui-kitten/components';
+import {windowHeight, windowWidth} from '../utils/Dimentions';
+
+
 
 const paymentScreen = ({ navigation }) => {
+
+  const StarIcon = (props) => (
+    <Icon {...props} name='star'/>
+  );
+  
+  const LoadingIndicator = (props) => (
+    <View style={[props.style, styles.indicator]}>
+      <Spinner size='small'/>
+    </View>
+  );
+  
+
   const [response, setResponse] = useState();
 
   const [makePayment, setMakePayment] = useState(false);
@@ -33,7 +49,6 @@ const paymentScreen = ({ navigation }) => {
     // perform operation to check payment status
 
     try {
-      console.log("***************** in the suucces try block ");
       const stripeResponse = await axios.post(
         "http://192.168.1.15:3333/api/payment",
         {
@@ -72,21 +87,22 @@ const paymentScreen = ({ navigation }) => {
             marginTop: 50,
           }}
         >
-          <Text style={{ fontSize: 25, margin: 10 }}> Make Payment </Text>
-          <Text style={{ fontSize: 16, margin: 10 }}>
+          <Image source={require("../../assets/payment.png")} style={styles.logo}/>
+          <Text style={{ fontSize: 28, margin: 10 , fontWeight:'bold' , color:'#009432'}}> Make Payment </Text>
+          <Text style={{ fontSize: 20, fontWeight:'bold',margin: 10 }}>
             {" "}
             Product Description: {cartInfo.description}{" "}
           </Text>
-          <Text style={{ fontSize: 16, margin: 10 }}>
+          <Text style={{ fontSize: 20,fontWeight:'bold', margin: 10 }}>
             {" "}
-            Payable Amount: {cartInfo.amount}{" "}
+            Payable Amount: {cartInfo.amount}{" DT"}
           </Text>
 
           <TouchableOpacity
             style={{
               height: 60,
               width: 300,
-              backgroundColor: "#FF5733",
+              backgroundColor: "#009432",
               borderRadius: 30,
               justifyContent: "center",
               alignItems: "center",
@@ -95,7 +111,7 @@ const paymentScreen = ({ navigation }) => {
               setMakePayment(true);
             }}
           >
-            <Text style={{ color: "#FFF", fontSize: 20 }}>Proceed To Pay</Text>
+            <Text style={{ color: "#FFF", fontSize: 24, fontWeight:'bold' }}>Proceed To Pay</Text>
           </TouchableOpacity>
         </View>
       );
@@ -120,13 +136,23 @@ const paymentScreen = ({ navigation }) => {
                 margin: 10,
                 alignContent: "center",
                 alignItems: "center",
+                color: 'green',
+                justifyContent: "center",
+
               }}
             >
               {" "}
               {paymentStatus}{" "}
             </Text>
-            {/* <Button onPress={()=>navigation.navigate('home')}/> */}
-            {/* <Text style={{ fontSize: 16, margin: 10}}> { response} </Text> */}
+            {paymentStatus === "Please wait while confirming your payment!" ?
+                <Button style={styles.load} appearance='outline' accessoryLeft={LoadingIndicator}>
+                ...LOADING
+              </Button>: 
+              <Button status='success' style={styles.button} onPress={()=> navigation.navigate('Home')}>
+                  SUCCESS
+              </Button>
+            }
+       
           </View>
         );
       } else {
@@ -154,6 +180,19 @@ const styles = StyleSheet.create({
     backgroundColor: "yellow",
   },
   footer: { flex: 1, backgroundColor: "cyan" },
+  load: {
+    margin:30,
+    backgroundColor:'#0652DD'
+  },
+  indicator: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  logo: {
+    height: windowHeight /2,
+    width:windowWidth -20,
+    resizeMode: "cover",
+  },
 });
 
 export default paymentScreen;
