@@ -243,12 +243,12 @@ const signUp = ({ navigation }) => {
         {/* {Platform.OS === 'android' ? ( */}
         <FormButton buttonTitle="Sign Up" onPress={() => register()} />
         <View>
-          <SocialButton
+          {/* <SocialButton
             buttonTitle="Sign Un with Facebook"
             btnType="facebook"
             color="#4867aa"
             backgroundColor="#e6eaf4"
-          />
+          /> */}
 
           <SocialButton
             buttonTitle="Sign Un with Google"

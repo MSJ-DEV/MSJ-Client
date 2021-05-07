@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Button,
 } from "react-native";
 import myConfig from "../../configExpo";
 import * as ImagePicker from "expo-image-picker";
@@ -42,6 +43,7 @@ export default function Profile({ navigation }) {
       jsonValue != null ? JSON.parse(jsonValue) : null;
       let mail = JSON.parse(jsonValue);
       let emailserver = mail.user.email;
+      console.log('00000000000000000000000000000000000000', emailserver)
 
       axios
         .post(`${myConfig}/api/users/oneUserEmail`, {
@@ -57,10 +59,8 @@ export default function Profile({ navigation }) {
           let m = storage[0].email;
           setEmail(m);
 
-          //  console.log('*************** response data ',res.data)
           console.log("########################my hooooooks\n", storage);
           console.log("firstName************", firstName, "", lastName, email);
-          //  console.log('firstName************',email)
         })
         .catch((e) => {
           console.log(e);
@@ -87,7 +87,7 @@ export default function Profile({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#dfe6e9" }}>
       <ScrollView
         style={styles.container}
         contentContainerStyle={{
@@ -138,6 +138,14 @@ export default function Profile({ navigation }) {
           btnType="phone"
           color="#1e272e"
           backgroundColor="#e6eaf4"
+          
+        />
+       
+          <Button 
+        
+        title='more info'
+            onPress={()=> navigation.navigate('Update')}
+
         />
       </ScrollView>
     </SafeAreaView>

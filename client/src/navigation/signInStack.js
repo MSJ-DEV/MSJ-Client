@@ -6,6 +6,8 @@ import React from 'react';
 import signUp from '../scenes/signUp';
 import Profile from '../scenes/profile';
 import { Text} from 'react-native';
+import Update from '../scenes/userInfo';
+
 
 
 
@@ -43,6 +45,15 @@ const screens = {
                 headerLeft : () => <Header navigation={navigation} />,
                 headerTitle : ()=> (<Text>Sign Up</Text>)
                 
+            }
+        }
+    },
+    Update : {
+        screen : Update,
+        navigationOptions:({navigation})=> {
+            return {
+                headerLeft :()=> <Header navigation={navigation} />,
+                headerTitle : () =>(<Text>More Inforamion</Text>)
             }
         }
     },
