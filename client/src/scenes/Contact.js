@@ -5,14 +5,20 @@ import FromInput from "../components/FormInput";
 import { Button } from "@ui-kitten/components";
 import axios from "react-native-axios";
 import TextArea from "../components/TextArea";
+import myConfig from "../../configExpo";
 
 const Contact = ({ navigaton }) => {
   const [email, setEmail] = useState();
   const [text, setText] = useState();
+  const [subjectTosend, setSubject] = useState();
 
   const onSendEMail = () => {
     axios
-      .post("http://192.168.1.12:3333/api/sendmail", { email, text })
+      .post(`${myConfig}:3333/api/sendmail`, {
+        email,
+        text,
+        subjectTosend,
+      })
       .then((res) => {
         console.log(res);
       })
@@ -35,10 +41,18 @@ const Contact = ({ navigaton }) => {
       <FromInput
         style={{ fontSize: 25, color: "#000" }}
         labelValue={email}
-        onChangeText={(userEmail) => setEmail(userEmail)}
+        onChangeText={(email) => setEmail(email)}
         placeholderText="Email"
         iconType="user"
         keyboardType="email-address"
+        autoCapitalize="none"
+      />
+      <FromInput
+        style={{ fontSize: 25, color: "#000" }}
+        labelValue={subjectTosend}
+        onChangeText={(subjectTosend) => setSubject(subjectTosend)}
+        placeholderText="Subject"
+        iconType="filetext1"
         autoCapitalize="none"
       />
       <TextArea
@@ -52,16 +66,6 @@ const Contact = ({ navigaton }) => {
         multiline={true}
       />
 
-      {/* <TextInput
-        style={styles.input}
-         labelValue={text}
-         onChangeText={(text) => setText(text)}
-          underlineColorAndroid="transparent"
-          placeholder="Type something"
-          placeholderTextColor="grey"
-          numberOfLines={10}
-          multiline={true}
-        /> */}
       <Button style={styles.btn} onPress={() => onSendEMail()}>
         Submit
       </Button>
@@ -74,7 +78,7 @@ export default Contact;
 const styles = StyleSheet.create({
   conntainer: {
     flex: 1,
-    backgroundColor: "#808e9b",
+    backgroundColor: "#1d5aa9",
     justifyContent: "center",
     alignItems: "center",
     padding: 20,

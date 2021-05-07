@@ -6,6 +6,8 @@ import {
   Platform,
   StyleSheet,
 } from "react-native";
+import myConfig from "../../configExpo";
+
 import FormInput from "../components/FormInput";
 import FormButton from "../components/FormButton";
 import SocialButton from "../components/SocialButton";
@@ -67,7 +69,7 @@ const signUp = ({ navigation }) => {
         console.log("LoginScreen.js 17 | success, navigating to profile");
 
         axios
-          .post("http://192.168.1.12:3333/api/auth/signup/google", {
+          .post(`${myConfig}/api/auth/signup/google`, {
             googleId: user.id,
             firstName: user.givenName,
             lastName: user.familyName,

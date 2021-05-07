@@ -4,6 +4,7 @@ import PaymentView from "../components/StripePayment";
 import axios from "react-native-axios";
 import AppLoading from "expo-app-loading";
 import { Button } from "react-native-paper";
+import myConfig from "../../configExpo";
 
 const paymentScreen = ({ navigation }) => {
   const [response, setResponse] = useState();
@@ -34,14 +35,11 @@ const paymentScreen = ({ navigation }) => {
 
     try {
       console.log("***************** in the suucces try block ");
-      const stripeResponse = await axios.post(
-        "http://192.168.1.12:3333/api/payment",
-        {
-          email: "rmadi.med1@gmail.com",
-          product: cartInfo,
-          authToken: jsonResponse,
-        },
-      );
+      const stripeResponse = await axios.post(`${myConfig}/api/payment`, {
+        email: "rmadi.med1@gmail.com",
+        product: cartInfo,
+        authToken: jsonResponse,
+      });
 
       if (stripeResponse) {
         const { paid } = stripeResponse.data;
