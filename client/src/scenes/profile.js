@@ -6,16 +6,17 @@ import {
   Image,
   ScrollView,
 } from "react-native";
+import myConfig from "../../configExpo";
 import * as ImagePicker from "expo-image-picker";
 import React, { useEffect, useState } from "react";
 import Icon from "react-native-vector-icons/FontAwesome";
 import SafeAreaView from "react-native-safe-area-view";
 import SocialButton from "../components/SocialButton";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import axios from "react-native-axios";
 
 export default function Profile({ navigation }) {
   const [selectImg, setSelectedImg] = useState(null);
-
   const [data, setPhoto] = useState("");
   const [firstName, setFirstName] = useState("user");
   const [lastName, setLastName] = useState("user");
@@ -26,6 +27,7 @@ export default function Profile({ navigation }) {
   );
   const [localStorrage, setLocalStrorage] = useState();
   const [storage, setStorage] = useState();
+  const [logIn, setLogIn] = useState(false);
 
   useEffect(() => {
     getInformation();
@@ -42,10 +44,11 @@ export default function Profile({ navigation }) {
       let emailserver = mail.user.email;
 
       axios
-        .post("http://192.168.1.15:3333/api/users/oneUserEmail", {
+        .post(`${myConfig}/api/users/oneUserEmail`, {
           email: emailserver,
         })
         .then((res) => {
+          setLogIn(true);
           setStorage(res.data);
           let first = storage[0].firstName;
           setFirstName(first);
@@ -66,62 +69,6 @@ export default function Profile({ navigation }) {
       // error reading value
     }
   };
-  // const getData = async () => {
-
-  // }
-
-  const [data,setPhoto]=useState('');
-  const [firstName, setFirstName]= useState('user')
-  const [lastName, setLastName]= useState('user')
-  const [email, setEmail]= useState('user')
-  const [numberPhone, setNumbePhone]= useState('user')
-  const [photoUrl, setPhotoUrl] = useState('https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg')
-  const [localStorrage, setLocalStrorage] = useState()
-  const [storage, setStorage] = useState()
-  const [logIn , setLogIn] = useState(false)
-
-useEffect( ()=> {
-
- getInformation()
-}, [])
-const getInformation= async ()=> {
-  try {
-    const jsonValue = await AsyncStorage.getItem('signIn')
-    console.log('****************************** GET data from local strorage from PROFILE  *********', jsonValue)
-      jsonValue != null ? JSON.parse(jsonValue) : null;
-     let mail = JSON.parse(jsonValue) 
-     let emailserver = mail.user.email
-
-     axios.post('http://192.168.1.15:3333/api/users/oneUserEmail', {email:emailserver})
-     .then((res)=> {
-       setLogIn(true)
-          setStorage(res.data)
-          let  first = storage[0].firstName
-          setFirstName(first)
-          let last = storage[0].lastName
-         setLastName(last)
-         let m = storage[0].email
-         setEmail(m)
-
-      //  console.log('*************** response data ',res.data)
-       console.log('########################my hooooooks\n',storage)
-       console.log('firstName************',firstName , '',  lastName, email)
-      //  console.log('firstName************',email)
-
-       
-
-      })
-      .catch((e)=> {
-        console.log(e)
-      })
-
-  } catch(e) {
-    // error reading value
-  }
-}
-  
-  let openImage = async () =>{
-    let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
   let openImage = async () => {
     let permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -162,6 +109,7 @@ const getInformation= async ()=> {
         <TouchableOpacity onPress={openImage} style={styles.button}>
           <Text>Click</Text>
         </TouchableOpacity>
+
         <Text style={{ marginTop: 50, marginBottom: 20, fontSize: 30 }}>
           {" "}
           Welcome Back {firstName}{" "}
@@ -178,27 +126,7 @@ const getInformation= async ()=> {
           color="#1e272e"
           backgroundColor="#e6eaf4"
         />
-        ) : (
-        <Image style={styles.userImg} source={{ uri: photoUrl }} />)
-        <TouchableOpacity onPress={openImage} style={styles.button}>
-          <Text>Click</Text>
-        </TouchableOpacity>
-        <Text style={{ marginTop: 50, marginBottom: 20, fontSize: 30 }}>
-          {" "}
-          Welcome Back{" "}
-        </Text>
-        <SocialButton
-          buttonTitle={firstName}
-          btnType="user"
-          color="#1e272e"
-          backgroundColor="#e6eaf4"
-        />
-        <SocialButton
-          buttonTitle={("your lastName ", lastName)}
-          btnType="user"
-          color="#1e272e"
-          backgroundColor="#e6eaf4"
-        />
+
         <SocialButton
           buttonTitle={email}
           btnType="user"

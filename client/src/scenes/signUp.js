@@ -6,6 +6,8 @@ import {
   Platform,
   StyleSheet,
 } from "react-native";
+import myConfig from "../../configExpo";
+
 import FormInput from "../components/FormInput";
 import FormButton from "../components/FormButton";
 import SocialButton from "../components/SocialButton";
@@ -15,9 +17,6 @@ import { ScrollView } from "react-native-gesture-handler";
 import * as Google from "expo-google-app-auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
-
-
 const signUp = ({ navigation }) => {
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
@@ -26,30 +25,29 @@ const signUp = ({ navigation }) => {
   const [numberPhone, setNumberPhone] = useState();
   const [googleId, setGoogleId] = useState();
 
-
-
   const [mailError, setMailError] = useState();
   const [nameError, setNameError] = useState();
   const [lastError, setLastError] = useState();
   const [passwordError, setPasswordError] = useState();
   const [phoneError, setPhoneError] = useState();
-  const clientAndroid = '213513789380-4g4i28f9lrf6soppvpqrri94tqoc9n8t.apps.googleusercontent.com';
-  const ClientIos = '213513789380-vq6hj0529hpbte0k5epr1c72gapq4np2.apps.googleusercontent.com'
+  const clientAndroid =
+    "213513789380-4g4i28f9lrf6soppvpqrri94tqoc9n8t.apps.googleusercontent.com";
+  const ClientIos =
+    "213513789380-vq6hj0529hpbte0k5epr1c72gapq4np2.apps.googleusercontent.com";
 
   const mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
   const passformat = /^(?=.*\d)(?=.*[a-z])[a-zA-Z0-9]{8,}$/;
   const phoneFormat = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
   const storeData = async (value) => {
     try {
-      const jsonValue = JSON.stringify(value)
+      const jsonValue = JSON.stringify(value);
 
-      await AsyncStorage.setItem('signIn', jsonValue)
-      console.log('store in my function ', jsonValue)
+      await AsyncStorage.setItem("signIn", jsonValue);
+      console.log("store in my function ", jsonValue);
     } catch (e) {
-      
-      console.log(e)
+      console.log(e);
     }
-  }
+  };
   const nameValidator = () => {
     if (!firstName) {
       setNameError("fill you name please*");
@@ -62,28 +60,34 @@ const signUp = ({ navigation }) => {
     console.log("LoginScreen.js 6 | loggin in");
     try {
       const { type, user } = await Google.logInAsync({
-        iosClientId:ClientIos ,
+        iosClientId: ClientIos,
         androidClientId: clientAndroid,
       });
-      console.log('************ from gooooooogle', user)
+      console.log("************ from gooooooogle", user);
       if (type === "success") {
         // Then you can use the Google REST API
         console.log("LoginScreen.js 17 | success, navigating to profile");
-      
 
-        axios.post('http://192.168.1.15:3333/api/auth/signup/google',{googleId:user.id, firstName:user.givenName, lastName: user.familyName , email: user.email })
-      .then((res)=> {console.log("dataaaaaaaaaaa\n*************",res.data),
-          storeData(user)
-    })
-      .catch((err)=>console.log('### err ###',err))
+        axios
+          .post(`${myConfig}/api/auth/signup/google`, {
+            googleId: user.id,
+            firstName: user.givenName,
+            lastName: user.familyName,
+            email: user.email,
+          })
+          .then((res) => {
+            console.log("dataaaaaaaaaaa\n*************", res.data),
+              storeData(user);
+          })
+          .catch((err) => console.log("### err ###", err));
 
-      navigation.navigate("Profile", { user });
+        navigation.navigate("Profile", { user });
       }
     } catch (error) {
       console.log("LoginScreen.js 19 | error with login", error);
     }
   };
-  
+
   const lastValidator = () => {
     if (!lastName) {
       setLastError("fill you last name please*");
@@ -195,7 +199,6 @@ const signUp = ({ navigation }) => {
           iconType="user"
           keyboardType="lastName"
           autoCapitalize="none"
-          
           autoCapitalize="none"
           autoCorrect={false}
           onBlur={() => lastValidator()}
@@ -252,8 +255,7 @@ const signUp = ({ navigation }) => {
             btnType="google"
             color="#de4d41"
             backgroundColor="#f5e7ea"
-            onPress={()=> signInAsync()}
-
+            onPress={() => signInAsync()}
           />
         </View>
         {/* ) : null} */}

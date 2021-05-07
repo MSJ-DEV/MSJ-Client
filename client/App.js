@@ -19,7 +19,7 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const changerView = (value) => {
-    value === "undefined" ? (value = false) : (value = value);
+    value === "undefined" ? (value = true) : (value = value);
     setIsLoggedIn(value);
   };
   useEffect(() => {
