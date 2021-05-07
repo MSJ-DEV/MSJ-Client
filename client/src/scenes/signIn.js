@@ -7,6 +7,7 @@ import axios from "react-native-axios";
 import * as Google from "expo-google-app-auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+
 import Expo from "expo";
 
 import { StyleSheet, Text, View, Platform, Image } from "react-native";
@@ -82,7 +83,7 @@ const signIn = ({ navigation }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <Image source={require("../../assets/logo.jpeg")} style={styles.logo} />
+      <Image source={require("../../assets/msjlogo.png")} style={styles.logo} />
 
       <FromInput
         labelValue={email}
@@ -107,12 +108,12 @@ const signIn = ({ navigation }) => {
       </TouchableOpacity>
       {Platform.OS === "android" ? (
         <View>
-          <SocialButton
+          {/* <SocialButton
             buttonTitle="Sign In with Facebook"
             btnType="facebook"
             color="#4867aa"
             backgroundColor="#e6eaf4"
-          />
+          /> */}
 
           <SocialButton
             buttonTitle="Sign In with Google"
@@ -146,15 +147,15 @@ const styles = StyleSheet.create({
     paddingTop: 50,
   },
   logo: {
-    height: 150,
-    width: 150,
+    height: 250,
+    width: 600,
     resizeMode: "cover",
   },
   text: {
     fontFamily: "Kufam-SemiBoldItalic",
     fontSize: 28,
     marginBottom: 10,
-    color: "#051d5f",
+    color: "#000",
   },
   navButton: {
     marginTop: 15,
@@ -165,7 +166,7 @@ const styles = StyleSheet.create({
   navButtonText: {
     fontSize: 18,
     fontWeight: "500",
-    color: "#2e64e5",
+    color: "#000",
     fontFamily: "Lato-Regular",
   },
 });

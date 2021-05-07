@@ -59,7 +59,6 @@ const product = ({ navigation }) => {
     }
 
     await AsyncStorage.setItem("item", JSON.stringify(array));
-    console.log("###########################", parseStorage);
   };
 
   return (
@@ -117,6 +116,15 @@ const product = ({ navigation }) => {
               nativeEvent: { contentOffset: { y: scrollY } },
             },
           ],
+
+
+    <View style={{ flex: 1, backgroundColor: "#fa8231", marginRight: 20 }}>
+  
+
+    <Animated.FlatList
+      data={data}
+      onScroll={Animated.event(
+        [
           {
             useNativeDriver: true,
           },

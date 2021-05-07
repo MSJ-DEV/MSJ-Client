@@ -143,7 +143,7 @@ export default class Cart extends React.Component {
             style={{ zIndex: "-999" }}
             onPress={() => this.goToProduct()}
             title="See all product "
-            color="#0652DD"
+            color="#fa8231"
             accessibilityLabel="Learn more about this purple button"
           />
         </View>
@@ -224,7 +224,7 @@ export default class Cart extends React.Component {
                       }}
                     >
                       {/* ITEM  NAME */}
-                      <Text numberOfLines={1} style={{ fontSize: 22 , marginTop:10, fontWeight:'bold', color:'#1e2d7d' , position:'relative', top:20}}>
+                      <Text numberOfLines={1} style={{ fontSize: 22 , marginTop:10, color:'#000' , position:'relative', top:20}}>
                         {item.name}
                       </Text>
                  
@@ -235,7 +235,7 @@ export default class Cart extends React.Component {
                         numberOfLines={1}
                         // color of Price 
                         style={{ color: "#d50100", marginBottom: 5 , alignItems:'center', justifyContent:'center', 
-                         width: 90, backgroundColor: '#ffed00', fontSize:20, fontWeight:'bold' , height:35
+                         width: 90, backgroundColor: '#ffed00', fontSize:20, height:35
                       }}
                       >
                         {item.quantity * item.oldprice} TND
@@ -286,7 +286,7 @@ export default class Cart extends React.Component {
           // backGround color of footer
           <View
             style={{
-              backgroundColor: "#0652DD",
+              backgroundColor: "#fa8231",
               borderTopWidth: 2,
               borderColor: "#f6f6f6",
               paddingVertical: 5,
@@ -362,8 +362,8 @@ export default class Cart extends React.Component {
                     alignItems: "center",
                   }}
                 >
-                  <Text style={{ color: "#8f8f8f" }}>SubTotal: </Text>
-                  <Text>{this.subtotalPrice().toFixed(2)} TND</Text>
+                  <Text style={{ color: "#fff" , fontWeight:'bold'}}>SubTotal: </Text>
+                  <Text style={{color:'#fff', fontWeight:'bold'}}>{this.subtotalPrice().toFixed(2)} TND</Text>
                 </View>
               </View>
             </View>

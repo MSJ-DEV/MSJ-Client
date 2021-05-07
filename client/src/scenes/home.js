@@ -168,9 +168,7 @@ const home = () => {
           />
         </View>
       </View>
-    </View>
-  );
-};
+
 
 const styles = StyleSheet.create({
   header: {
@@ -295,3 +293,4 @@ const catalogueText = StyleSheet.create({
 });
 
 export default home;
+
