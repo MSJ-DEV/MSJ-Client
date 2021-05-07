@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fff',
+    borderRadius:20
   },
   iconStyle: {
     padding: 10,
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
     color: '#000',
     justifyContent: 'center',
     alignItems: 'center',
+   
   },
   inputField: {
     padding: 10,

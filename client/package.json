@@ -23,6 +23,7 @@
     "expo-google-app-auth": "^8.1.7",
     "expo-google-sign-in": "^8.4.0",
     "expo-image-picker": "^10.1.4",
+    "expo-linear-gradient": "^8.4.0",
     "expo-location": "~10.0.0",
     "expo-splash-screen": "~0.8.0",
     "expo-status-bar": "~1.0.3",
@@ -51,8 +52,7 @@
     "sanitize-html": "^2.3.3",
     "sweetalert": "^2.1.2",
     "sweetalert2": "^10.16.4",
-    "yup": "^0.32.9",
-    "expo-linear-gradient": "~8.4.0"
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

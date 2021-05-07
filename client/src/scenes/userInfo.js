@@ -85,7 +85,7 @@ const image = {uri: 'https://www.carrefourtunisie.com/assets/img/fb-logos-share-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor:'#74b9ff'
+    backgroundColor:'#e67e22'
   
   },
  

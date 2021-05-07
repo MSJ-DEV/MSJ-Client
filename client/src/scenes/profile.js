@@ -7,6 +7,8 @@ import {
   ScrollView,
   Button,
 } from "react-native";
+import { LinearGradient } from 'expo-linear-gradient';
+
 import myConfig from "../../configExpo";
 import * as ImagePicker from "expo-image-picker";
 import React, { useEffect, useState } from "react";
@@ -87,9 +89,16 @@ export default function Profile({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#dfe6e9" }}>
+
+
+//     background-color: #f9ea8f;
+// background-image: linear-gradient(315deg, #f9ea8f 0%, #aff1da 74%);
+
+    <SafeAreaView >
+      <LinearGradient colors={['#aff1da', '#f9ea8f', '#aff1da']}
+    style={styles.conntainer} >
       <ScrollView
-        style={styles.container}
+       
         contentContainerStyle={{
           justifyContent: "center",
           alignItems: "center",
@@ -148,6 +157,7 @@ export default function Profile({ navigation }) {
 
         />
       </ScrollView>
+      </LinearGradient>
     </SafeAreaView>
   );
 }
