@@ -11,10 +11,12 @@ import {
   StatusBar,
   Animated,
 } from "react-native";
+import { LinearGradient } from 'expo-linear-gradient';
+
 import Cart from "./myList";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import myConfig from "../../configExpo";
 // import { State } from 'react-native-gesture-handler';
+
 
 const product = ({ navigation }) => {
   const SPACING = 20;
@@ -31,7 +33,7 @@ const product = ({ navigation }) => {
 
   useEffect(() => {
     axios
-      .get(`${myConfig}/api/poducts`)
+      .get("http://192.168.1.15:3333/api/poducts")
       .then((res) => {
         setData(res.data);
       })
@@ -44,7 +46,7 @@ const product = ({ navigation }) => {
   };
 
   const handleClick = async (item) => {
-    let storage = await AsyncStorage.getItem("item");
+    let storage = await AsyncStorage.getItem("item")
     let parseStorage = JSON.parse(storage);
     var containe = -1;
     if (array) {
@@ -62,63 +64,11 @@ const product = ({ navigation }) => {
   };
 
   return (
-    // <View>
-    //   <Button
-    //     style={{ flex: 1, zIndex: "-999" }}
-    //     onPress={() => goToList()}
-    //     title="Check my List "
-    //     color="#0652DD"
-    //     accessibilityLabel="L15636msearn more about this purple button"
-    //   />
-    //   <FlatList
-    //     data={data}
-    //     renderItem={({ item }) => {
-    //       return (
-    //         <View style={styles.container}>
-    //           <TouchableOpacity style={styles.card} key={item.id}>
-    //             <Image
-    //               style={styles.cardImage}
-    //               source={{ uri: item.image }}
-    //               onPress={() => handleClick(items)}
-    //             />
-    //             <Text
-    //               style={styles.cardText}
-    //               onPress={() => handleClick(items)}
-    //             >
-    //               {item.name}
-    //             </Text>
-    //             <Text style={styles.Text} onPress={() => handleClick(items)}>
-    //               {item.oldprice}DT
-    //             </Text>
-    //             <Text
-    //               onPress={() => handleClick(items)}
-    //               style={{ marginLeft: 110, fontSize: 20 }}
-    //             >
-    //               {item.type}
-    //             </Text>
-    //             <Button
-    //               title="ADD To List"
-    //               color="#0652DD"
-    //               onPress={() => handleClick(item)}
-    //             />
-    //           </TouchableOpacity>
-    //         </View>
-    //       );
-    //     }}
-    //   />
-    // </View>
-    <View style={{ flex: 1, backgroundColor: "#1d5aa9", marginRight: 20 }}>
-      <Animated.FlatList
-        data={data}
-        onScroll={Animated.event(
-          [
-            {
-              nativeEvent: { contentOffset: { y: scrollY } },
-            },
-          ],
-
-
-    <View style={{ flex: 1, backgroundColor: "#fa8231", marginRight: 20 }}>
+    
+    <LinearGradient
+    colors={['#aff1da', '#f9ea8f', '#aff1da']}
+    style={{ flex: 1, marginRight: 20 }}>
+   
   
 
     <Animated.FlatList
@@ -126,81 +76,89 @@ const product = ({ navigation }) => {
       onScroll={Animated.event(
         [
           {
-            useNativeDriver: true,
+            nativeEvent: { contentOffset: { y: scrollY } },
           },
-        )}
-        keyExtractor={(item) => item.id}
-        contentContainerStyle={{
-          padding: 20,
-          paddingTop: StatusBar.currentHeight || 42,
-        }}
-        renderItem={({ item, index }) => {
-          const inputRange = [
-            -1,
-            0,
-            ITEM_SIZE * index,
-            ITEM_SIZE * (index + 2),
-          ];
-          const opacityInputRange = [
-            -1,
-            0,
-            ITEM_SIZE * index,
-            ITEM_SIZE * (index + 1),
-          ];
-          const scale = scrollY.interpolate({
-            inputRange,
-            outputRange: [1, 1, 1, 0],
-          });
-          const opacity = scrollY.interpolate({
-            inputRange: opacityInputRange,
-            outputRange: [1, 1, 1, 0],
-          });
-          return (
-            <Animated.View
+        ],
+        {
+          useNativeDriver: true,
+        },
+      )}
+      keyExtractor={(item) => item.id}
+      contentContainerStyle={{
+        padding: 20,
+        paddingTop: StatusBar.currentHeight || 42,
+      }}
+      renderItem={({ item, index }) => {
+        const inputRange = [
+          -1,
+          0,
+          ITEM_SIZE * index,
+          ITEM_SIZE * (index + 2),
+        ];
+        const opacityInputRange = [
+          -1,
+          0,
+          ITEM_SIZE * index,
+          ITEM_SIZE * (index + 1),
+        ];
+        const scale = scrollY.interpolate({
+          inputRange,
+          outputRange: [1, 1 , 1, 0],
+        });
+        const opacity = scrollY.interpolate({
+          inputRange: opacityInputRange,
+          outputRange: [1, 1, 1, 0],
+        });
+        return (
+          <Animated.View
+  
+            style={{
+              flexDirection: "row",
+              padding: 10,
+              marginBottom: 15,
+              backgroundColor: "rgba(255,255,255,0.9)",
+              borderRadius: 12,
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 10 },
+              shadowOpacity: 0.3,
+              shadowRadius: 20,
+              opacity,
+              transform: [{ scale }],
+            }}
+          >
+            <Image
+              source={{ uri: item.image }}
               style={{
-                flexDirection: "row",
-                padding: 10,
-                marginBottom: 15,
-                backgroundColor: "rgba(255,255,255,0.9)",
-                borderRadius: 12,
-                shadowColor: "#000",
-                shadowOffset: { width: 0, height: 10 },
-                shadowOpacity: 0.3,
-                shadowRadius: 20,
-                opacity,
-                transform: [{ scale }],
+                width: 80,
+                height: 80,
+                borderRadius: 70,
+                marginRight: 20,
+             
               }}
-            >
-              <Image
-                source={{ uri: item.image }}
-                style={{
-                  width: 80,
-                  height: 80,
-                  borderRadius: 70,
-                  marginRight: 20,
-                }}
-              />
-              <View>
-                <TouchableOpacity onPress={() => handleClick(item)}>
-                  <Text style={{ fontSize: 24, fontWeight: "900" }}>
-                    {" "}
-                    {item.title}
-                    <Text style={{ color: "#1e3799" }}>{item.newprice} DT</Text>
-                  </Text>
-                  <Text style={{ fontSize: 23 }}>{item.type}</Text>
-                  {/* <Button 
+            />
+            <View>
+              <TouchableOpacity onPress={()=> handleClick(item)}>
+              <Text style={{ fontSize: 24, fontWeight: "900" }}>
+                {" "}
+                {item.title}
+                <Text style={{ color: "#1e3799" }}>{item.newprice} DT</Text>
+              </Text>
+              <Text style={{ fontSize: 23 }}>{item.type}</Text>
+              {/* <Button 
               style={{}}
                title="ADD To List"
                color="#0652DD"
                onPress={() => handleClick(item)}
               /> */}
-                </TouchableOpacity>
-              </View>
-            </Animated.View>
-          );
-        }}
-      />
-    </View>
+              </TouchableOpacity>
+            </View>
+       
+          </Animated.View>
+        );
+      }}
+    />
+ 
+  </LinearGradient>
   );
 };
 
@@ -246,5 +204,7 @@ const styles = StyleSheet.create({
     height: 170,
     resizeMode: "cover",
   },
-  btn: {},
+  btn:{
+    
+  }
 });

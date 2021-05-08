@@ -5,7 +5,11 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Button,
 } from "react-native";
+import { LinearGradient } from 'expo-linear-gradient';
+
+
 import myConfig from "../../configExpo";
 import * as ImagePicker from "expo-image-picker";
 import React, { useEffect, useState } from "react";
@@ -18,10 +22,10 @@ import axios from "react-native-axios";
 export default function Profile({ navigation }) {
   const [selectImg, setSelectedImg] = useState(null);
   const [data, setPhoto] = useState("");
-  const [firstName, setFirstName] = useState("user");
-  const [lastName, setLastName] = useState("user");
-  const [email, setEmail] = useState("user");
-  const [numberPhone, setNumbePhone] = useState("user");
+  const [firstName, setFirstName] = useState("rmadi");
+  const [lastName, setLastName] = useState("eleys");
+  const [email, setEmail] = useState("msjcontactdev@gmail.com");
+  const [numberPhone, setNumbePhone] = useState(" ");
   const [photoUrl, setPhotoUrl] = useState(
     "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg",
   );
@@ -35,13 +39,11 @@ export default function Profile({ navigation }) {
   const getInformation = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("signIn");
-      console.log(
-        "****************************** GET data from local strorage from PROFILE  *********",
-        jsonValue,
-      );
+   
       jsonValue != null ? JSON.parse(jsonValue) : null;
       let mail = JSON.parse(jsonValue);
-      let emailserver = mail.user.email;
+
+      let emailserver = mail.email;
 
       axios
         .post(`${myConfig}/api/users/oneUserEmail`, {
@@ -51,16 +53,15 @@ export default function Profile({ navigation }) {
           setLogIn(true);
           setStorage(res.data);
           let first = storage[0].firstName;
+          console.log('*********************** first /******************', first)
           setFirstName(first);
           let last = storage[0].lastName;
           setLastName(last);
           let m = storage[0].email;
           setEmail(m);
 
-          //  console.log('*************** response data ',res.data)
           console.log("########################my hooooooks\n", storage);
           console.log("firstName************", firstName, "", lastName, email);
-          //  console.log('firstName************',email)
         })
         .catch((e) => {
           console.log(e);
@@ -87,9 +88,16 @@ export default function Profile({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+
+
+//     background-color: #f9ea8f;
+// background-image: linear-gradient(315deg, #f9ea8f 0%, #aff1da 74%);
+
+    <SafeAreaView >
+      <LinearGradient colors={['#aff1da', '#f9ea8f', '#aff1da']}
+    style={styles.conntainer} >
       <ScrollView
-        style={styles.container}
+       
         contentContainerStyle={{
           justifyContent: "center",
           alignItems: "center",
@@ -138,8 +146,17 @@ export default function Profile({ navigation }) {
           btnType="phone"
           color="#1e272e"
           backgroundColor="#e6eaf4"
+          
+        />
+       
+          <Button 
+        
+        title='more info'
+            onPress={()=> navigation.navigate('Update')}
+
         />
       </ScrollView>
+      </LinearGradient>
     </SafeAreaView>
   );
 }

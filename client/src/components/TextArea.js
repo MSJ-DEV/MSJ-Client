@@ -4,6 +4,7 @@ import {windowHeight, windowWidth} from '../utils/Dimentions';
 
 import AntDesign from 'react-native-vector-icons/AntDesign';
 
+
 const TextArea = ({labelValue, placeholderText, iconType, ...rest}) => {
     return (
         <View style={styles.inputContainer}>
@@ -35,6 +36,7 @@ const styles = StyleSheet.create({
       flexDirection: 'row',
       alignItems: 'center',
       backgroundColor: '#fff',
+      borderRadius:20
     },
     iconStyle: {
       padding: 10,

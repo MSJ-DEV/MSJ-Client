@@ -143,7 +143,7 @@ export default class Cart extends React.Component {
             style={{ zIndex: "-999" }}
             onPress={() => this.goToProduct()}
             title="See all product "
-            color="#fa8231"
+            color="#0984e3"
             accessibilityLabel="Learn more about this purple button"
           />
         </View>
@@ -189,7 +189,7 @@ export default class Cart extends React.Component {
                             : "ios-checkmark-circle-outline"
                         }
                         size={25}
-                        color={item.promotion == 1 ? "#0faf9a" : "#aaaaaa"}
+                        color={item.promotion == 1 ? "#009432" : "#000"}
                       />
                     </TouchableOpacity>
                   </View>
@@ -286,7 +286,7 @@ export default class Cart extends React.Component {
           // backGround color of footer
           <View
             style={{
-              backgroundColor: "#fa8231",
+              backgroundColor: "#0984e3",
               borderTopWidth: 2,
               borderColor: "#f6f6f6",
               paddingVertical: 5,
@@ -311,12 +311,12 @@ export default class Cart extends React.Component {
                   alignItems: "center",
                 }}
               >
-                <Text>Voucher</Text>
+                <Text style={{color:'#fff', fontSize:16}}>Voucher</Text>
                 <View style={{ paddingRight: 20 }}>
                    <TextInput
                     style={{
                       paddingHorizontal: 10,
-                      backgroundColor: "#f0f0f0",
+                      backgroundColor: "#fff",
                       height: 25,
                       borderRadius: 4,
                     }}
@@ -340,7 +340,7 @@ export default class Cart extends React.Component {
                         : "ios-checkmark-circle-outline"
                     }
                     size={25}
-                    color={selectAll == true ? "#0faf9a" : "#aaaaaa"}
+                    color={selectAll == true ? "#009432" : "#000"}
                     style={{alignItems:'center'}}
                   />
                 </TouchableOpacity>
@@ -354,7 +354,7 @@ export default class Cart extends React.Component {
                   alignItems: "center",
                 }}
               >
-                <Text>Select All</Text>
+                <Text style={{color:'#fff',fontSize:16 }}>Select All</Text>
                 <View
                   style={{
                     flexDirection: "row",
@@ -380,7 +380,7 @@ export default class Cart extends React.Component {
                 style={[
                   styles.centerElement,
                   {
-                    backgroundColor: "#0faf9a",
+                    backgroundColor: "#009432",
                     width: 100,
                     height: 25,
                     borderRadius: 5,
