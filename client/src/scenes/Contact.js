@@ -7,12 +7,20 @@ import axios from "react-native-axios";
 import TextArea from "../components/TextArea";
 import myConfig from "../../configExpo";
 
+import { Input, Layout } from "@ui-kitten/components";
+
+const useInputState = (initialValue = "") => {
+  const [value, setValue] = React.useState(initialValue);
+  return { value, onChangeText: setValue };
+};
+
 const Contact = ({ navigaton }) => {
   const [email, setEmail] = useState();
   const [text, setText] = useState();
   const [subjectTosend, setSubject] = useState();
 
   const onSendEMail = () => {
+    console.log(email, text, subjectTosend);
     axios
       .post(`${myConfig}:3333/api/sendmail`, {
         email,
@@ -31,45 +39,54 @@ const Contact = ({ navigaton }) => {
   };
 
   return (
-    <View style={styles.conntainer}>
-      <Image
-        source={{
-          uri: "https://gtmix.org/wp-content/uploads/2019/05/contact_us.jpg",
-        }}
-      />
+    <React.Fragment>
+      <View style={styles.conntainer}>
+        <Image
+          source={{
+            uri: "https://gtmix.org/wp-content/uploads/2019/05/contact_us.jpg",
+          }}
+        />
 
-      <FromInput
-        style={{ fontSize: 25, color: "#000" }}
-        labelValue={email}
-        onChangeText={(email) => setEmail(email)}
-        placeholderText="Email"
-        iconType="user"
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <FromInput
-        style={{ fontSize: 25, color: "#000" }}
-        labelValue={subjectTosend}
-        onChangeText={(subjectTosend) => setSubject(subjectTosend)}
-        placeholderText="Subject"
-        iconType="filetext1"
-        autoCapitalize="none"
-      />
-      <TextArea
-        style={styles.input}
-        labelValue={text}
-        onChangeText={(text) => setText(text)}
-        underlineColorAndroid="transparent"
-        placeholder="Type something"
-        placeholderTextColor="grey"
-        numberOfLines={10}
-        multiline={true}
-      />
+        <Layout style={styles.rowContainer} level="1">
+          <Input
+            style={styles.input}
+            status="warning"
+            placeholder="e-mail"
+            // {...warningInputState}
+            labelValue={email}
+            onChangeText={(email) => setEmail(email)}
+            keyboardType="email-address"
+            autoCapitalize="none"
+          />
 
-      <Button style={styles.btn} onPress={() => onSendEMail()}>
-        Submit
-      </Button>
-    </View>
+          <Input
+            style={styles.input}
+            status="danger"
+            placeholder="Subject"
+            // {...dangerInputState}
+            labelValue={subjectTosend}
+            onChangeText={(subjectTosend) => setSubject(subjectTosend)}
+            iconType="filetext1"
+            autoCapitalize="none"
+          />
+        </Layout>
+        <Layout style={styles.rowContainer} level="1">
+          <Input
+            style={styles.input}
+            status="success"
+            placeholder="type here"
+            labelValue={text}
+            onChangeText={(text) => setText(text)}
+            numberOfLines={10}
+            multiline={true}
+          />
+        </Layout>
+
+        <Button style={styles.btn} onPress={() => onSendEMail()}>
+          Submit
+        </Button>
+      </View>
+    </React.Fragment>
   );
 };
 
@@ -82,6 +99,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
+    borderRadius: 10,
     // paddingTop: 50,
   },
   input: {
@@ -89,10 +107,31 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     textAlignVertical: "top",
     color: "#000",
+    borderRadius: 10,
+    height: 500,
+    width: 500,
   },
   btn: {
     marginTop: 20,
     width: 150,
     backgroundColor: "#485460",
+  },
+  input: {
+    flex: 1,
+    margin: 2,
+    borderRadius: 10,
+  },
+  rowContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderRadius: 10,
+  },
+  controlContainer: {
+    borderRadius: 4,
+    margin: 2,
+    padding: 6,
+    backgroundColor: "#3366FF",
+    borderRadius: 10,
   },
 });

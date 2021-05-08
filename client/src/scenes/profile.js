@@ -35,19 +35,18 @@ export default function Profile({ navigation }) {
   const getInformation = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("signIn");
-      console.log(
-        "****************************** GET data from local strorage from PROFILE  *********",
-        jsonValue,
-      );
+
       jsonValue != null ? JSON.parse(jsonValue) : null;
       let mail = JSON.parse(jsonValue);
       let emailserver = mail.user.email;
-
+      console.log("test");
       axios
         .post(`${myConfig}/api/users/oneUserEmail`, {
           email: emailserver,
         })
+
         .then((res) => {
+          console.log("resssssssssssssss", res);
           setLogIn(true);
           setStorage(res.data);
           let first = storage[0].firstName;
@@ -56,11 +55,6 @@ export default function Profile({ navigation }) {
           setLastName(last);
           let m = storage[0].email;
           setEmail(m);
-
-          //  console.log('*************** response data ',res.data)
-          console.log("########################my hooooooks\n", storage);
-          console.log("firstName************", firstName, "", lastName, email);
-          //  console.log('firstName************',email)
         })
         .catch((e) => {
           console.log(e);
