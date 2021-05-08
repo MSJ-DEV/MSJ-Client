@@ -224,7 +224,7 @@ export default class Cart extends React.Component {
                       }}
                     >
                       {/* ITEM  NAME */}
-                      <Text numberOfLines={1} style={{ fontSize: 22 , marginTop:10, color:'#000' , position:'relative', top:20}}>
+                      <Text numberOfLines={1} style={{ fontSize: 22 , marginTop:10, color:'#000' , position:'relative', top:20 , fontFamily:'Kufam-SemiBoldItalic'}}>
                         {item.name}
                       </Text>
                  
@@ -235,7 +235,7 @@ export default class Cart extends React.Component {
                         numberOfLines={1}
                         // color of Price 
                         style={{ color: "#d50100", marginBottom: 5 , alignItems:'center', justifyContent:'center', 
-                         width: 90, backgroundColor: '#ffed00', fontSize:20, height:35
+                         width: 80, backgroundColor: '#ffed00', fontSize:20, height:35
                       }}
                       >
                         {item.quantity * item.oldprice} TND
@@ -243,18 +243,18 @@ export default class Cart extends React.Component {
                       <View style={{ flexDirection: "row" , marginLeft:100, marginBottom:10, position:'relative', bottom:37.5}}>
                         <TouchableOpacity
                           onPress={() => this.quantityHandler("less", i)}
-                          style={{ borderWidth: 2, borderColor: "#1d5aa9" }}
+                          style={{ borderWidth: 1, borderColor: "#1d5aa9" , borderRadius:20, backgroundColor:'orange'}}
                         >
-                          <MaterialIcons name="remove" size={22} color="#1d5aa9" />
+                          <MaterialIcons name="remove" size={22} color="#000" />
                         </TouchableOpacity>
                         <Text
                           style={{
-                            borderTopWidth: 1,
-                            borderBottomWidth: 1,
+                            borderTopWidth: 0,
+                            borderBottomWidth: 0,
                             borderColor: "#000",
-                            paddingHorizontal: 7,
-                            paddingTop: 3,
-                            color: "#1d5aa9",
+                            paddingHorizontal: 10,
+                            paddingTop: -10,
+                            color: "#000",
                             fontSize: 20,
                           }}
                         >
@@ -262,7 +262,7 @@ export default class Cart extends React.Component {
                         </Text>
                         <TouchableOpacity
                           onPress={() => this.quantityHandler("more", i)}
-                          style={{ borderWidth: 2, borderColor: "#1d5aa9" }}
+                          style={{ borderWidth: 1, borderColor: "#1d5aa9", borderRadius:20 , backgroundColor:'orange'}}
                         >
                           <MaterialIcons name="add" size={22} color="#000" />
                         </TouchableOpacity>
@@ -271,7 +271,7 @@ export default class Cart extends React.Component {
                   </View>
                   <View style={[styles.centerElement, { width: 60 }]}>
                     <TouchableOpacity
-                      style={[styles.centerElement, { width: 32, height: 32 }]}
+                      style={[styles.centerElement, { width: 32, height: 32 ,paddingTop:10}]}
                       onPress={() => this.deleteHandler(item.id)}
                     >
                       <Ionicons name="md-trash" size={25} color="#ee4d2d" />

@@ -49,7 +49,6 @@ const paymentScreen = ({ navigation }) => {
     // perform operation to check payment status
 
     try {
-      console.log("***************** in the suucces try block ");
       const stripeResponse = await axios.post(`${myConfig}/api/payment`, {
         email: "rmadi.med1@gmail.com",
         product: cartInfo,
@@ -128,13 +127,13 @@ const paymentScreen = ({ navigation }) => {
         return (
           <View
             style={{
-              display: "flex",
+              flex:1,
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
               height: windowHeight,
-              marginTop: 50,
-              backgroundColor:"yellow"
+             
+              backgroundColor:"#0984e3"
             }}
           >
             <Text
@@ -155,7 +154,11 @@ const paymentScreen = ({ navigation }) => {
                 <Button style={styles.load} appearance='outline' accessoryLeft={LoadingIndicator}>
                 ...LOADING
               </Button>: 
-              <Button status='success' style={styles.button} onPress={()=> navigation.navigate('Home')}>
+              
+              <Button status='success' style={styles.button} 
+              onPress={()=> navigation.navigate('Home')}
+
+              > 
                   SUCCESS ✅
               </Button>
             }
@@ -184,12 +187,12 @@ const styles = StyleSheet.create({
     flex: 10,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "yellow",
+    backgroundColor: "#0984e3",
   },
   footer: { flex: 1, backgroundColor: "cyan" },
   load: {
     margin:30,
-    backgroundColor:'#0652DD'
+    backgroundColor:'#00b894'
   },
   indicator: {
     justifyContent: 'center',

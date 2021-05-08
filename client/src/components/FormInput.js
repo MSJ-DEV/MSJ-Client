@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   inputContainer: {
     marginTop: 5,
     marginBottom: 10,
-    width: '100%',
+    width: '90%',
     height: windowHeight / 15,
     borderColor: '#ccc',
     borderRadius: 3,
@@ -36,7 +36,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#fff',
-    borderRadius:20
+    borderRadius:20,
+    justifyContent:'center',
+    alignContent:'center',
+    alignItems:'center',
+    alignSelf:'center'
   },
   iconStyle: {
     padding: 10,
