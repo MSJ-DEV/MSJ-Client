@@ -23,7 +23,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const product = ({ navigation }) => {
   const SPACING = 20;
   const AVATAR_SIZE = 70;
-  const ITEM_SIZE = AVATAR_SIZE + SPACING * 1.5;
+  const ITEM_SIZE = AVATAR_SIZE + SPACING * 3;
   const [data, setData] = useState([]);
   const [items, setItems] = useState([]);
   const [array, setArray] = React.useReducer((state = [], action) => [
@@ -140,14 +140,14 @@ const product = ({ navigation }) => {
             />
             <View>
               <TouchableOpacity onPress={()=> handleClick(item)}>
-              <Text style={{ fontSize: 24, fontWeight: "900" }}>
+              <Text style={{ fontSize: 24, fontWeight: "bold" ,fontFamily:'Lato-BoldItalic'}}>
                 {" "}
                 {item.title}
                 <Text style={{ color: "#1e3799" }}>{item.newprice} DT</Text>
               </Text>
-              <Text style={{ fontSize: 23 , position:'relative', bottom:-10 , marginLeft:6}}>{item.type}</Text>
+              <Text style={{ fontSize: 23 , position:'relative', bottom:-10 , marginLeft:6, fontFamily:'Lato-BoldItalic'}}>{item.type}</Text>
               <View >
-                <FontAwesome name ='plus-circle' size={30} color='#f7b731' style={{position:'relative', left:150, top:-30}}/>
+                <FontAwesome name ='plus-circle' size={30} color='#f7b731' style={{position:'relative', left:150, top:-30}} onPress={()=>handleClick(item)}/>
               </View>  
               </TouchableOpacity>
             </View>
