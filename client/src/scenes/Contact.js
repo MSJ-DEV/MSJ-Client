@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { Image, StyleSheet, Text, View } from "react-native";
 import { ScrollView, TextInput } from "react-native-gesture-handler";
 import FromInput from "../components/FormInput";
@@ -7,12 +8,15 @@ import axios from "react-native-axios";
 import TextArea from "../components/TextArea";
 import myConfig from "../../configExpo";
 
+import { LinearGradient } from "expo-linear-gradient";
+
 const Contact = ({ navigaton }) => {
   const [email, setEmail] = useState();
   const [text, setText] = useState();
   const [subjectTosend, setSubject] = useState();
 
   const onSendEMail = () => {
+    console.log(email, text, subjectTosend);
     axios
       .post(`${myConfig}:3333/api/sendmail`, {
         email,
@@ -31,7 +35,13 @@ const Contact = ({ navigaton }) => {
   };
 
   return (
-    <View style={styles.conntainer}>
+    // background-color: #f5d020;background-image: linear-gradient(315deg, #f5d020 0%, #f53803 74%);
+
+    <LinearGradient
+      // Button Linear Gradient
+      colors={["#aff1da", "#f9ea8f", "#aff1da"]}
+      style={styles.conntainer}
+    >
       <Image
         source={{
           uri: "https://gtmix.org/wp-content/uploads/2019/05/contact_us.jpg",
@@ -69,7 +79,7 @@ const Contact = ({ navigaton }) => {
       <Button style={styles.btn} onPress={() => onSendEMail()}>
         Submit
       </Button>
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -78,10 +88,11 @@ export default Contact;
 const styles = StyleSheet.create({
   conntainer: {
     flex: 1,
-    backgroundColor: "#1d5aa9",
+    backgroundColor: "#f39c12",
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
+    borderRadius: 10,
     // paddingTop: 50,
   },
   input: {
@@ -89,10 +100,32 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     textAlignVertical: "top",
     color: "#000",
+    borderRadius: 10,
+    height: 500,
+    width: 500,
   },
   btn: {
     marginTop: 20,
     width: 150,
-    backgroundColor: "#485460",
+    borderRadius: 30,
+    backgroundColor: "#74b9ff",
+  },
+  input: {
+    flex: 1,
+    margin: 2,
+    borderRadius: 10,
+  },
+  rowContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderRadius: 10,
+  },
+  controlContainer: {
+    borderRadius: 4,
+    margin: 2,
+    padding: 6,
+    backgroundColor: "#3366FF",
+    borderRadius: 10,
   },
 });
