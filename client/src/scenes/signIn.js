@@ -7,7 +7,6 @@ import axios from "react-native-axios";
 import * as Google from "expo-google-app-auth";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-
 import Expo from "expo";
 
 import { StyleSheet, Text, View, Platform, Image } from "react-native";
@@ -64,7 +63,7 @@ const signIn = ({ navigation }) => {
 
   const singInx = () => {
     axios
-      .post("http://192.168.1.12:3333/api/auth/login", { email, password })
+      .post(`${myConfig}/api/auth/signIn/google`, { email, password })
       .then((res) => {
         console.log("***********************", res.data.user);
 

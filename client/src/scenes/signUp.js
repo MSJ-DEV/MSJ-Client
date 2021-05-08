@@ -159,7 +159,7 @@ const signUp = ({ navigation }) => {
       lastValidator()
     ) {
       axios
-        .post("http://192.168.1.12:3333/api/users/create", {
+        .post("http://192.168.1.15:3333/api/users/create", {
           firstName,
           lastName,
           email,
@@ -243,15 +243,15 @@ const signUp = ({ navigation }) => {
         {/* {Platform.OS === 'android' ? ( */}
         <FormButton buttonTitle="Sign Up" onPress={() => register()} />
         <View>
-          <SocialButton
+          {/* <SocialButton
             buttonTitle="Sign Un with Facebook"
             btnType="facebook"
             color="#4867aa"
             backgroundColor="#e6eaf4"
-          />
+          /> */}
 
           <SocialButton
-            buttonTitle="Sign Un with Google"
+            buttonTitle="Sign Up with Google"
             btnType="google"
             color="#de4d41"
             backgroundColor="#f5e7ea"

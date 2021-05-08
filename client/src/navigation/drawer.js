@@ -6,7 +6,7 @@ import ProductStack from "./productStack";
 import SingInStack from "./signInStack";
 import SingUpStack from "./singUpStack";
 import MyListStack from "./myListStack";
-import ProfileStack from "./profileStack";
+import Profile from "./profileStack";
 import FoundUs from "./FoundUsStack";
 import React from "react";
 import paymentScreen from "../scenes/paymentScreen";
@@ -36,8 +36,8 @@ const screens = {
   Contact: {
     screen: ContactStack1,
   },
-  ProfileStack: {
-    screen: ProfileStack,
+  Profile: {
+    screen: Profile,
   },
 };
 const RootDrawerNavigator = createDrawerNavigator(screens);

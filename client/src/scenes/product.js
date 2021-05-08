@@ -11,10 +11,12 @@ import {
   StatusBar,
   Animated,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+
 import Cart from "./myList";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import myConfig from "../../configExpo";
 // import { State } from 'react-native-gesture-handler';
+import myConfig from "../../configExpo";
 
 const product = ({ navigation }) => {
   const SPACING = 20;
@@ -62,7 +64,10 @@ const product = ({ navigation }) => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#fa8231", marginRight: 20 }}>
+    <LinearGradient
+      colors={["#aff1da", "#f9ea8f", "#aff1da"]}
+      style={{ flex: 1, marginRight: 20 }}
+    >
       <Animated.FlatList
         data={data}
         onScroll={Animated.event(
@@ -134,7 +139,7 @@ const product = ({ navigation }) => {
                     <Text style={{ color: "#1e3799" }}>{item.newprice} DT</Text>
                   </Text>
                   <Text style={{ fontSize: 23 }}>{item.type}</Text>
-                  {/* <Button
+                  {/* <Button 
               style={{}}
                title="ADD To List"
                color="#0652DD"
@@ -146,7 +151,7 @@ const product = ({ navigation }) => {
           );
         }}
       />
-    </View>
+    </LinearGradient>
   );
 };
 
@@ -194,166 +199,3 @@ const styles = StyleSheet.create({
   },
   btn: {},
 });
-
-// import React, { useState } from "react";
-// import { StyleSheet, View, Image, Dimensions } from "react-native";
-// import { Button, Card, Layout, Text, Input } from "@ui-kitten/components";
-
-// const { height, width } = Dimensions.get("window");
-
-// // const Footer = (props) => {
-// //   const [value, setValue] = React.useState("");
-// //   return (
-// //     <View {...props} style={[props.style, styles.footerContainer]}>
-// //       <Button
-// //         style={styles.footerControl}
-// //         size="small"
-// //         onPress={() => setValue(value + 1)}
-// //       >
-// //         - 1
-// //       </Button>
-
-// //       <Button
-// //         style={styles.footerControl}
-// //         size="small"
-// //         onPress={() => setValue(value + 1)}
-// //       >
-// //         + 1
-// //       </Button>
-// //     </View>
-// //   );
-// // };
-
-// const Product = (props) => {
-//   // for quantity
-//   const [value, setValue] = React.useState(0);
-//   console.log(value);
-
-//   return (
-//     <React.Fragment>
-//       <Layout style={styles.topContainer} level="1">
-//         <Card style={styles.card}>
-//           <View style={styles.topCard}>
-//             <Image
-//               style={styles.imageCard}
-//               source={require("../../assets/facebookLogo.png")}
-//             />
-//             <Text style={styles.text}>Product name</Text>
-//             <Input
-//               style={styles.input}
-//               textAlign={"center"}
-//               value={value}
-//               placeholder="0"
-//               keyboardType="number-pad"
-//               onChangeText={(nextValue) => setValue(nextValue)}
-//             />
-//           </View>
-//           <View {...props} style={[props.style, styles.footerContainer]}>
-//             <Button
-//               style={styles.footerControl}
-//               size="small"
-//               onPress={() => {
-//                 var counter = value - 1;
-//                 setValue(counter);
-//               }}
-//             >
-//               - 1
-//             </Button>
-
-//             <Button
-//               style={styles.footerControl}
-//               size="small"
-//               onPress={() => {
-//                 var counter = value + 1;
-//                 console.log(counter);
-//                 setValue(counter);
-//               }}
-//             >
-//               + 1
-//             </Button>
-//           </View>
-//         </Card>
-//         <Card style={styles.card}>
-//           <View style={styles.topCard}>
-//             <Image
-//               style={styles.imageCard}
-//               source={require("../../assets/facebookLogo.png")}
-//             />
-//             <Text style={styles.text}>Product name</Text>
-//             <Input
-//               style={styles.input}
-//               textAlign={"center"}
-//               value={value}
-//               placeholder="0"
-//               keyboardType="number-pad"
-//               onChangeText={(nextValue) => setValue(nextValue)}
-//             />
-//           </View>
-//           <View {...props} style={[props.style, styles.footerContainer]}>
-//             <Button
-//               style={styles.footerControl}
-//               size="small"
-//               onPress={() => {
-//                 var counter = value - 1;
-//                 setValue(counter);
-//               }}
-//             >
-//               - 1
-//             </Button>
-
-//             <Button
-//               style={styles.footerControl}
-//               size="small"
-//               onPress={() => {
-//                 var counter = value + 1;
-//                 console.log(counter);
-//                 setValue(counter);
-//               }}
-//             >
-//               + 1
-//             </Button>
-//           </View>
-//         </Card>
-//       </Layout>
-//     </React.Fragment>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   topContainer: {
-//     height: height / 3,
-//     flexDirection: "row",
-//     justifyContent: "space-between",
-//   },
-//   card: {
-//     flex: 1,
-//     margin: 2,
-//   },
-//   footerContainer: {
-//     flexDirection: "row",
-//     justifyContent: "flex-end",
-//     backgroundColor: 20,
-//     height: 60,
-//     alignSelf: "center",
-//   },
-//   footerControl: {
-//     // marginHorizontal: 2,
-//     backgroundColor: "#fa8231",
-//   },
-//   imageCard: {
-//     height: 70,
-//     width: 70,
-//     alignSelf: "center",
-//   },
-//   text: {
-//     alignSelf: "center",
-//     marginTop: 10,
-//   },
-//   input: {
-//     width: 80,
-//     marginTop: 20,
-//     alignSelf: "center",
-//   },
-// });
-
-// export default Product;
