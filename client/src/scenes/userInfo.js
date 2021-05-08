@@ -6,16 +6,31 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { BackgroundImage } from 'react-native-elements/dist/config';
 import {windowHeight, windowWidth} from '../utils/Dimentions';
 import { LinearGradient } from 'expo-linear-gradient';
+import axios from 'react-native-axios'
 
 
 
 
 export default function userInfo({navigation}) {
-  const [address1, setAddress1] = useState()
-  const [address2, setAddress2] = useState()
-  const [zipCode, setZipCode] = useState()
-  const [gender, setGender] = useState()
-  const [city, setCity] = useState()
+  const [address1, setAddress1] = useState("")
+  const [address2, setAddress2] = useState("")
+  const [zipCode, setZipCode] = useState("")
+  const [gender, setGender] = useState("")
+  const [city, setCity] = useState("")
+  const id = navigation.navigate
+  console.log('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$',id)
+  console.log(address1)
+  console.log(address2)
+  console.log(city)
+  const updateForm = ()=> {
+    axios.put(`http://192.168.1.15:3333/api/users/update/2`, {address1, address2, city, gender, zipCode})
+    .then((res)=> {
+      console.log(res)
+    })
+    .catch((e)=> {console.log(e)})
+  }
+
+
 
 
 
@@ -42,7 +57,7 @@ const image = {uri: 'https://www.carrefourtunisie.com/assets/img/fb-logos-share-
               
                      <FormInput 
                labelValue={address2}
-               onChangeText={(address1) => setAddress2(address2)}
+               onChangeText={(address2) => setAddress2(address2)}
                placeholderText="sett your correct address please"
                iconType="idcard"
                autoCapitalize="none"
@@ -82,7 +97,7 @@ const image = {uri: 'https://www.carrefourtunisie.com/assets/img/fb-logos-share-
 
 
 
-         <Button style={{width:windowWidth/2, height:windowHeight/15, justifyContent:'center', alignSelf:'center' }}>submit</Button>
+         <Button style={{width:windowWidth/2, height:windowHeight/15, justifyContent:'center', alignSelf:'center' }} onPress={()=>updateForm()}>submit</Button>
 
           </ScrollView>
          

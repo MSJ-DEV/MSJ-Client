@@ -26,6 +26,7 @@ export default function Profile({ navigation }) {
   const [lastName, setLastName] = useState("eleys");
   const [email, setEmail] = useState("msjcontactdev@gmail.com");
   const [numberPhone, setNumbePhone] = useState(" ");
+  const [id, setId] = useState()
   const [photoUrl, setPhotoUrl] = useState(
     "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg",
   );
@@ -59,6 +60,8 @@ export default function Profile({ navigation }) {
           setLastName(last);
           let m = storage[0].email;
           setEmail(m);
+          let myid = storage[0].id;
+          setId(myid)
 
           console.log("########################my hooooooks\n", storage);
           console.log("firstName************", firstName, "", lastName, email);
@@ -152,7 +155,7 @@ export default function Profile({ navigation }) {
           <Button 
         
         title='more info'
-            onPress={()=> navigation.navigate('Update')}
+            onPress={()=> navigation.navigate('Update', {id})}
 
         />
       </ScrollView>

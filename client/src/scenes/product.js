@@ -11,6 +11,8 @@ import {
   StatusBar,
   Animated,
 } from "react-native";
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+
 import { LinearGradient } from 'expo-linear-gradient';
 
 import Cart from "./myList";
@@ -143,13 +145,10 @@ const product = ({ navigation }) => {
                 {item.title}
                 <Text style={{ color: "#1e3799" }}>{item.newprice} DT</Text>
               </Text>
-              <Text style={{ fontSize: 23 }}>{item.type}</Text>
-              {/* <Button 
-              style={{}}
-               title="ADD To List"
-               color="#0652DD"
-               onPress={() => handleClick(item)}
-              /> */}
+              <Text style={{ fontSize: 23 , position:'relative', bottom:-10 , marginLeft:6}}>{item.type}</Text>
+              <View >
+                <FontAwesome name ='plus-circle' size={30} color='#f7b731' style={{position:'relative', left:150, top:-30}}/>
+              </View>  
               </TouchableOpacity>
             </View>
        
