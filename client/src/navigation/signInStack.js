@@ -7,6 +7,8 @@ import signUp from '../scenes/signUp';
 import Profile from '../scenes/profile';
 import { Text} from 'react-native';
 import Update from '../scenes/userInfo';
+import Home from '../scenes/home'
+
 
 
 
@@ -57,6 +59,16 @@ const screens = {
             }
         }
     },
+    Home : {
+        screen : Home,
+        navigationOptions:({navigation})=> {
+            return {
+                headerLeft :()=> <Header navigation={navigation} />,
+                headerTitle : () =>(<Text>More Inforamion</Text>)
+            }
+        }
+    },
+
   
   
 

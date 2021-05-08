@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 
+
 import myConfig from "../../configExpo";
 import * as ImagePicker from "expo-image-picker";
 import React, { useEffect, useState } from "react";
@@ -21,10 +22,10 @@ import axios from "react-native-axios";
 export default function Profile({ navigation }) {
   const [selectImg, setSelectedImg] = useState(null);
   const [data, setPhoto] = useState("");
-  const [firstName, setFirstName] = useState("user");
-  const [lastName, setLastName] = useState("user");
-  const [email, setEmail] = useState("user");
-  const [numberPhone, setNumbePhone] = useState("user");
+  const [firstName, setFirstName] = useState("rmadi");
+  const [lastName, setLastName] = useState("eleys");
+  const [email, setEmail] = useState("msjcontactdev@gmail.com");
+  const [numberPhone, setNumbePhone] = useState(" ");
   const [photoUrl, setPhotoUrl] = useState(
     "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg",
   );
@@ -38,14 +39,11 @@ export default function Profile({ navigation }) {
   const getInformation = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem("signIn");
-      console.log(
-        "****************************** GET data from local strorage from PROFILE  *********",
-        jsonValue,
-      );
+   
       jsonValue != null ? JSON.parse(jsonValue) : null;
       let mail = JSON.parse(jsonValue);
-      let emailserver = mail.user.email;
-      console.log('00000000000000000000000000000000000000', emailserver)
+
+      let emailserver = mail.email;
 
       axios
         .post(`${myConfig}/api/users/oneUserEmail`, {
@@ -55,6 +53,7 @@ export default function Profile({ navigation }) {
           setLogIn(true);
           setStorage(res.data);
           let first = storage[0].firstName;
+          console.log('*********************** first /******************', first)
           setFirstName(first);
           let last = storage[0].lastName;
           setLastName(last);

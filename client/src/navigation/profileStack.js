@@ -7,6 +7,7 @@ import Header from '../components/header';
 import React from 'react';
 import MyList from '../scenes/myList';
 import Update from '../scenes/userInfo';
+import Home from '../scenes/home'
 
 const screens = {
    

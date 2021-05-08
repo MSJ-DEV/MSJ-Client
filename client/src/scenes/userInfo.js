@@ -5,10 +5,12 @@ import FormInput from '../components/FormInput'
 import { ScrollView } from 'react-native-gesture-handler';
 import { BackgroundImage } from 'react-native-elements/dist/config';
 import {windowHeight, windowWidth} from '../utils/Dimentions';
+import { LinearGradient } from 'expo-linear-gradient';
 
 
 
-export default function userInfo() {
+
+export default function userInfo({navigation}) {
   const [address1, setAddress1] = useState()
   const [address2, setAddress2] = useState()
   const [zipCode, setZipCode] = useState()
@@ -20,7 +22,11 @@ export default function userInfo() {
 const image = {uri: 'https://www.carrefourtunisie.com/assets/img/fb-logos-share-v4.png'}
 
     return (
-        <View style={styles.container}>
+      <LinearGradient
+      colors={['#aff1da', '#f9ea8f', '#aff1da']}
+      style={styles.container}
+      >
+        
         
             <Text style={styles.text}>please put your correct information for youe delevery </Text>
             <ScrollView>
@@ -76,10 +82,11 @@ const image = {uri: 'https://www.carrefourtunisie.com/assets/img/fb-logos-share-
 
 
 
-
+         <Button style={{width:windowWidth/2, height:windowHeight/15, justifyContent:'center', alignSelf:'center' }}>submit</Button>
 
           </ScrollView>
-          </View>
+         
+          </LinearGradient>
     )
 }
 const styles = StyleSheet.create({
