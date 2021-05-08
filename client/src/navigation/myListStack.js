@@ -28,7 +28,7 @@ const screens = {
                 
             }
         
-    }
+     }
     },
     Product: {
         screen: Product,
@@ -46,7 +46,7 @@ const screens = {
                  ),
             }
         
-    }
+     }
     },
     PaymentScreen: {
         screen: PaymentScreen,

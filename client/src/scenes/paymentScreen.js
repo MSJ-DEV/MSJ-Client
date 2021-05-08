@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity , Image} from "react-native";
 import PaymentView from "../components/StripePayment";
 import axios from "react-native-axios";
 import AppLoading from "expo-app-loading";
-// import { Button } from "react-native-paper";
+import myConfig from "../../configExpo"
 import { Button, Icon, Layout, Spinner } from '@ui-kitten/components';
 import {windowHeight, windowWidth} from '../utils/Dimentions';
 
@@ -49,14 +49,20 @@ const paymentScreen = ({ navigation }) => {
     // perform operation to check payment status
 
     try {
-      const stripeResponse = await axios.post(
-        "http://192.168.1.15:3333/api/payment",
-        {
-          email: "rmadi.med1@gmail.com",
-          product: cartInfo,
-          authToken: jsonResponse,
-        },
-      );
+      console.log("***************** in the suucces try block ");
+      const stripeResponse = await axios.post(`${myConfig}/api/payment`, {
+        email: "rmadi.med1@gmail.com",
+        product: cartInfo,
+        authToken: jsonResponse,
+      });
+//       const stripeResponse = await axios.post(
+//         "http://192.168.1.15:3333/api/payment",
+//         {
+//           email: "rmadi.med1@gmail.com",
+//           product: cartInfo,
+//           authToken: jsonResponse,
+//         },
+//       );
 
       if (stripeResponse) {
         const { paid } = stripeResponse.data;
@@ -126,8 +132,9 @@ const paymentScreen = ({ navigation }) => {
               flexDirection: "column",
               justifyContent: "center",
               alignItems: "center",
-              height: 300,
+              height: windowHeight,
               marginTop: 50,
+              backgroundColor:"yellow"
             }}
           >
             <Text
@@ -149,7 +156,7 @@ const paymentScreen = ({ navigation }) => {
                 ...LOADING
               </Button>: 
               <Button status='success' style={styles.button} onPress={()=> navigation.navigate('Home')}>
-                  SUCCESS
+                  SUCCESS ✅
               </Button>
             }
        

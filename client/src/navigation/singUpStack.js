@@ -6,6 +6,8 @@ import SingIn from '../scenes/signIn';
 import React from 'react'
 import { Text} from 'react-native';
 import Profile from '../scenes/profile'
+import Update from '../scenes/userInfo';
+
 
 
 
@@ -32,7 +34,17 @@ const screens = {
                 
             }
         }
-    },  
+    },
+    Update : {
+        screen : Update,
+        navigationOptions:({navigation})=> {
+            return {
+                headerLeft :()=> <Header navigation={navigation} />,
+                headerTitle : () =>(<Text>More Inforamion</Text>)
+            }
+        }
+    },
+  
  
     
     

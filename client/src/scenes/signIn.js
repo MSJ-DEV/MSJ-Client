@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import myConfig from "../../configExpo";
 import FormButton from "../components/FormButton";
 import SocialButton from "../components/SocialButton";
 import FromInput from "../components/FormInput";
@@ -42,7 +43,7 @@ const signIn = ({ navigation }) => {
       console.log("************ from gooooooogle", user);
       if (type === "success") {
         axios
-          .post("http://192.168.1.12:3333/api/auth/signup/google", {
+          .post(`${myConfig}/api/auth/signup/google`, {
             googleId: user.id,
             firstName: user.givenName,
             lastName: user.familyName,
@@ -63,7 +64,7 @@ const signIn = ({ navigation }) => {
 
   const singInx = () => {
     axios
-      .post("http://192.168.1.12:3333/api/auth/login", { email, password })
+      .post("http://192.168.1.15:3333/api/auth/signIn/google", { email, password })
       .then((res) => {
         console.log("***********************", res.data.user);
 

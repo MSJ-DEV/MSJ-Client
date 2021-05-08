@@ -11,9 +11,12 @@ import {
   StatusBar,
   Animated,
 } from "react-native";
+import { LinearGradient } from 'expo-linear-gradient';
+
 import Cart from "./myList";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { State } from 'react-native-gesture-handler';
+
 
 const product = ({ navigation }) => {
   const SPACING = 20;
@@ -43,7 +46,7 @@ const product = ({ navigation }) => {
   };
 
   const handleClick = async (item) => {
-    let storage = await AsyncStorage.getItem("item");
+    let storage = await AsyncStorage.getItem("item")
     let parseStorage = JSON.parse(storage);
     var containe = -1;
     if (array) {
@@ -61,8 +64,11 @@ const product = ({ navigation }) => {
   };
 
   return (
-
-    <View style={{ flex: 1, backgroundColor: "#fa8231", marginRight: 20 }}>
+    
+    <LinearGradient
+    colors={['#aff1da', '#f9ea8f', '#aff1da']}
+    style={{ flex: 1, marginRight: 20 }}>
+   
   
 
     <Animated.FlatList
@@ -151,7 +157,8 @@ const product = ({ navigation }) => {
         );
       }}
     />
-  </View>
+ 
+  </LinearGradient>
   );
 };
 
