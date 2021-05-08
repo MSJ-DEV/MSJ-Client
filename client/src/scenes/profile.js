@@ -34,8 +34,18 @@ export default function Profile({ navigation }) {
   const [localStorrage, setLocalStrorage] = useState();
   const [userInfo, setUserInfo] = useState();
   const [logIn, setLogIn] = useState(false);
+  const [refreshing, setRefreching] = useState(false);
+  const[onOefreshing, setOnRefreshing] = useState();
+
+  const onRefresh = React.useCallback(async () => {
+    setRefreshing(true);
+  
+  });
+
 
   useEffect(() => {
+    
+   
     getInformation();
   }, []);
   const getInformation = async () => {
@@ -110,6 +120,8 @@ export default function Profile({ navigation }) {
         style={{ height }}
       >
         <ScrollView
+        refreshing={refreshing} 
+        onRefresh={onRefresh}
           contentContainerStyle={{
             justifyContent: "center",
             alignItems: "center",
