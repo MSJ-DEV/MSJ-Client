@@ -15,10 +15,11 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 import { LinearGradient } from 'expo-linear-gradient';
 
+
 import Cart from "./myList";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 // import { State } from 'react-native-gesture-handler';
-
+import myConfig from "../../configExpo";
 
 const product = ({ navigation }) => {
   const SPACING = 20;
@@ -35,7 +36,7 @@ const product = ({ navigation }) => {
 
   useEffect(() => {
     axios
-      .get("http://192.168.1.15:3333/api/poducts")
+      .get(`${myConfig}/api/poducts`)
       .then((res) => {
         setData(res.data);
       })
@@ -48,7 +49,7 @@ const product = ({ navigation }) => {
   };
 
   const handleClick = async (item) => {
-    let storage = await AsyncStorage.getItem("item")
+    let storage = await AsyncStorage.getItem("item");
     let parseStorage = JSON.parse(storage);
     var containe = -1;
     if (array) {
@@ -66,76 +67,62 @@ const product = ({ navigation }) => {
   };
 
   return (
-    
     <LinearGradient
-    colors={['#aff1da', '#f9ea8f', '#aff1da']}
-    style={{ flex: 1, marginRight: 20 }}>
-   
-  
-
-    <Animated.FlatList
-      data={data}
-      onScroll={Animated.event(
-        [
+      colors={["#aff1da", "#f9ea8f", "#aff1da"]}
+      style={{ flex: 1, marginRight: 20 }}
+    >
+      <Animated.FlatList
+        data={data}
+        onScroll={Animated.event(
+          [
+            {
+              nativeEvent: { contentOffset: { y: scrollY } },
+            },
+          ],
           {
-            nativeEvent: { contentOffset: { y: scrollY } },
+            useNativeDriver: true,
           },
-        ],
-        {
-          useNativeDriver: true,
-        },
-      )}
-      keyExtractor={(item) => item.id}
-      contentContainerStyle={{
-        padding: 20,
-        paddingTop: StatusBar.currentHeight || 42,
-      }}
-      renderItem={({ item, index }) => {
-        const inputRange = [
-          -1,
-          0,
-          ITEM_SIZE * index,
-          ITEM_SIZE * (index + 2),
-        ];
-        const opacityInputRange = [
-          -1,
-          0,
-          ITEM_SIZE * index,
-          ITEM_SIZE * (index + 1),
-        ];
-        const scale = scrollY.interpolate({
-          inputRange,
-          outputRange: [1, 1 , 1, 0],
-        });
-        const opacity = scrollY.interpolate({
-          inputRange: opacityInputRange,
-          outputRange: [1, 1, 1, 0],
-        });
-        return (
-          <Animated.View
-  
-            style={{
-              flexDirection: "row",
-              padding: 10,
-              marginBottom: 15,
-              backgroundColor: "rgba(255,255,255,0.9)",
-              borderRadius: 12,
-              shadowColor: "#000",
-              shadowOffset: { width: 0, height: 10 },
-              shadowOpacity: 0.3,
-              shadowRadius: 20,
-              opacity,
-              transform: [{ scale }],
-            }}
-          >
-            <Image
-              source={{ uri: item.image }}
+        )}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={{
+          padding: 20,
+          paddingTop: StatusBar.currentHeight || 42,
+        }}
+        renderItem={({ item, index }) => {
+          const inputRange = [
+            -1,
+            0,
+            ITEM_SIZE * index,
+            ITEM_SIZE * (index + 2),
+          ];
+          const opacityInputRange = [
+            -1,
+            0,
+            ITEM_SIZE * index,
+            ITEM_SIZE * (index + 1),
+          ];
+          const scale = scrollY.interpolate({
+            inputRange,
+            outputRange: [1, 1, 1, 0],
+          });
+          const opacity = scrollY.interpolate({
+            inputRange: opacityInputRange,
+            outputRange: [1, 1, 1, 0],
+          });
+          return (
+            <Animated.View
               style={{
-                width: 80,
-                height: 80,
-                borderRadius: 70,
-                marginRight: 20,
-             
+                flexDirection: "row",
+                padding: 10,
+                marginBottom: 15,
+                backgroundColor: "rgba(255,255,255,0.9)",
+                borderRadius: 12,
+                shadowColor: "#000",
+                shadowOffset: { width: 0, height: 10 },
+                shadowOpacity: 0.3,
+                shadowRadius: 20,
+                opacity,
+                transform: [{ scale }],
               }}
             />
             <View>
@@ -158,6 +145,7 @@ const product = ({ navigation }) => {
     />
  
   </LinearGradient>
+
   );
 };
 
@@ -203,7 +191,5 @@ const styles = StyleSheet.create({
     height: 170,
     resizeMode: "cover",
   },
-  btn:{
-    
-  }
+  btn: {},
 });

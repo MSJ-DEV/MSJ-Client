@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff8eb",
   },
   imageFooter: {
-    height: 60,
+    height: 30,
     width,
   },
   backgroundLogo: {

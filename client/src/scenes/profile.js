@@ -120,8 +120,7 @@ export default function Profile({ navigation }) {
         style={{ height }}
       >
         <ScrollView
-        refreshing={refreshing} 
-        onRefresh={onRefresh}
+
           contentContainerStyle={{
             justifyContent: "center",
             alignItems: "center",
@@ -143,6 +142,7 @@ export default function Profile({ navigation }) {
             <Text>Click</Text>
           </TouchableOpacity>
 
+
           <Text style={{ marginTop: 50, marginBottom: 20, fontSize: 30 }}>
             {" "}
             Welcome Back {firstName}{" "}
@@ -161,6 +161,15 @@ export default function Profile({ navigation }) {
           />
 
           <SocialButton
+            buttonTitle={("your lastName ", lastName)}
+            btnType="user"
+            buttonTitle={numberPhone}
+            btnType="phone"
+            color="#1e272e"
+            backgroundColor="#e6eaf4"
+          />
+
+          <SocialButton
             buttonTitle={email}
             btnType="user"
             color="#1e272e"
@@ -172,6 +181,7 @@ export default function Profile({ navigation }) {
             color="#1e272e"
             backgroundColor="#e6eaf4"
           />
+
 
           <Button
             title="more info"

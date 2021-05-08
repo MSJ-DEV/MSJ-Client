@@ -1,10 +1,10 @@
-import React from 'react';
-import {View, TextInput, StyleSheet} from 'react-native';
-import {windowHeight, windowWidth} from '../utils/Dimentions';
+import React from "react";
+import { View, TextInput, StyleSheet } from "react-native";
+import { windowHeight, windowWidth } from "../utils/Dimentions";
 
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import AntDesign from "react-native-vector-icons/AntDesign";
 
-const FormInput = ({labelValue, placeholderText, iconType, ...rest}) => {
+const FormInput = ({ labelValue, placeholderText, iconType, ...rest }) => {
   return (
     <View style={styles.inputContainer}>
       <View style={styles.iconStyle}>
@@ -29,8 +29,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 10,
     width: '90%',
+
     height: windowHeight / 15,
-    borderColor: '#ccc',
+    borderColor: "#ccc",
     borderRadius: 3,
     borderWidth: 1,
     flexDirection: 'row',
@@ -41,13 +42,14 @@ const styles = StyleSheet.create({
     alignContent:'center',
     alignItems:'center',
     alignSelf:'center'
+ 
   },
   iconStyle: {
     padding: 10,
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRightColor: '#ccc',
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRightColor: "#ccc",
     borderRightWidth: 1,
     width: 50,
   },
@@ -55,11 +57,10 @@ const styles = StyleSheet.create({
     padding: 10,
     flex: 1,
     fontSize: 16,
-    fontFamily: 'Lato-Regular',
-    color: '#000',
-    justifyContent: 'center',
-    alignItems: 'center',
-   
+    fontFamily: "Lato-Regular",
+    color: "#000",
+    justifyContent: "center",
+    alignItems: "center",
   },
   inputField: {
     padding: 10,
