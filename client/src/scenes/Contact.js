@@ -6,9 +6,12 @@ import FromInput from "../components/FormInput";
 import { Button } from "@ui-kitten/components";
 import axios from "react-native-axios";
 import TextArea from "../components/TextArea";
-import myConfig from "../../configExpo";
+import myConfig from "../../configExpo"
+import { LinearGradient } from 'expo-linear-gradient';
 
-import { LinearGradient } from "expo-linear-gradient";
+
+
+
 
 const Contact = ({ navigaton }) => {
   const [email, setEmail] = useState();
@@ -16,9 +19,9 @@ const Contact = ({ navigaton }) => {
   const [subjectTosend, setSubject] = useState();
 
   const onSendEMail = () => {
-    console.log(email, text, subjectTosend);
+
     axios
-      .post(`${myConfig}:3333/api/sendmail`, {
+      .post(`http://192.168.1.15:3333/api/sendmail`, {
         email,
         text,
         subjectTosend,
@@ -38,6 +41,7 @@ const Contact = ({ navigaton }) => {
     // background-color: #f5d020;background-image: linear-gradient(315deg, #f5d020 0%, #f53803 74%);
 
     <LinearGradient
+
       // Button Linear Gradient
       colors={["#aff1da", "#f9ea8f", "#aff1da"]}
       style={styles.conntainer}
@@ -58,7 +62,7 @@ const Contact = ({ navigaton }) => {
         autoCapitalize="none"
       />
       <FromInput
-        style={{ fontSize: 25, color: "#000" }}
+        style={{ fontSize: 25, color: "#000" , padding:6}}
         labelValue={subjectTosend}
         onChangeText={(subjectTosend) => setSubject(subjectTosend)}
         placeholderText="Subject"
@@ -100,9 +104,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     textAlignVertical: "top",
     color: "#000",
-    borderRadius: 10,
-    height: 500,
-    width: 500,
+
   },
   btn: {
     marginTop: 20,

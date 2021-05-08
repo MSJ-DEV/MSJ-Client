@@ -28,6 +28,7 @@ export default function userInfo({ route, navigation }) {
   const [zipCode, setZipCode] = useState("zip code");
   const [city, setCity] = useState("city");
   const [gender, setGender] = useState("male or female?");
+
   const email = navigation.state.params.userInfo.email;
   setTimeout(() => {
     // firstName
@@ -75,7 +76,8 @@ export default function userInfo({ route, navigation }) {
     const gender = genderU;
     const email = emailU;
     axios
-      .put(`${myConfig}/api/users/update/1`, {
+      .put(`${myConfig}/api/users/update/${id}`, {
+
         firstName,
         lastName,
         numberPhone,
@@ -127,8 +129,9 @@ export default function userInfo({ route, navigation }) {
           />
           <FormInput
             onChangeText={(numberPhone) => setNumberPhoneU(numberPhone)}
-            placeholderText={phoneNumber}
-            iconType="idcard"
+            placeholderText={phoneNumber? phoneNumber: "put your phone number please "}
+            iconType="phone"
+
             autoCapitalize="none"
             autoCorrect={false}
             keyboardType="numeric"
@@ -153,7 +156,8 @@ export default function userInfo({ route, navigation }) {
           <FormInput
             onChangeText={(address1) => setAddresse1U(address1)}
             placeholderText={adresse1}
-            iconType="idcard"
+            iconType="flag"
+
             autoCapitalize="none"
             autoCorrect={false}
           />
@@ -161,14 +165,16 @@ export default function userInfo({ route, navigation }) {
           <FormInput
             onChangeText={(address2) => setAddresse2U(address2)}
             placeholderText={address2}
-            iconType="idcard"
+            iconType="flag"
+
             autoCapitalize="none"
             autoCorrect={false}
           />
           <FormInput
             onChangeText={(city) => setCityU(city)}
             placeholderText={city}
-            iconType="idcard"
+            iconType="flag"
+
             autoCapitalize="none"
             autoCorrect={false}
           />
@@ -215,3 +221,4 @@ const styles = StyleSheet.create({
     backgroundColor: "#0984e3",
   },
 });
+
